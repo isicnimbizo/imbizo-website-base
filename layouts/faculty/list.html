@@ -11,14 +11,14 @@
           <label class="btn btn-sm btn-primary active">
             <input type="radio" name="shuffle-filter" value="all" checked="checked" />All
           </label>
-					{{ $categories := slice }}
+					{{ $years := slice }}
 					{{ range site.Data.faculty.item }}
         
-					  {{ range .categories }}
-					    {{ $categories = $categories | append . }}
+					  {{ range .years }}
+					    {{ $years = $years | append . }}
 					  {{ end }}
 					{{ end }}
-					{{ range ( $categories | uniq | sort ) }}
+					{{ range ( $years | uniq | sort ) }}
           <label class="btn btn-sm btn-primary">
             <input type="radio" name="shuffle-filter" value="{{ . | urlize }}" />{{ . }}
           </label>
@@ -28,19 +28,24 @@
     </div>
     <div class="row shuffle-wrapper">
       {{ range site.Data.faculty.item  | sort }}
-      <div class="col-lg-3 col-xs-12 col-4 mb-4 shuffle-item" data-groups="[{{range $index, $element:= .categories }}{{if ne $index 0}},{{end}}&quot;{{. | urlize}}&quot;{{ end }}]">
-        <div class="d-flex">
+      <div class="col-lg-3 col-xs-12 col-4 mb-4 shuffle-item" data-groups="[{{range $index, $element:= .years }}{{if ne $index 0}},{{end}}&quot;{{. | urlize}}&quot;{{ end }}]">
+        <a href="{{.link}}" class="pl-0 ml-0 center text-center", target="_blank" class="d-flex">
           <div class="circletag">
-            <img src="{{.image | absURL }}" alt="portfolio-image" class="img-fluid w-100 d-block">
-
+            {{if .image}}
+            <img src="{{.image | absURL }}" alt="{{.name}}" class="img-fluid w-100 d-block">
+            {{else}}
+              {{$last_name := (index (split .name " ") 1) }}
+              {{ $path :=  printf "images/people/%s.jpg" $last_name}}
+                <img src="{{ $path | absURL }}" alt="{{.name}}" class="img-fluid w-100 d-block">
+            {{end}}
           </div>
           <div>
             <h4>{{ .name }}</h4>
-            <p class="mb-0 text-light">{{.academy}}</p>
-            <p class="text-dark mb-1">{{ range .categories}} {{ . }} {{end}}</p>
+            <p class="mb-0 text-light">{{.affiliation}}</p>
+            <small class="text-muted mb-1">{{ range .years}} {{ . }} {{end}}</small>
 
           </div>
-        </div>
+        </a>
       </div>
 
       <!-- <div class="position-relative h-100 card text-center rounded hover-wrapper">
