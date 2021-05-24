@@ -32,9 +32,9 @@
         <a href="{{.link}}" class="pl-0 ml-0 center text-center", target="_blank" class="d-flex">
           <div class="circletag">
             {{if .image}}
-            <img src="{{.image | absURL }}" alt="{{.name}}" class="img-fluid w-100 d-block">
+            <img src="{{ .image | absURL }}" alt="{{.name}}" class="img-fluid w-100 d-block">
             {{else}}
-              {{$last_name := (index (split .name " ") 1) }}
+              {{$last_name := lower (index (split .name " ") 1) }}
               {{ $path :=  printf "images/people/%s.jpg" $last_name}}
                 <img src="{{ $path | absURL }}" alt="{{.name}}" class="img-fluid w-100 d-block">
             {{end}}
