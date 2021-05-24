@@ -1,0 +1,71 @@
+{{ define "main" }}
+
+{{ partial "page-title.html" . }}
+
+<!-- portfolio -->
+<section class="section">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-12">
+        <div class="btn-group btn-group-toggle justify-content-center d-flex flex-wrap" data-toggle="buttons">
+          <label class="btn btn-sm btn-primary active">
+            <input type="radio" name="shuffle-filter" value="all" checked="checked" />All
+          </label>
+					{{ $categories := slice }}
+					{{ range site.Data.faculty.item }}
+        
+					  {{ range .categories }}
+					    {{ $categories = $categories | append . }}
+					  {{ end }}
+					{{ end }}
+					{{ range ( $categories | uniq | sort ) }}
+          <label class="btn btn-sm btn-primary">
+            <input type="radio" name="shuffle-filter" value="{{ . | urlize }}" />{{ . }}
+          </label>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+    <div class="row shuffle-wrapper">
+      {{ range site.Data.faculty.item  | sort }}
+      <div class="col-lg-3 col-xs-12 col-4 mb-4 shuffle-item" data-groups="[{{range $index, $element:= .categories }}{{if ne $index 0}},{{end}}&quot;{{. | urlize}}&quot;{{ end }}]">
+        <div class="d-flex">
+          <div class="circletag">
+            <img src="{{.image | absURL }}" alt="portfolio-image" class="img-fluid w-100 d-block">
+
+          </div>
+          <div>
+            <h4>{{ .name }}</h4>
+            <p class="mb-0 text-light">{{.academy}}</p>
+            <p class="text-dark mb-1">{{ range .categories}} {{ . }} {{end}}</p>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="position-relative h-100 card text-center rounded hover-wrapper">
+        <img src="{{.image | absURL }}" alt="portfolio-image" class="img-fluid rounded w-100 d-block card-img-top">
+        <div class="card-body">
+          <h4 class="card-title">{{.name }}</h4>
+          <p class="text-light font-secondary">{{.designation }}</p>
+        </div>
+        <div class="hover-overlay">
+          <div class="hover-content">
+            <a class="btn btn-light btn-sm" href="{{ .Permalink }}">view</a>
+          </div>
+        </div>
+      </div>
+    </div> -->
+      {{ end }}
+    </div>
+  </div>
+</section>
+<!-- /portfolio -->
+
+<section class="section bg-light">
+  <div class="container">
+    {{ partial "client-slider.html" . }}
+  </div>
+</section>
+
+{{ end }}

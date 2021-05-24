@@ -10,8 +10,11 @@
       </div>
     </div>
     <div class="layer-bg w-100">
-      <img class="img-fluid w-100" src="{{`images/illustrations/leaf-bg.png` | relURL}}" alt="bg-shape">
+      <div class="bg-gradient h-100 w-100 position-absolute"></div>
+      <!-- <img class="img-fluid w-100" src="https://images.unsplash.com/photo-1580737173595-3c4b8464d8ad?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1500&q=80" alt="bg-shape"> -->
+      <!-- <img class="img-fluid w-100" src="{{`images/illustrations/leaf-bg.png` | relURL}}" alt="bg-shape"> -->
     </div>
+    {{ if site.Data.homepage.banner.decor }}
     <div class="layer" id="l2">
       <img src="{{`images/illustrations/dots-cyan.svg` | relURL}}" alt="bg-shape">
     </div>
@@ -36,6 +39,7 @@
     <div class="layer" id="l9">
       <img src="{{`images/illustrations/leaf-cyan-2.svg` | relURL}}" alt="bg-shape">
     </div>
+    {{end}}
     <!-- social icon -->
     <ul class="list-unstyled ml-5 mt-3 position-relative zindex-1">
       {{ range site.Params.social }}
@@ -55,9 +59,9 @@
           {{ with site.Data.homepage.about }}
           <p class="font-secondary lead text-dark">{{.content | markdownify}}</p>
           {{ if .button.enable }}
-          {{ with .button }}
-          <a href="{{ .URL | absURL }}" class="btn btn-transparent">{{.label}}</a>
-          {{ end }}
+            {{ with .button }}
+            <a href="{{ .URL | absURL }}" class="btn btn-success btn-lg btn-block">{{.label}}</a>
+            {{ end }}
           {{ end }}
           {{ end }}
         </div>
@@ -67,34 +71,41 @@
   <!-- /about -->
   {{ end }}
 
+  <hr>
 
-  {{ if site.Data.homepage.skill.enable }}
-  {{ with site.Data.homepage.skill }}
-  <!-- skills -->
+  {{ with site.Data.homepage.school }}
+  <!-- the school -->
   <section class="section">
     <div class="container">
       <div class="row">
         <div class="col-lg-12 text-center">
           <h2 class="section-title">{{ .title | markdownify }}</h2>
+          <div class="text-muted">
+            {{.content | markdownify}}
+          </div>
         </div>
         {{ range .item }}
         <div class="col-lg-3 col-sm-6 mb-4">
           <div class="card shadow text-center">
             <div class="position-relative rounded-top progress-wrapper" data-color="{{.color}}">
+              <h4 class="position-absolute card-title text-center" style="bottom:0; left:0; right:0">{{.title }}</h4>
               <div class="wave" data-progress="{{.progress}}"></div>
             </div>
             <div class="card-footer bg-white">
-              <h4 class="card-title">{{.title }} ({{.progress}})</h4>
+                <!-- <small class="text-muted">{{.faculty | markdownify}}</small> -->
+              {{.content}}
             </div>
           </div>
         </div>
         {{ end }}
       </div>
     </div>
+
   </section>
-  <!-- /skills -->
+  <!-- /school -->
   {{ end }}
-  {{ end }}
+
+  <hr>
 
   {{ if site.Data.homepage.experience.enable }}
   {{ with site.Data.homepage.experience }}
@@ -121,6 +132,7 @@
   {{ end }}
 
   {{ if site.Data.homepage.education.enable }}
+  <hr>
   {{ with site.Data.homepage.education }}
   <!-- education -->
   <section class="section position-relative">
@@ -154,6 +166,7 @@
 
 
   {{ if site.Data.homepage.service.enable }}
+  <hr>
   {{ with site.Data.homepage.service }}
   <!-- services -->
   <section class="section">
@@ -182,6 +195,7 @@
 
 
   {{ if site.Data.homepage.portfolio.enable }}
+  <hr>
   <!-- portfolio -->
   <section class="section">
     <div class="container">
@@ -212,6 +226,7 @@
 
 
   {{ if site.Data.homepage.testimonial.enable }}
+  <hr>
   {{ with site.Data.homepage.testimonial }}
   <!-- testimonial -->
   <section class="section bg-primary position-relative testimonial-bg-shapes">
@@ -248,6 +263,7 @@
 
 
   {{ if site.Data.homepage.clients_logo_slider.enable }}
+  <hr>
   <!-- client logo slider -->
   <section class="section pb-0">
     <div class="container">
