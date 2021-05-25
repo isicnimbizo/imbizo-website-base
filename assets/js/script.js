@@ -109,14 +109,20 @@ $(window).on('load', function () {
 	});
 
 
-	// clients logo slider
-	$('.client-logo-slider').slick({
+	// faculty logo slider
+	$('.faculty-logo-slider').slick({
 		infinite: true,
-		slidesToShow: 5,
-		slidesToScroll: 1,
+		// speed: 100, 
+		slidesToShow: 8,
+		slidesToScroll: 4,
+		swipeToSlide: true,
 		autoplay: true,
-		dots: false,
-		arrows: false,
+		autoplaySpeed: 1000,
+		dots: true,
+		arrows: true,
+		pauseOnHover: false,
+		nextArrow: '<button type="button" class="slick-next btn btn-outline-dark">></button>',
+		prevArrow: '<button type="button" class="slick-next btn btn-outline-dark"><</button>',
 		responsive: [{
 				breakpoint: 1024,
 				settings: {

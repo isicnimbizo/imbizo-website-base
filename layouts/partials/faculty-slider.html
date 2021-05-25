@@ -1,0 +1,42 @@
+<div class="faculty-logo-slider d-flex align-items-center">
+  {{/*  Find latest year  */}}
+  {{ $max_year := 0 }}
+  {{ range site.Data.faculty.item }}
+    {{ range .years }}
+      {{ if gt . $max_year}}
+        {{ $max_year = . }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+  {{ $select_years := (slice $max_year) }}
+
+  {{ range site.Data.faculty.item }} 
+    {{ $is_current := intersect $select_years .years }}
+    {{ if $is_current}}
+    {{ $path :=  printf "%s" .image}}
+    {{if not .image}}
+      {{ $last_name := lower (index (split .name " ") 1) }}
+      {{ $path =  printf "images/people/%s.jpg" $last_name}}
+    {{end}}
+    <div class="col-lg-3 col-xs-12 col-4 mb-4 shuffle-item" data-groups="[{{range $index, $element:= .years }}{{if ne $index 0}},{{end}}&quot;{{. | urlize}}&quot;{{ end }}]">
+        <a href="{{.link}}" class="pl-0 ml-0 center text-center", target="_blank" class="d-flex">
+          <div class="circletag">
+            {{if .image}}
+            <img src="{{ .image | absURL }}" alt="{{.name}}" class="img-fluid w-100 d-block">
+            {{else}}
+              {{$last_name := lower (index (split .name " ") 1) }}
+              {{ $path :=  printf "images/people/%s.jpg" $last_name}}
+                <img src="{{ $path | absURL }}" alt="{{.name}}" class="img-fluid w-100 d-block">
+            {{end}}
+          </div>
+          <div>
+            <h4>{{ .name }}</h4>
+            <p class="mb-0 text-light">{{.affiliation}}</p>
+
+          </div>
+        </a>
+      </div>
+
+  {{ end }}
+  {{end}}
+</div>

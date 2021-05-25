@@ -197,11 +197,11 @@
 <!-- /school -->
 {{ end }}
 
-<hr />
 
 {{ if site.Data.homepage.experience.enable }} {{ with
 site.Data.homepage.experience }}
 <!-- experience -->
+<hr />
 <section class="section">
   <div class="container">
     <div class="row justify-content-around">
@@ -261,17 +261,25 @@ site.Data.homepage.experience }}
     alt="bg-shape"
     class="img-fluid bg-shape-5"
   />
-</section>
 {{end}}
 
-<!-- client logo slider -->
-{{ if site.Data.homepage.clients_logo_slider.enable }}
-<hr />
-<section class="section pb-0">
-  <div class="container">{{ partial "client-slider.html" . }}</div>
 </section>
-<!-- /client logo slider -->
-{{ end }}
+
+<!-- faculty slider -->
+{{ if site.Data.homepage.faculty.enable }}
+<section class="section bg-light ">
+  <div class="container">
+    <div class="row mb-2">
+      <div class="col-12 text-center mb-5">
+        <h2 class="section-title mb-0">Faculty</h2>
+        <a href="faculty">past faculty</a>
+      </div>
+    </div>
+    {{ partial "faculty-slider.html" . }}
+  </div>
+</section>
+<!-- /faculty logo slider -->
+{{end}}
 
 <!-- blog -->
 {{ if site.Data.homepage.blog.enable }}

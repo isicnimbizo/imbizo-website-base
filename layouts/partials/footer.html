@@ -14,7 +14,7 @@
               <input type="text" id="name" name="name" placeholder="Full Name" class="form-control px-0 mb-4">
             </div>
             <div class="col-md-6">
-              <input type="email" id="email" name="email" placeholder="Email Address" class="form-control px-0 mb-4">
+              <input type="email" id="email" name="_replyto" placeholder="Email Address" class="form-control px-0 mb-4">
             </div>
             <div class="col-12">
               <textarea name="message" id="message" class="form-control px-0 mb-4"
@@ -34,7 +34,7 @@
 
 <!-- footer -->
 <footer class="bg-dark footer-section">
-  <div class="section">
+  {{/*  <div class="section">
     <div class="container">
       <div class="row">
         <div class="col-md-4">
@@ -51,7 +51,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div>  */}}
   <div class="border-top text-center border-dark py-5">
     <p class="mb-0 text-light">{{ site.Params.copyright | markdownify }}</p>
   </div>
@@ -71,6 +71,43 @@
 {{ "<!-- Main Script -->" | safeHTML }}
 {{ $script := resources.Get "js/script.js" | minify}}
 <script src="{{ $script.Permalink }}"></script>
+
+{{/*  Formspree floating button  */}}
+<script src="https://formspree.io/js/formbutton-v1.min.js" defer></script>
+<script>
+  /* paste this line in verbatim */
+  window.formbutton=window.formbutton||function(){(formbutton.q=formbutton.q||[]).push(arguments)};
+
+  /* customize formbutton below*/     
+  formbutton("create", {
+    action: "{{site.Params.contact.form_action}}",
+    title: "How can we help?",
+    fields: [
+      { 
+        type: "email", 
+        label: "Email:", 
+        name: "email",
+        required: true,
+        placeholder: "your@email.com"
+      },
+      {
+        type: "textarea",
+        label: "Message:",
+        name: "message",
+        placeholder: "What's on your mind?",
+      },
+      { type: "submit" }      
+    ],
+    styles: {
+      title: {
+        backgroundColor: "{{site.Params.theme_color}}"
+      },
+      button: {
+        backgroundColor: "gray"
+      }
+    }
+  });
+</script>
 
 
 <!-- cookie -->
