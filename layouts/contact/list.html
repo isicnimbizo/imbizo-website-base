@@ -6,10 +6,10 @@
 <section class="section pb-0">
   <div class="container">
     <div class="row">
-      <div class="col-12 text-center">
-        <h2 class="section-title">Find me on Google Map</h2>
+      <div class=" col-lg-6 col-12 text-center">
+        <h2 class="section-title">Muizenberg, Cape Town</h2>
       </div>
-      <div class="col-12">
+      <div class=" col-lg-6 col-12">
         {{ with site.Params.map }}
         {{"<!-- Google Map -->" | safeHTML}}
         <div class="shadow" id="map" data-latitude="{{ .map_latitude }}" data-longitude="{{ .map_longitude }}"
@@ -24,10 +24,10 @@
 <section class="section">
   <div class="container">
     <div class="row">
-      <div class="col-12 text-center">
-        <h2 class="section-title">Follow me on Social</h2>
+      <div class=" col-lg-6 col-12 text-center">
+        <h2 class="section-title">Follow us</h2>
       </div>
-      <div class="col-12">
+      <div class=" col-lg-6 col-12">
         <ul class="list-inline social-icons text-center">
           {{ range site.Params.social }}
           <li class="list-inline-item"><a href="{{.URL}}"><i class="{{.icon}}"></i></a></li>

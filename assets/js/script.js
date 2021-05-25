@@ -98,8 +98,8 @@ $(window).on('load', function () {
 	}
 	/* ########################################### /hero parallax ############################################## */
 
-	// testimonial-slider
-	$('.testimonial-slider').slick({
+	// slideshow-slider
+	$('.slideshow-slider').slick({
 		dots: true,
 		infinite: true,
 		speed: 300,
