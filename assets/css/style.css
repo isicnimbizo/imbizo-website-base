@@ -51,6 +51,13 @@ h1,
   }
 }
 
+@media (max-width: 480px) {
+  h1,
+  .h1 {
+    font-size: 40px;
+  }
+}
+
 h2,
 .h2 {
   font-size: 60px;
@@ -234,11 +241,20 @@ a:hover {
   color: var(--primary-color);
 }
 
+.faculty-logo-slider .col-4 {
+  max-width: 100% !important;
+}
+
 .slick-slide {
   outline: 0;
 }
 
 .slick-list {
+}
+
+.slick-next.btn {
+  padding: 5px !important;
+  min-height: 10em;
 }
 
 .section {
@@ -403,6 +419,7 @@ a:hover {
 .slick-dots {
   position: absolute;
   bottom: -25px;
+  right: 0;
   display: block;
   width: 100%;
   padding: 0;
