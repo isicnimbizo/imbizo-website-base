@@ -1,13 +1,17 @@
-{{ define "main" }}
+{{ define "main" }} 
 
 {{ partial "page-title.html" . }}
 
-<!-- portfolio -->
+<!-- archive item -->
 <section class="section">
   <div class="container">
     <div class="row">
       <div class="col-lg-5 mb-5">
-        <img src="{{ .Params.image | absURL }}" class="img-fluid w-100" alt="{{ .Title }}">
+        <img
+          src="{{ .Params.image | absURL }}"
+          class="img-fluid w-100"
+          alt="{{ .Title }}"
+        />
       </div>
       <div class="col-lg-7 mb-5 mb-lg-0 align-self-center">
         <div class="row mx-0">
@@ -31,15 +35,18 @@
             </div>
           </div>
           {{ end }}
+
+          {{ with .Params.categories}}
           <div class="col-sm-6 mb-5">
             <div class="project-meta">
               <i class="ti-folder"></i>
               <div class="ml-3">
                 <h4>Categories</h4>
-                <p>{{ delimit .Params.categories ", " | humanize }}</p>
+                <p>{{ delimit . ", " | humanize }}</p>
               </div>
             </div>
           </div>
+          {{ end }}
           {{ with .Params.project_url}}
           <div class="col-sm-6 mb-5">
             <div class="project-meta">
@@ -59,6 +66,6 @@
     </div>
   </div>
 </section>
-<!-- /portfolio -->
+<!-- /archive item-->
 
 {{ end }}

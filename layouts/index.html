@@ -135,72 +135,88 @@
   </div>
 </section>
 <!-- /about -->
-{{ end }}
-
-<hr />
-
-{{ with site.Data.homepage.school }}
+{{ end }} {{ with site.Data.homepage.school }}
 <!-- the school -->
-<section class="section">
+<hr class="mb-0" />
+
+<section class="section bg-light">
   <div class="container">
-    <div class="row">
-      <div class="col-lg-12 text-center mb-5">
-        <h2 class="section-title mb-0">{{ .title | markdownify }}</h2>
-        {{ if site.Data.homepage.dates.school_start_date}}
+    <div class="row text-center mb-5">
+      <div class="col-lg-12">
+        <h2 class="section-title mb-5">{{ .title | markdownify }}</h2>
+
+        <div class="row">
+          {{ if site.Data.homepage.dates.school_start_date}}
           <div class="col-4 mb-5">
             <div class="project-meta">
               <i class="ti-calendar"></i>
               <div class="ml-3">
                 <h4>Duration</h4>
                 <p>
-                  {{ dateFormat "Jan 02, 2006" site.Data.homepage.dates.school_start_date }} - 
-                  {{ dateFormat "Jan 02, 2006" site.Data.homepage.dates.school_end_date }}
+                  {{ dateFormat "Jan 02, 2006"
+                  site.Data.homepage.dates.school_start_date }} - {{ dateFormat
+                  "Jan 02, 2006" site.Data.homepage.dates.school_end_date }}
                 </p>
               </div>
             </div>
           </div>
-          {{/*  Old version  */}}
-        {{/*  <p class="mb-5 text-muted">
-          {{ dateFormat "Jan 02, 2006" site.Data.homepage.dates.school_start_date
-          }} - {{ dateFormat "Jan 02, 2006"
-          site.Data.homepage.dates.school_end_date }}
-        </p>  */}}
-        {{end}}
-        <div class="text-muted">{{.content | markdownify}}</div>
-      </div>
-      {{ range .item }}
-      <div class="col-lg-4 col-sm-6 mb-4">
-        <div class="card shadow text-center">
-          <div
-            class="position-relative rounded-top progress-wrapper"
-            data-color="{{.color}}"
-          >
-            <h4
-              class="position-absolute card-title text-center"
-              style="bottom: 0; left: 0; right: 0"
-            >
-              {{.title }}
-            </h4>
-            <div class="wave" data-progress="{{.progress}}"></div>
-          </div>
-          <div class="card-footer bg-white">
-            <!-- <small class="text-muted">{{.faculty | markdownify}}</small> -->
-            {{.content}}
+          {{/* Old version */}} {{/*
+          <p class="mb-5 text-muted">
+            {{ dateFormat "Jan 02, 2006"
+            site.Data.homepage.dates.school_start_date }} - {{ dateFormat "Jan
+            02, 2006" site.Data.homepage.dates.school_end_date }}
+          </p>
+          */}} {{end}}
+          <div class="col-8 mb-5">
+            <div class="project-meta">
+              <i class="ti-info-alt"></i>
+              <div class="ml-3">
+                <p class="text-muted">
+                  <small> {{.content | markdownify}} </small>
+                </p>
+              </div>
+            </div>
           </div>
         </div>
+        {{/*
+        <div class="text-muted">{{.content | markdownify}}</div>
+        */}}
       </div>
-      {{ end }}
+      <div class="row text-center mb-5">
+        {{ range .item }}
+        <div class="col-lg-4 col-sm-6 mb-4">
+          <div class="card shadow text-center">
+            <div
+              class="position-relative rounded-top progress-wrapper"
+              data-color="{{.color}}"
+            >
+              <h4
+                class="position-absolute card-title text-center"
+                style="top: 1em; bottom: 0; left: 0; right: 0; z-index: 11"
+              >
+                {{.title }}
+              </h4>
+              <div class="wave" data-progress="{{.progress}}"></div>
+            </div>
+            <div
+              class="card-footer text-white text-left"
+              data-color="{{.color}}"
+            >
+              <!-- <small class="text-muted">{{.faculty | markdownify}}</small> -->
+              {{.content}}
+            </div>
+          </div>
+        </div>
+        {{ end }}
+      </div>
     </div>
   </div>
 </section>
 <!-- /school -->
-{{ end }}
-
-
-{{ if site.Data.homepage.experience.enable }} {{ with
+{{ end }} {{ if site.Data.homepage.experience.enable }} {{ with
 site.Data.homepage.experience }}
 <!-- experience -->
-<hr />
+<hr class="mb-0" />
 <section class="section">
   <div class="container">
     <div class="row justify-content-around">
@@ -260,18 +276,18 @@ site.Data.homepage.experience }}
     alt="bg-shape"
     class="img-fluid bg-shape-5"
   />
-{{end}}
-
+  {{end}}
 </section>
 
 <!-- faculty slider -->
 {{ if site.Data.homepage.faculty.enable }}
-<section class="section bg-light ">
+<hr class="mt-0" />
+<section class="section">
   <div class="container">
     <div class="row mb-2">
       <div class="col-12 text-center mb-5">
         <h2 class="section-title mb-0">Faculty</h2>
-        <a href="faculty">past faculty</a>
+        <a href="faculty">past faculty <i class="ti-arrow-top-right"></i></a>
       </div>
     </div>
     {{ partial "faculty-slider.html" . }}
@@ -282,6 +298,7 @@ site.Data.homepage.experience }}
 
 <!-- blog -->
 {{ if site.Data.homepage.blog.enable }}
+<hr class="mb-0" />
 <section class="section">
   <div class="container">
     <div class="row">
@@ -296,4 +313,5 @@ site.Data.homepage.experience }}
   </div>
 </section>
 <!-- /blog -->
+{{ end }} {{ if site.Params.contact.homepage }} {{ partial "contact.html" . }}
 {{ end }} {{ end }}

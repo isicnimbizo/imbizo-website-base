@@ -1,36 +1,4 @@
-{{ if site.Params.contact.enable }}
-<!-- contact -->
-<section class="section section-on-footer" data-background="{{`images/backgrounds/bg-dots.png` | absURL}}">
-  <div class="container">
-    <div class="row">
-      <div class="col-12 text-center">
-        <h2 class="section-title">Contact Info</h2>
-      </div>
-      <div class="col-lg-8 mx-auto">
-        <div class="bg-white rounded text-center p-5 shadow-down">
-          <h4 class="mb-80">Contact Form</h4>
-          <form action="{{site.Params.contact.form_action}}" method="POST" class="row">
-            <div class="col-md-6">
-              <input type="text" id="name" name="name" placeholder="Full Name" class="form-control px-0 mb-4">
-            </div>
-            <div class="col-md-6">
-              <input type="email" id="email" name="_replyto" placeholder="Email Address" class="form-control px-0 mb-4">
-            </div>
-            <div class="col-12">
-              <textarea name="message" id="message" class="form-control px-0 mb-4"
-                placeholder="Type Message Here"></textarea>
-            </div>
-            <div class="col-lg-6 col-10 mx-auto">
-              <button class="btn btn-primary w-100">send</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- /contact -->
-{{ end }}
+
 
 <!-- footer -->
 <footer class="bg-dark footer-section">
@@ -72,42 +40,45 @@
 {{ $script := resources.Get "js/script.js" | minify}}
 <script src="{{ $script.Permalink }}"></script>
 
-{{/*  Formspree floating button  */}}
-<script src="https://formspree.io/js/formbutton-v1.min.js" defer></script>
-<script>
-  /* paste this line in verbatim */
-  window.formbutton=window.formbutton||function(){(formbutton.q=formbutton.q||[]).push(arguments)};
+{{ if and site.Params.contact.enable site.Params.contact.floating }}
 
-  /* customize formbutton below*/     
-  formbutton("create", {
-    action: "{{site.Params.contact.form_action}}",
-    title: "How can we help?",
-    fields: [
-      { 
-        type: "email", 
-        label: "Email:", 
-        name: "email",
-        required: true,
-        placeholder: "your@email.com"
-      },
-      {
-        type: "textarea",
-        label: "Message:",
-        name: "message",
-        placeholder: "What's on your mind?",
-      },
-      { type: "submit" }      
-    ],
-    styles: {
-      title: {
-        backgroundColor: "{{site.Params.theme_color}}"
-      },
-      button: {
-        backgroundColor: "gray"
+  {{  "<!-- Formspree floating button -->" | safeHTML }}
+  <script src="https://formspree.io/js/formbutton-v1.min.js" defer></script>
+  <script>
+    /* paste this line in verbatim */
+    window.formbutton=window.formbutton||function(){(formbutton.q=formbutton.q||[]).push(arguments)};
+
+    /* customize formbutton below*/     
+    formbutton("create", {
+      action: "{{site.Params.contact.form_action}}",
+      title: "How can we help?",
+      fields: [
+        { 
+          type: "email", 
+          label: "Email:", 
+          name: "email",
+          required: true,
+          placeholder: "your@email.com"
+        },
+        {
+          type: "textarea",
+          label: "Message:",
+          name: "message",
+          placeholder: "What's on your mind?",
+        },
+        { type: "submit" }      
+      ],
+      styles: {
+        title: {
+          backgroundColor: "{{site.Params.theme_color}}"
+        },
+        button: {
+          backgroundColor: "gray"
+        }
       }
-    }
-  });
-</script>
+    });
+  </script>
+{{ end }}
 
 
 <!-- cookie -->
