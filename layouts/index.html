@@ -16,61 +16,35 @@
   </div>
   {{ if site.Params.decor }}
   <div class="layer" id="l2">
-    <img
-      src="{{`images/illustrations/dots-cyan.svg` | relURL}}"
-      alt="bg-shape"
-    />
+    <img src="{{`images/illustrations/dots-cyan.svg` | relURL}}" alt="bg-shape" />
   </div>
   <div class="layer" id="l3">
-    <img
-      src="{{`images/illustrations/leaf-orange.svg` | relURL}}"
-      alt="bg-shape"
-    />
+    <img src="{{`images/illustrations/leaf-orange.svg` | relURL}}" alt="bg-shape" />
   </div>
   <div class="layer" id="l4">
-    <img
-      src="{{`images/illustrations/dots-orange.svg` | relURL}}"
-      alt="bg-shape"
-    />
+    <img src="{{`images/illustrations/dots-orange.svg` | relURL}}" alt="bg-shape" />
   </div>
   <div class="layer" id="l5">
-    <img
-      src="{{`images/illustrations/leaf-yellow.svg` | relURL}}"
-      alt="bg-shape"
-    />
+    <img src="{{`images/illustrations/leaf-yellow.svg` | relURL}}" alt="bg-shape" />
   </div>
   <div class="layer" id="l6">
-    <img
-      src="{{`images/illustrations/leaf-cyan.svg` | relURL}}"
-      alt="bg-shape"
-    />
+    <img src="{{`images/illustrations/leaf-cyan.svg` | relURL}}" alt="bg-shape" />
   </div>
   <div class="layer" id="l7">
-    <img
-      src="{{`images/illustrations/dots-group-orange.svg` | relURL}}"
-      alt="bg-shape"
-    />
+    <img src="{{`images/illustrations/dots-group-orange.svg` | relURL}}" alt="bg-shape" />
   </div>
   <div class="layer" id="l8">
-    <img
-      src="{{`images/illustrations/leaf-pink-round.svg` | relURL}}"
-      alt="bg-shape"
-    />
+    <img src="{{`images/illustrations/leaf-pink-round.svg` | relURL}}" alt="bg-shape" />
   </div>
   <div class="layer" id="l9">
-    <img
-      src="{{`images/illustrations/leaf-cyan-2.svg` | relURL}}"
-      alt="bg-shape"
-    />
+    <img src="{{`images/illustrations/leaf-cyan-2.svg` | relURL}}" alt="bg-shape" />
   </div>
   {{end}}
   <!-- social icon -->
   <ul class="list-unstyled ml-5 mt-3 position-relative zindex-1">
     {{ range site.Params.social }}
     <li class="mb-3">
-      <a class="text-white" href="{{.URL | safeURL }}"
-        ><i class="{{.icon}}"></i
-      ></a>
+      <a class="text-white" href="{{.URL | safeURL }}"><i class="{{.icon}}"></i></a>
     </li>
     {{ end }}
   </ul>
@@ -88,24 +62,18 @@
         <p class="font-secondary lead text-dark">{{.content | markdownify}}</p>
         {{ with .applications }}
         <!-- applications -->
-        {{ $t := (time site.Data.homepage.dates.applications_close_date) }} {{
-        if .open }}
-        <a href="{{ .URL | absURL }}" class="btn btn-success btn-lg btn-block"
-          >{{.label}}</a
-        >
+        {{ $t := (time site.Data.homepage.dates.applications_close_date) }}
+        {{ if .open }}
+        <a href="{{ .URL | absURL }}" class="btn btn-success btn-lg btn-block">{{.label}}</a>
         <p>Closing {{site.Data.homepage.dates.applications_close_date}}</p>
         {{else if $t.Before now }}
-        <a href="{{ .URL | absURL }}" class="btn disabled btn-danger btn-lg"
-          >{{.closed_message}}</a
-        >
+        <a href="{{ .URL | absURL }}" class="btn disabled btn-danger btn-lg">{{.closed_message}}</a>
         <p class="text-muted">
           Acceptances expected {{site.Data.homepage.dates.acceptance_date}}
         </p>
 
         {{else}}
-        <a href="{{ .URL | absURL }}" class="btn disabled btn-info btn-lg"
-          >{{.closed_message}}</a
-        >
+        <a href="{{ .URL | absURL }}" class="btn disabled btn-info btn-lg">{{.closed_message}}</a>
         <p class="text-muted">
           Opening {{site.Data.homepage.dates.applications_open_date}}
         </p>
@@ -123,9 +91,9 @@
           <div class="ml-3">
             <h4>Application period</h4>
             <p>
-              {{ .applications_open_date }} - {{ dateFormat "Jan 02, 2006"
-              .applications_close_date }}
-              <small>(notified {{ .acceptance_date }})</small>
+              {{ .applications_open_date }} -
+              {{ dateFormat "Jan 02, 2006 15:04:05 MST" .applications_close_date }}
+              <small>[notified {{ .acceptance_date }}]</small>
             </p>
           </div>
         </div>
@@ -153,9 +121,8 @@
               <div class="ml-3">
                 <h4>Duration</h4>
                 <p>
-                  {{ dateFormat "Jan 02, 2006"
-                  site.Data.homepage.dates.school_start_date }} - {{ dateFormat
-                  "Jan 02, 2006" site.Data.homepage.dates.school_end_date }}
+                  {{ dateFormat "Jan 02, 2006" site.Data.homepage.dates.school_start_date }} -
+                  {{ dateFormat "Jan 02, 2006" site.Data.homepage.dates.school_end_date }}
                 </p>
               </div>
             </div>
@@ -163,16 +130,16 @@
           {{/* Old version */}} {{/*
           <p class="mb-5 text-muted">
             {{ dateFormat "Jan 02, 2006"
-            site.Data.homepage.dates.school_start_date }} - {{ dateFormat "Jan
-            02, 2006" site.Data.homepage.dates.school_end_date }}
+            site.Data.homepage.dates.school_start_date }} -
+            {{ dateFormat "Jan 02, 2006" site.Data.homepage.dates.school_end_date }}
           </p>
           */}} {{end}}
-          <div class="col-8 mb-5">
+          <div class="col-8 col-xs-12 mb-5">
             <div class="project-meta">
               <i class="ti-info-alt"></i>
               <div class="ml-3">
-                <p class="text-muted">
-                  <small> {{.content | markdownify}} </small>
+                <p class="text-muted text-left">
+                  {{.content | markdownify}}
                 </p>
               </div>
             </div>
@@ -186,22 +153,14 @@
         {{ range .item }}
         <div class="col-lg-4 col-sm-6 mb-4">
           <div class="card shadow text-center">
-            <div
-              class="position-relative rounded-top progress-wrapper"
-              data-color="{{.color}}"
-            >
-              <h4
-                class="position-absolute card-title text-center"
-                style="top: 1em; bottom: 0; left: 0; right: 0; z-index: 11"
-              >
+            <div class="position-relative rounded-top progress-wrapper" data-color="{{.color}}">
+              <h4 class="position-absolute card-title text-center"
+                style="top: 1em; bottom: 0; left: 0; right: 0; z-index: 11">
                 {{.title }}
               </h4>
               <div class="wave" data-progress="{{.progress}}"></div>
             </div>
-            <div
-              class="card-footer text-white text-left"
-              data-color="{{.color}}"
-            >
+            <div class="card-footer text-white text-left font-weight-light" data-color="{{.color}}">
               <!-- <small class="text-muted">{{.faculty | markdownify}}</small> -->
               {{.content}}
             </div>
@@ -213,8 +172,10 @@
   </div>
 </section>
 <!-- /school -->
-{{ end }} {{ if site.Data.homepage.experience.enable }} {{ with
-site.Data.homepage.experience }}
+{{ end }}
+
+{{ if site.Data.homepage.experience.enable }}
+{{ with site.Data.homepage.experience }}
 <!-- experience -->
 <hr class="mb-0" />
 <section class="section">
@@ -235,47 +196,24 @@ site.Data.homepage.experience }}
   </div>
 </section>
 
-{{ end }} {{ end }}
+{{ end }}
+{{ end }}
 <!-- /experience -->
 
-<section class="section bg-primary position-relative slideshow-bg-shapes">
+<section class="section bg-secondary position-relative slideshow-bg-shapes">
   <div class="container">
     <div class="row">
-      {{ partial "slideshow.html" site.Data.homepage.testimonials }}
+      {{ partial "slideshow.html" . }}
     </div>
   </div>
   {{ if site.Params.decor }}
   <!-- bg shapes -->
-  <img
-    src="{{`images/backgrounds/map.png` | relURL }}"
-    alt="map"
-    class="img-fluid bg-map"
-  />
-  <img
-    src="{{`images/illustrations/dots-group-v.svg` | relURL }}"
-    alt="bg-shape"
-    class="img-fluid bg-shape-1"
-  />
-  <img
-    src="{{`images/illustrations/leaf-orange.svg` | relURL }}"
-    alt="bg-shape"
-    class="img-fluid bg-shape-2"
-  />
-  <img
-    src="{{`images/illustrations/dots-group-sm.svg` | relURL }}"
-    alt="bg-shape"
-    class="img-fluid bg-shape-3"
-  />
-  <img
-    src="{{`images/illustrations/leaf-pink-round.svg` | relURL }}"
-    alt="bg-shape"
-    class="img-fluid bg-shape-4"
-  />
-  <img
-    src="{{`images/illustrations/leaf-cyan.svg` | relURL }}"
-    alt="bg-shape"
-    class="img-fluid bg-shape-5"
-  />
+  <img src="{{`images/backgrounds/map.png` | relURL }}" alt="map" class="img-fluid bg-map" />
+  <img src="{{`images/illustrations/dots-group-v.svg` | relURL }}" alt="bg-shape" class="img-fluid bg-shape-1" />
+  <img src="{{`images/illustrations/leaf-orange.svg` | relURL }}" alt="bg-shape" class="img-fluid bg-shape-2" />
+  <img src="{{`images/illustrations/dots-group-sm.svg` | relURL }}" alt="bg-shape" class="img-fluid bg-shape-3" />
+  <img src="{{`images/illustrations/leaf-pink-round.svg` | relURL }}" alt="bg-shape" class="img-fluid bg-shape-4" />
+  <img src="{{`images/illustrations/leaf-cyan.svg` | relURL }}" alt="bg-shape" class="img-fluid bg-shape-5" />
   {{end}}
 </section>
 
@@ -307,11 +245,16 @@ site.Data.homepage.experience }}
           {{site.Data.homepage.blog.title | markdownify }}
         </h2>
       </div>
-      {{ range first 3 (where .Site.RegularPages "Section" "blog")}} {{ .Render
-      "post" }} {{ end }}
+      {{ range first 3 (where .Site.RegularPages "Section" "blog")}}
+      {{ .Render "post" }}
+      {{ end }}
     </div>
   </div>
 </section>
 <!-- /blog -->
-{{ end }} {{ if site.Params.contact.homepage }} {{ partial "contact.html" . }}
-{{ end }} {{ end }}
+{{ end }}
+
+{{ if site.Params.contact.homepage }} {{ partial "contact.html" . }} {{ end }}
+
+<!-- end Main -->
+{{ end }}

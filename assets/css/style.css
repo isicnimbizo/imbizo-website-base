@@ -300,6 +300,10 @@ a:hover {
   background: var(--primary-color) !important;
 }
 
+.bg-secondary {
+  background-color: var(--secondary-color) !important;
+}
+
 .bg-gray {
   background: #eaeaea !important;
 }
