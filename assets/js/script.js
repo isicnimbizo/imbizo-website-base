@@ -102,14 +102,16 @@ $(window).on('load', function () {
 	$('.slideshow-slider').slick({
 		dots: true,
 		infinite: true,
-		speed: 1200,
+		speed: 3000,
 		autoplay: true,
-		autoplaySpeed: 2000,
+		autoplaySpeed: 3000,
 		slidesToShow: 1,
 		slidesToScroll: 1,
 		arrows: true,
 		adaptiveHeight: false,
 		centerMode: false,
+		useTransform: true,
+		cssEase: 'ease-in-out',
 		nextArrow: '<button type="button" class="slick-next mx-2 btn btn-outline-success">></button>',
 		prevArrow: '<button type="button" class="slick-next mx-2 btn btn-outline-success"><</button>',
 	});

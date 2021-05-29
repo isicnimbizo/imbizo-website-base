@@ -13,7 +13,6 @@
           </label>
 					{{ $years := slice }}
 					{{ range site.Data.faculty.item }}
-        
 					  {{ range .years }}
 					    {{ $years = $years | append . }}
 					  {{ end }}
@@ -28,7 +27,8 @@
     </div>
     <div class="row shuffle-wrapper">
       {{ range site.Data.faculty.item  | sort }}
-      <div class="col-lg-3 col-xs-12 col-4 mb-4 shuffle-item" data-groups="[{{range $index, $element:= .years }}{{if ne $index 0}},{{end}}&quot;{{. | urlize}}&quot;{{ end }}]">
+      <div class="col-lg-3 col-sm-6 col-md-4 mb-4 shuffle-item" 
+        data-groups="[{{range $index, $element:= .years }}{{if ne $index 0}},{{end}}&quot;{{. | urlize}}&quot;{{ end }}]">
         <a href="{{.link}}" class="pl-0 ml-0 center text-center", target="_blank" class="d-flex">
           <div class="circletag">
             {{if .image}}

@@ -57,54 +57,44 @@
 <section class="section">
   <div class="container">
     <div class="row">
-      <div class="col-lg-10 mx-auto text-center">
-        {{ with site.Data.homepage.about }}
-        <p class="font-secondary lead text-dark">{{.content | markdownify}}</p>
-        {{ with .applications }}
-        <!-- applications -->
-        {{ $t := (time site.Data.homepage.dates.applications_close_date) }}
-        {{ if .open }}
-        <a href="{{ .URL | absURL }}" class="btn btn-success btn-lg btn-block">{{.label}}</a>
-        <p>Closing {{site.Data.homepage.dates.applications_close_date}}</p>
-        {{else if $t.Before now }}
-        <a href="{{ .URL | absURL }}" class="btn disabled btn-danger btn-lg">{{.closed_message}}</a>
-        <p class="text-muted">
-          Acceptances expected {{site.Data.homepage.dates.acceptance_date}}
-        </p>
-
-        {{else}}
-        <a href="{{ .URL | absURL }}" class="btn disabled btn-info btn-lg">{{.closed_message}}</a>
-        <p class="text-muted">
-          Opening {{site.Data.homepage.dates.applications_open_date}}
-        </p>
-
-        {{ end }}
-        <!-- applications -->
-        {{ end }} {{ end }}
+    {{with site.Data.application_info}}
+      <div class="col-10 mx-auto text-center">
+        <p class="font-secondary lead text-dark">{{site.Data.homepage.about.content | markdownify}}</p>
       </div>
-    </div>
-    {{with site.Data.homepage.dates}}
-    <div class="row">
-      <div class="col-12">
-        <div class="project-meta">
-          <i class="ti-calendar"></i>
-          <div class="ml-3">
-            <h4>Application period</h4>
-            <p>
-              {{ .applications_open_date }} -
-              {{ dateFormat "Jan 02, 2006 15:04:05 MST" .applications_close_date }}
-              <small>[notified {{ .acceptance_date }}]</small>
+      <div class="col-12 my-5 text-center">
+        {{ if site.Data.homepage.about.show_application_info }}
+          <!-- application info -->
+          {{ $t := (time .dates.applications_close_date) }}
+          {{ if .open }}
+            <a href="{{ .URL | absURL }}" class="btn btn-success btn-lg btn-block">{{.label}}</a>
+            <p>Closing {{site.Data.application_info.dates.applications_close_date}}</p>
+          {{else if $t.Before now }}
+            <a href="{{ .URL | absURL }}" class="btn disabled btn-danger btn-lg" aria-disabled="true">{{.closed_message}}</a>
+            <p class="text-muted">
+              Acceptances expected {{site.Data.application_info.dates.acceptance_date}}
             </p>
-          </div>
-        </div>
+
+          {{else}}
+            <a href="{{ .URL | absURL }}" class="btn disabled btn-info btn-lg" aria-disabled="true">{{.closed_message}}</a>
+            <p class="text-muted">
+              Opening {{site.Data.application_info.dates.applications_open_date}}
+            </p>
+          {{ end }}
+          <!-- application info -->
+        {{ end }} 
+      </div>
+      <div class="col-12 text-center">
+        <a href="" class="btn btn-sm btn-outline-secondary"><i class="ti-info-alt"></i> &nbsp;{{.info_link_label}}</a>
       </div>
     </div>
-    {{end}}
+  {{end}}
   </div>
 </section>
 <!-- /about -->
-{{ end }} {{ with site.Data.homepage.school }}
+{{ end }} 
+
 <!-- the school -->
+{{ with site.Data.homepage.school }}
 <hr class="mb-0" />
 
 <section class="section bg-light">
@@ -114,15 +104,15 @@
         <h2 class="section-title mb-5">{{ .title | markdownify }}</h2>
 
         <div class="row">
-          {{ if site.Data.homepage.dates.school_start_date}}
+          {{ if .dates.school_start_date}}
           <div class="col-4 mb-5">
             <div class="project-meta">
               <i class="ti-calendar"></i>
               <div class="ml-3">
                 <h4>Duration</h4>
                 <p>
-                  {{ dateFormat "Jan 02, 2006" site.Data.homepage.dates.school_start_date }} -
-                  {{ dateFormat "Jan 02, 2006" site.Data.homepage.dates.school_end_date }}
+                  {{ dateFormat "Jan 02, 2006" .dates.school_start_date }} -
+                  {{ dateFormat "Jan 02, 2006" .dates.school_end_date }}
                 </p>
               </div>
             </div>
@@ -134,9 +124,9 @@
             {{ dateFormat "Jan 02, 2006" site.Data.homepage.dates.school_end_date }}
           </p>
           */}} {{end}}
-          <div class="col-8 col-xs-12 mb-5">
+          <div class="col-md-8 col-sm-12 mb-5">
             <div class="project-meta">
-              <i class="ti-info-alt"></i>
+              <i class="ti-info"></i>
               <div class="ml-3">
                 <p class="text-muted text-left">
                   {{.content | markdownify}}
@@ -145,9 +135,6 @@
             </div>
           </div>
         </div>
-        {{/*
-        <div class="text-muted">{{.content | markdownify}}</div>
-        */}}
       </div>
       <div class="row text-center mb-5">
         {{ range .item }}

@@ -2,16 +2,23 @@
 
   {{ partial "page-title.html" . }}
 
-  <!-- blog -->
+  <!-- news -->
   <section class="section">
     <div class="container">
       <div class="row">
-        {{ range .Data.Pages }}
-        {{ .Render "post" }}
-        {{ end }}
+        <div class="col-sm-12 col-md-9">
+          <div class="row">
+            {{ range .Data.Pages }}
+            {{ .Render "post" }}
+            {{ end }}
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-3">
+          <a class="twitter-timeline" href="https://twitter.com/isiCNI?ref_src=twsrc%5Etfw">Tweets by isiCNI</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
       </div>
     </div>
   </section>
-  <!-- /blog -->
+  <!-- /news -->
 
 {{ end }}

@@ -26,7 +26,7 @@
     {{ range sort .item "tier_weight" "asc"}}
     {{if .current}}
 
-    <div class="col-lg-3 col-xs-12 col-6 mb-4 shuffle-item" data-groups="[&quot;{{.tier | urlize}}&quot;]">
+    <div class="col-lg-3 col-sm-12 col-6 mb-4 shuffle-item" data-groups="[&quot;{{.tier | urlize}}&quot;]">
       <a href="{{.link}}" class="pl-0 ml-0 center text-center" target="_blank" class="d-flex">
         <div class="position-relative">
           {{if .image}}

@@ -7,7 +7,9 @@
 {{end}}
 
 <!-- page title -->
-<section class="page-title bg-primary position-relative overflow-hidden">
+<section class="page-title bg-primary position-relative overflow-hidden"
+         style="{{ if .Params.min_header_height}}height:{{.Params.min_header_height}};{{ end }}"
+>
   <div class="container">
     <div class="row">
       <div class="col-12 text-center">
