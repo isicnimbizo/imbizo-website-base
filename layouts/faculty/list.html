@@ -21,7 +21,7 @@
 					{{ end }}
 					{{ range ( $years | uniq | sort ) }}
           <input type="radio" class="btn-check" name="shuffle-filter" id="{{.}}" value="{{ . | urlize }}" />
-          <label class="btn btn-sm btn-secondary" for="{{.}}">{{ . }}</label>
+          <label class="btn btn-sm btn-primary" for="{{.}}">{{ . }}</label>
 
           {{ end }}
         </div>
