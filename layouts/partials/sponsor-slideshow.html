@@ -3,14 +3,12 @@
 <div class="col-12 text-center">
   <h2 class="section-title text-white mb-5">{{ .title | markdownify }}</h2>
 </div>
-
-
 <div class="col-lg-10 mx-auto slideshow-slider d-flex align-items-center">
   {{ range .sponsors }}
   <!-- slider-item -->
   {{ $filtered := where .item "current" (not false)}}
   {{ if $filtered}}
-  <div class="text-center slideshow-content">
+  <div class="text-center slideshow-content" id="{{.tier}}">
     <!-- <i class="ti-quote-right text-white icon mb-4 d-inline-block"></i> -->
     <h3 class="text-white mb-4">{{.tier | markdownify}}</h3>
     <div class="row">

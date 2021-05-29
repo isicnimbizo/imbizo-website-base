@@ -42,6 +42,7 @@ h6 {
 h1,
 .h1 {
   font-size: 80px;
+  text-shadow: 0px 5px 5px rgba(50, 0, 0, 0.2);
 }
 
 @media (max-width: 991px) {
@@ -192,14 +193,14 @@ img {
 
 .circletag {
   display: block;
-  max-width: 80px;
-  max-height: 80px;
+  max-width: 120px;
+  max-height: 120px;
   width: 100%;
   height: 100%;
   background: #e6e7ed;
-  border-radius: 40px;
-  -moz-border-radius: 40px;
-  -webkit-border-radius: 40px;
+  border-radius: 60px;
+  -moz-border-radius: 60px;
+  -webkit-border-radius: 60px;
   background-image: url(../images/people/placeholder.jpg);
   background-position: 50% 50%;
   background-repeat: no-repeat;
@@ -445,6 +446,10 @@ a:hover {
 .slick-dots li.slick-active button {
   /* background: #fff; */
   width: 25px;
+}
+
+.bg-secondary .slick-dots li button {
+  background: rgba(255, 255, 255, 0.5) !important;
 }
 
 .slick-dots li button {

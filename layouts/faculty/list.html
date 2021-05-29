@@ -7,9 +7,11 @@
   <div class="container">
     <div class="row mb-5">
       <div class="col-12">
-        <div class="btn-group btn-group-toggle justify-content-center d-flex flex-wrap" data-toggle="buttons">
-          <label class="btn btn-sm btn-primary active">
-            <input type="radio" name="shuffle-filter" value="all" checked="checked" />All
+        <div class="btn-group btn-group-toggle justify-content-center d-flex flex-wrap" data-toggle="buttons"
+             role="group" aria-label="select faculty year">
+             <input type="radio" class="btn-check" name="shuffle-filter" 
+                    id="all" value="all" autocomplete="off" checked="checked">
+             <label class="btn btn-sm btn-primary" for="all">All</label>
           </label>
 					{{ $years := slice }}
 					{{ range site.Data.faculty.item }}
@@ -18,9 +20,9 @@
 					  {{ end }}
 					{{ end }}
 					{{ range ( $years | uniq | sort ) }}
-          <label class="btn btn-sm btn-primary">
-            <input type="radio" name="shuffle-filter" value="{{ . | urlize }}" />{{ . }}
-          </label>
+          <input type="radio" class="btn-check" name="shuffle-filter" id="{{.}}" value="{{ . | urlize }}" />
+          <label class="btn btn-sm btn-secondary" for="{{.}}">{{ . }}</label>
+
           {{ end }}
         </div>
       </div>
