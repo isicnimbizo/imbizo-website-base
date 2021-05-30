@@ -76,7 +76,11 @@
         <div class="row justify-content-around">
           {{ range .item }}
           <div class="col-lg-3 col-md-4 text-center hover-shadow pt-3">
+            {{ if in .icon "ti-"}}
+            <i class="{{ .icon }} fs-1 my-4"></i>
+            {{ else }}
             <img src="{{ .icon | absURL }}" class="mb-4" alt="icon">
+            {{ end }}
             <h4 class="mb-4">{{ .title }}</h4>
             <p>{{ .content | markdownify }}</p>
           </div>
