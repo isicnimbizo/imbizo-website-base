@@ -227,19 +227,21 @@
 {{end}}
 
 <!-- blog -->
-{{ if site.Data.homepage.blog.enable }}
+{{ if site.Data.homepage.news.enable }}
 <hr class="mb-0" />
 <section class="section">
   <div class="container">
     <div class="row">
-      <div class="col-12 text-center">
-        <h2 class="section-title">
-          {{site.Data.homepage.blog.title | markdownify }}
+      <div class="col-12 text-center mb-5">
+        <h2 class="section-title mb-0">
+          {{site.Data.homepage.news.title | markdownify }}
         </h2>
+        <a href="news">read more<i class="ti-arrow-top-right"></i></a>
       </div>
-      {{ range first 3 (where .Site.RegularPages "Section" "blog")}}
+      {{ range first 3 (where .Site.RegularPages "Section" "news")}}
       {{ .Render "post" }}
       {{ end }}
+      
     </div>
   </div>
 </section>
