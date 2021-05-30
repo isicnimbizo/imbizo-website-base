@@ -1,4 +1,4 @@
-{{ define "main" }} 
+{{ define "main" }}
 
 {{ partial "page-title.html" . }}
 
@@ -7,18 +7,15 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-5 mb-5">
-        <img
-          src="{{ .Params.image | absURL }}"
-          class="img-fluid w-100"
-          alt="{{ .Title }}"
-        />
+        <img src="{{if .Params.thumbnail}}{{.Params.thumbnail | relURL}}{{ else }}{{.Params.Image | relURL}}{{ end }}"
+          class="img-fluid w-100" alt="{{ .Title }}" />
       </div>
       <div class="col-lg-7 mb-5 mb-lg-0 align-self-center">
         <div class="row mx-0">
           <div class="col-sm-6 mb-5">
             <div class="project-meta">
               <i class="ti-calendar"></i>
-              <div class="ml-3">
+              <div class="ms-3">
                 <h4>Date</h4>
                 <p>{{ .PublishDate.Format "Jan 02, 2006" }}</p>
               </div>
@@ -28,7 +25,7 @@
           <div class="col-sm-6 mb-5">
             <div class="project-meta">
               <i class="ti-user"></i>
-              <div class="ml-3">
+              <div class="ms-3">
                 <h4>Client</h4>
                 <p>{{. | markdownify}}</p>
               </div>
@@ -40,7 +37,7 @@
           <div class="col-sm-6 mb-5">
             <div class="project-meta">
               <i class="ti-folder"></i>
-              <div class="ml-3">
+              <div class="ms-3">
                 <h4>Categories</h4>
                 <p>{{ delimit . ", " | humanize }}</p>
               </div>
@@ -51,7 +48,7 @@
           <div class="col-sm-6 mb-5">
             <div class="project-meta">
               <i class="ti-link"></i>
-              <div class="ml-3">
+              <div class="ms-3">
                 <h4>Project Link</h4>
                 <p>{{. | markdownify}}</p>
               </div>

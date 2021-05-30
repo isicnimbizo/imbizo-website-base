@@ -1,15 +1,19 @@
 {{ if .Params.image}}
-<style>
-  :root{
-    --image-header: url({{ .Params.image | absURL }});
+  <style>
+    :root{
+      {{ if in .Params.image "/"}}
+        --image-header: url({{ .Params.image | absURL }});
+        {{ else }}
+        --image-header: {{.Params.image}};
+      {{end}}
   }
 </style>
 {{end}}
 
 <!-- page title -->
 <section class="page-title bg-primary position-relative overflow-hidden"
-         style="{{ if .Params.min_header_height}}height:{{.Params.min_header_height}};{{ end }}"
->
+  style="{{ if .Params.min_header_height}}height:{{.Params.min_header_height}};{{ end }}">
+  <div class="layer-bg w-100 position-absolute"></div>
   <div class="container">
     <div class="row">
       <div class="col-12 text-center">
@@ -17,18 +21,15 @@
       </div>
     </div>
   </div>
-  <div class="layer-bg w-100">
-    <div class="bg-gradient h-100 w-100 position-absolute"></div>
-  </div>
   {{ if site.Params.decor}}
-    <!-- background shapes -->
-    <img src="{{`images/illustrations/page-title.png`| relURL}}" alt="illustrations" class="bg-shape-1 w-100">
-    <img src="{{`images/illustrations/leaf-pink-round.svg`| relURL}}" alt="illustrations" class="bg-shape-2">
-    <img src="{{`images/illustrations/dots-cyan.svg`| relURL}}" alt="illustrations" class="bg-shape-3">
-    <img src="{{`images/illustrations/leaf-orange.svg`| relURL}}" alt="illustrations" class="bg-shape-4">
-    <img src="{{`images/illustrations/leaf-yellow.svg`| relURL}}" alt="illustrations" class="bg-shape-5">
-    <img src="{{`images/illustrations/dots-group-cyan.svg`| relURL}}" alt="illustrations" class="bg-shape-6">
-    <img src="{{`images/illustrations/leaf-cyan-lg.svg`| relURL}}" alt="illustrations" class="bg-shape-7">
+  <!-- background shapes -->
+  <img src="{{`images/illustrations/page-title.png`| relURL}}" alt="illustrations" class="bg-shape-1 w-100">
+  <img src="{{`images/illustrations/leaf-pink-round.svg`| relURL}}" alt="illustrations" class="bg-shape-2">
+  <img src="{{`images/illustrations/dots-cyan.svg`| relURL}}" alt="illustrations" class="bg-shape-3">
+  <img src="{{`images/illustrations/leaf-orange.svg`| relURL}}" alt="illustrations" class="bg-shape-4">
+  <img src="{{`images/illustrations/leaf-yellow.svg`| relURL}}" alt="illustrations" class="bg-shape-5">
+  <img src="{{`images/illustrations/dots-group-cyan.svg`| relURL}}" alt="illustrations" class="bg-shape-6">
+  <img src="{{`images/illustrations/leaf-cyan-lg.svg`| relURL}}" alt="illustrations" class="bg-shape-7">
   {{end}}
 </section>
 <!-- /page title -->

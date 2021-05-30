@@ -8,7 +8,8 @@
       {{ range .Data.Pages }}
       <div class="col-md-4 col-sm-6 mb-4 mb-md-0">
         <div class="position-relative h-100 card text-center rounded hover-wrapper">
-          <img src="{{ .Params.image | absURL }}" class="card-img-top">
+          <img src="{{if .Params.thumbnail}}{{.Params.thumbnail | relURL}}{{ else }}{{.Params.Image | relURL}}{{ end }}"
+            class="card-img-top">
           <div class="card-body">
             <h4 class="card-title">{{.Params.title }}</h4>
             <p class="text-light font-secondary">{{.Params.designation }}</p>
