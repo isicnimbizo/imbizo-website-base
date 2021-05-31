@@ -118,10 +118,10 @@ $(window).on('load', function () {
 
 
 	// faculty logo slider
-	$('.faculty-logo-slider').slick({
+	$('#faculty .faculty-logo-slider').slick({
 		infinite: true,
 		// speed: 100, 
-		slidesToShow: 5,
+		slidesToShow: 4,
 		rows: 3,
 		slidesPerRow: 1,
 		slidesToScroll: 3,
@@ -168,6 +168,50 @@ $(window).on('load', function () {
 				// slidesToScroll: 1
 			}
 		}
+		]
+	});
+	$('#teaching-assistants .faculty-logo-slider').slick({
+		infinite: true,
+		// speed: 100, 
+		slidesToShow: 6,
+		rows: 1,
+		slidesPerRow: 1,
+		slidesToScroll: 1,
+		swipeToSlide: true,
+		autoplay: true,
+		autoplaySpeed: 1000,
+		dots: false,
+		arrows: false,
+		centerMode: false,
+		pauseOnHover: false,
+		nextArrow: '<button type="button" class="slick-next btn btn-outline-dark">></button>',
+		prevArrow: '<button type="button" class="slick-next btn btn-outline-dark"><</button>',
+		responsive: [{
+			breakpoint: 1024,
+			settings: {
+				slidesToShow: 3,
+				rows: 2,
+				slidesPerRow: 2,
+				slidesToScroll: 1,
+			}
+		},
+		{
+			breakpoint: 600,
+			settings: {
+				arrows: true,
+				slidesToShow: 3,
+				slidesToScroll: 1
+			}
+		},
+		{
+			breakpoint: 480,
+			settings: {
+				arrows: true,
+				slidesToShow: 2,
+				slidesPerRow: 1,
+				slidesToScroll: 1
+			}
+		},
 		]
 	});
 

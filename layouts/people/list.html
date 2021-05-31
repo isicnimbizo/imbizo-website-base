@@ -5,10 +5,10 @@
 <!-- portfolio -->
 <section class="section">
   <div class="container">
-    <div class="row mb-5">
+    <div class="row mb-5 sticky-top" style="top: 85px; z-index:1200;">
       <div class="col-12">
         <div class="btn-group btn-group-toggle justify-content-center d-flex flex-wrap" data-toggle="buttons"
-          role="group" aria-label="select faculty year">
+          style="box-shadow: 0 0 5px rgba(0,0,0,0.5); border-radius: 5px;" role="group" aria-label="select faculty year">
           <input type="radio" class="btn-check" name="shuffle-filter" id="all" value="all" autocomplete="off"
             checked="checked">
           <label class="btn btn-sm btn-primary" for="all">All</label>
@@ -27,8 +27,42 @@
         </div>
       </div>
     </div>
+    <div class="row" id="faculty">
+      <div class="col-lg-12 text-center">
+        <h3 class="section-title">{{site.Data.faculty.title}}</h3>
+      </div>
+    </div>
     <div class="row shuffle-wrapper">
       {{ range site.Data.faculty.item | sort }}
+      <div class="col-lg-3 col-sm-6 col-md-4 mb-4 shuffle-item"
+        data-groups="[{{range $index, $element:= .years }}{{if ne $index 0}},{{end}}&quot;{{. | urlize}}&quot;{{ end }}]">
+        <a href="{{.link}}" class="pl-0 ms-0 center text-center" , target="_blank" class="d-flex">
+          <div class="circletag">
+            {{if .image}}
+            <img src="{{ .image | absURL }}" alt="{{.name}}" class="img-fluid w-100 d-block">
+            {{else}}
+            {{$last_name := lower (index (split .name " ") 1) }}
+            {{ $path := printf "images/people/%s.jpg" $last_name}}
+            <img src="{{ $path | absURL }}" alt="{{.name}}" class="img-fluid w-100 d-block">
+            {{end}}
+          </div>
+          <div>
+            <h4>{{ .name }}</h4>
+            <p class="mb-0 text-light">{{.affiliation}}</p>
+            <small class="text-muted mb-1">{{ range .years}} {{ . }} {{end}}</small>
+
+          </div>
+        </a>
+      </div>
+      {{ end }}
+
+      <div class="col-12 shuffle-item text-center" id="teaching-assistants"
+        data-groups="[{{range $index, $element:= $years }}{{if ne $index 0}},{{end}}&quot;{{. | urlize}}&quot;{{ end }}]">
+        <hr>
+        <h3 class="section-title mt-5">{{site.Data.tutors.title}}</h3>
+
+      </div>
+      {{ range site.Data.tutors.item | sort }}
       <div class="col-lg-3 col-sm-6 col-md-4 mb-4 shuffle-item"
         data-groups="[{{range $index, $element:= .years }}{{if ne $index 0}},{{end}}&quot;{{. | urlize}}&quot;{{ end }}]">
         <a href="{{.link}}" class="pl-0 ms-0 center text-center" , target="_blank" class="d-flex">

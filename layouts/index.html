@@ -6,11 +6,26 @@
   <div class="layer-bg w-100 position-absolute"></div>
   <div class="container">
     <div class="row">
-      <div class="col-lg-11 mx-auto">
+      <div class="col-lg-12 mx-auto">
         <h1 class="text-white font-tertiary">
           {{ site.Data.homepage.banner.title | safeHTML }}
         </h1>
       </div>
+      <!-- social icon -->
+      <ul class="list-unstyled ms-5 mt-3 position-relative zindex-1 d-flex align-items-center justify-content-end">
+        {{ range site.Params.social }}
+        {{ if gt (len .URL) 5}}
+        <li class="m-3">
+          {{ if .embed}}
+          {{ .embed | safeHTML}}
+          {{ else }}
+          <a class="text-white" href="{{.URL | safeURL }}"><i class="{{.icon}}"></i></a>
+          {{ end }}
+        </li>
+        {{ end }}
+        {{ end }}
+      </ul>
+      <!-- /social icon -->
     </div>
   </div>
   {{ if site.Params.decor }}
@@ -39,21 +54,7 @@
     <img src="{{`images/illustrations/leaf-cyan-2.svg` | relURL}}" alt="bg-shape" />
   </div>
   {{end}}
-  <!-- social icon -->
-  <ul class="list-unstyled ms-5 mt-3 position-relative zindex-1 d-flex align-items-center">
-    {{ range site.Params.social }}
-    {{ if gt (len .URL) 5}}
-    <li class="m-3">
-      {{ if .embed}}
-      {{ .embed | safeHTML}}
-      {{ else }}
-      <a class="text-white" href="{{.URL | safeURL }}"><i class="{{.icon}}"></i></a>
-      {{ end }}
-    </li>
-    {{ end }}
-    {{ end }}
-  </ul>
-  <!-- /social icon -->
+
 </section>
 <!-- /hero area -->
 
@@ -213,14 +214,31 @@
 {{ if site.Data.homepage.faculty.enable }}
 <hr class="mt-0" />
 <section class="section">
-  <div class="container">
+  <div class="container" id="faculty">
     <div class="row mb-2">
       <div class="col-12 text-center mb-5">
-        <h2 class="section-title mb-0">Faculty</h2>
-        <a href="faculty">past faculty <i class="ti-arrow-top-right"></i></a>
+        <h2 class="section-title mb-0">{{site.Data.faculty.title}}</h2>
+        <a href="people/#faculty">past {{site.Data.faculty.title | lower}} <i class="ti-arrow-top-right"></i></a>
       </div>
     </div>
-    {{ partial "faculty-slider.html" . }}
+    {{ partial "people-slider.html" site.Data.faculty }}
+
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container text-center" id="teaching-assistants">
+    <div class="row mb-2">
+      <div class="col-12 text-center mb-5">
+        <h2 class="section-title mb-0">{{site.Data.tutors.title}}</h2>
+        <a href="people/#teaching-assistants">past {{site.Data.tutors.title | lower}} <i
+            class="ti-arrow-top-right"></i></a>
+      </div>
+    </div>
+
+    {{ partial "people-slider.html" site.Data.tutors }}
+
   </div>
 </section>
 <!-- /faculty logo slider -->
@@ -241,7 +259,7 @@
       {{ range first 3 (where .Site.RegularPages "Section" "news")}}
       {{ .Render "post" }}
       {{ end }}
-      
+
     </div>
   </div>
 </section>

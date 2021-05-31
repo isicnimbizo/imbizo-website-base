@@ -7,13 +7,12 @@
   <div class="container">
     <div class="row">
       <div class=" col-lg-6 col-12 text-center">
-        <h2 class="section-title">Muizenberg, Cape Town</h2>
+        <h2 class="section-title">{{site.Params.address}}</h2>
       </div>
       <div class=" col-lg-6 col-12">
         {{ with site.Params.map }}
         {{"<!-- Google Map -->" | safeHTML}}
-        <div class="shadow" id="map" data-latitude="{{ .map_latitude }}" data-longitude="{{ .map_longitude }}"
-          data-marker="{{ .map_marker | absURL }}" data-marker-name="{{ site.Title }}" style="height: 400px;"></div>
+        {{.map_embed_html | safeHTML}}
         {{ end }}
       </div>
     </div>
@@ -31,7 +30,7 @@
         <ul class="list-inline social-icons text-center">
           {{ range site.Params.social }}
           {{ if gt (len .URL) 5 }}
-            <li class="list-inline-item"><a href="{{.URL}}"><i class="{{.icon}}"></i></a></li>
+            <li class="list-inline-item"><a href="{{.URL}}" target="_blank"><i class="{{.icon}}"></i></a></li>
           {{ end }}
           {{ end }}
         </ul>

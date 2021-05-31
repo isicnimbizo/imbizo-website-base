@@ -1,7 +1,7 @@
-<div class="faculty-logo-slider d-flex align-items-center">
+<div class="faculty-logo-slider d-flex align-items-center justify-content-center">
   {{/* Find latest year */}}
   {{ $max_year := 0 }}
-  {{ range site.Data.faculty.item }}
+  {{ range .item }}
   {{ range .years }}
   {{ if gt . $max_year}}
   {{ $max_year = . }}
@@ -10,7 +10,7 @@
   {{ end }}
   {{ $select_years := (slice $max_year) }}
 
-  {{ range site.Data.faculty.item }}
+  {{ range .item }}
   {{ $is_current := intersect $select_years .years }}
   {{ if $is_current}}
   {{ $path := printf "%s" .image}}
@@ -20,7 +20,7 @@
   {{end}}
   <div class="col-lg-3 col-sm-12 col-4 mb-4 shuffle-item"
     data-groups="[{{range $index, $element:= .years }}{{if ne $index 0}},{{end}}&quot;{{. | urlize}}&quot;{{ end }}]">
-    <a href="{{.link}}" class="pl-0 ms-0 center text-center" , target="_blank" class="d-flex">
+    <a href="{{.link}}" class="pl-0 ms-0 center text-center" target="_blank" class="d-flex">
       <div class="circletag">
         {{if .image}}
         <img src="{{ .image | absURL }}" alt="{{.name}}" class="img-fluid w-100 d-block">
@@ -33,11 +33,9 @@
       <div>
         <h4>{{ .name }}</h4>
         <p class="mb-0 text-light">{{.affiliation}}</p>
-
       </div>
     </a>
   </div>
-
   {{ end }}
   {{end}}
 </div>
