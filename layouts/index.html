@@ -71,7 +71,7 @@
         {{ if site.Data.homepage.about.show_application_info }}
         <!-- application info -->
         {{ $t := (time .dates.applications_close_date) }}
-        {{ if .applications_open }}
+        {{ if site.Data.application_info.applications_open }}
         <a href="{{ .URL | absURL }}" class="btn btn-success btn-lg btn-block">{{.label}}</a>
         <p>Closing {{site.Data.application_info.dates.applications_close_date}}</p>
         {{else if $t.Before now }}
