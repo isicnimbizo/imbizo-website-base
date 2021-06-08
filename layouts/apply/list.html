@@ -13,7 +13,7 @@
       <div class="col-12 text-center">
         <!-- application info -->
         {{ $t := (time .dates.applications_close_date) }}
-        {{ if .open }}
+        {{ if .applications_open }}
         <a href="{{ .URL | absURL }}" class="btn btn-success btn-lg btn-block">{{.label}}</a>
         <p>Closing {{site.Data.application_info.dates.applications_close_date}}</p>
         {{else if $t.Before now }}
