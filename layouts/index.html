@@ -64,7 +64,6 @@
   <div class="container">
     <div class="row">
       {{with site.Data.application_info}}
-      <p>{{site.Data.application_info.applications_open}}</p>
       <div class="col-10 mx-auto text-center">
         <p class="font-secondary lead text-dark">{{site.Data.homepage.about.content | markdownify}}</p>
       </div>
@@ -74,7 +73,7 @@
         {{ $t := (time .dates.applications_close_date) }}
         {{ if site.Data.application_info.applications_open }}
         <a href="{{ .URL | absURL }}" class="btn btn-success btn-lg btn-block">{{.label}}</a>
-        <p>Closing {{site.Data.application_info.dates.applications_close_date}}</p>
+        <p>Closing {{dateFormat "Monday 02 Jan 2006 at 15:04:05 MST" site.Data.application_info.dates.applications_close_date }}</p>
         {{else if $t.Before now }}
         <a href="{{ .URL | absURL }}" class="btn disabled btn-danger btn-lg"
           aria-disabled="true">{{.closed_message}}</a>

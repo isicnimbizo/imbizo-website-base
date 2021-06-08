@@ -15,7 +15,7 @@
         {{ $t := (time .dates.applications_close_date) }}
         {{ if .applications_open }}
         <a href="{{ .URL | absURL }}" class="btn btn-success btn-lg btn-block">{{.label}}</a>
-        <p>Closing {{site.Data.application_info.dates.applications_close_date}}</p>
+        <p>Closing {{dateFormat "Monday 02 Jan 2006 at 15:04:05 MST" site.Data.application_info.dates.applications_close_date }}</p>
         {{else if $t.Before now }}
         <a href="{{ .URL | absURL }}" class="btn disabled btn-danger btn-lg">{{.closed_message}}</a>
         <p class="text-muted">
@@ -38,7 +38,7 @@
           <h4>Application period</h4>
           <p>
             {{ .dates.applications_open_date }} -
-            {{ dateFormat "Jan 02, 2006 15:04:05 MST" .dates.applications_close_date }}
+            {{ dateFormat "02 Jan 2006 15:04:05 MST" .dates.applications_close_date }}
             <br><small>notified {{ .dates.acceptance_date }}</small>
           </p>
         </div>
