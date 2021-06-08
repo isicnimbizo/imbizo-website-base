@@ -44,14 +44,15 @@
             </div>
           </div>
           {{ end }}
-          {{ with .Params.material_link}}
+          {{ if .Params.material_link}}
           <div class="col-sm-6 mb-5" data-bs-toggle="tooltip" data-bs-placement="bottom"
             title="for school attendees only">
             <div class="project-meta">
               <i class="ti-link"></i>
               <div class="ms-3">
                 <h4>Material</h4>
-                <p>{{. | markdownify}}</p>
+                <a href="{{.Params.material_link}}" target="_blank"
+                  title="school material for {{.Params.Title}}">{{.Params.material_link}}</a>
               </div>
             </div>
           </div>
