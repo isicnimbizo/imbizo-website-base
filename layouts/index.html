@@ -64,6 +64,7 @@
   <div class="container">
     <div class="row">
       {{with site.Data.application_info}}
+      <p>{{site.Data.application_info.applications_open}}</p>
       <div class="col-10 mx-auto text-center">
         <p class="font-secondary lead text-dark">{{site.Data.homepage.about.content | markdownify}}</p>
       </div>
