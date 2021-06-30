@@ -2,7 +2,8 @@
 
 <!-- hero area -->
 <section class="hero-area bg-primary overflow-hidden"
-  style="{{ if site.Data.homepage.banner.min_header_height}}min-height:{{site.Data.homepage.banner.min_header_height}};{{ end }}">
+  style="{{ if site.Data.homepage.banner.min_header_height}}min-height:{{site.Data.homepage.banner.min_header_height}};{{ end }}"
+  {{ if site.Params.decor }} id="parallax" {{ end }}>
   <div class="layer-bg w-100 position-absolute"></div>
   <div class="container">
     <div class="row">
@@ -12,7 +13,7 @@
         </h1>
       </div>
       <!-- social icon -->
-      <ul class="list-unstyled ms-5 mt-3 position-relative zindex-1 d-flex align-items-center justify-content-end">
+      <ul class="list-unstyled mt-3 position-relative zindex-1 d-flex align-items-center justify-content-end">
         {{ range site.Params.social }}
         {{ if gt (len .URL) 5}}
         <li class="m-3">
@@ -29,31 +30,29 @@
     </div>
   </div>
   {{ if site.Params.decor }}
-  <div  id="parallax">
-    <div class="layer" id="l2">
-      <img src="{{`images/illustrations/dots-cyan.svg` | relURL}}" alt="bg-shape" />
-    </div>
-    <div class="layer" id="l3">
-      <img src="{{`images/illustrations/leaf-orange.svg` | relURL}}" alt="bg-shape" />
-    </div>
-    <div class="layer" id="l4">
-      <img src="{{`images/illustrations/dots-orange.svg` | relURL}}" alt="bg-shape" />
-    </div>
-    <div class="layer" id="l5">
-      <img src="{{`images/illustrations/leaf-yellow.svg` | relURL}}" alt="bg-shape" />
-    </div>
-    <div class="layer" id="l6">
-      <img src="{{`images/illustrations/leaf-cyan.svg` | relURL}}" alt="bg-shape" />
-    </div>
-    <div class="layer" id="l7">
-      <img src="{{`images/illustrations/dots-group-orange.svg` | relURL}}" alt="bg-shape" />
-    </div>
-    <div class="layer" id="l8">
-      <img src="{{`images/illustrations/leaf-pink-round.svg` | relURL}}" alt="bg-shape" />
-    </div>
-    <div class="layer" id="l9">
-      <img src="{{`images/illustrations/leaf-cyan-2.svg` | relURL}}" alt="bg-shape" />
-    </div>
+  <div class="layer" id="l2">
+    <img src="{{`images/illustrations/dots-cyan.svg` | relURL}}" alt="bg-shape" />
+  </div>
+  <div class="layer" id="l3">
+    <img src="{{`images/illustrations/leaf-orange.svg` | relURL}}" alt="bg-shape" />
+  </div>
+  <div class="layer" id="l4">
+    <img src="{{`images/illustrations/dots-orange.svg` | relURL}}" alt="bg-shape" />
+  </div>
+  <div class="layer" id="l5">
+    <img src="{{`images/illustrations/leaf-yellow.svg` | relURL}}" alt="bg-shape" />
+  </div>
+  <div class="layer" id="l6">
+    <img src="{{`images/illustrations/leaf-cyan.svg` | relURL}}" alt="bg-shape" />
+  </div>
+  <div class="layer" id="l7">
+    <img src="{{`images/illustrations/dots-group-orange.svg` | relURL}}" alt="bg-shape" />
+  </div>
+  <div class="layer" id="l8">
+    <img src="{{`images/illustrations/leaf-pink-round.svg` | relURL}}" alt="bg-shape" />
+  </div>
+  <div class="layer" id="l9">
+    <img src="{{`images/illustrations/leaf-cyan-2.svg` | relURL}}" alt="bg-shape" />
   </div>
   {{end}}
 
@@ -75,7 +74,9 @@
         {{ $t := (time .dates.applications_close_date) }}
         {{ if site.Data.application_info.applications_open }}
         <a href="{{ .URL | absURL }}" class="btn btn-success btn-lg btn-block">{{.label}}</a>
-        <p>Closing {{dateFormat "Monday 02 Jan 2006 at 15:04:05 MST" site.Data.application_info.dates.applications_close_date }}</p>
+        <p>Closing
+          {{dateFormat "Monday 02 Jan 2006 at 15:04:05 MST" site.Data.application_info.dates.applications_close_date }}
+        </p>
         {{else if $t.Before now }}
         <a href="{{ .URL | absURL }}" class="btn disabled btn-danger btn-lg"
           aria-disabled="true">{{.closed_message}}</a>
