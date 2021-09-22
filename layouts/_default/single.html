@@ -12,11 +12,9 @@
         <p class="font-secondary">Published 
           {{if .Params.published_in}}in <strong>{{.Params.published_in}}</strong> {{ end }}
           on {{ .PublishDate.Format "Jan 02, 2006" }} 
-          by <span class="text-primary">
+          <span class="text-primary">
             {{ if .Params.Author }}
-            {{ .Params.Author }}
-            {{ else }}
-            {{ site.Params.Author}}
+            by {{ .Params.Author }}
             {{ end }}
           </span>
         </p>
