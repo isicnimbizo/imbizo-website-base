@@ -526,7 +526,7 @@ textarea.form-control {
 
 .navbar .nav-item.active .nav-link {
   /* color: #52f8f4; */
-  color:var(--secondary-color) ;
+  color: var(--secondary-color);
   opacity: 0.5;
   text-shadow: 0 2px 5px var(--secondary-color);
 }
@@ -538,6 +538,7 @@ textarea.form-control {
 .hero-area {
   padding: 250px 0 200px;
   position: relative;
+  background-color: #000;
 }
 
 @media (max-width: 767px) {
@@ -841,6 +842,7 @@ blockquote {
 
 .page-title-alt {
   padding: 350px 0 70px;
+  background-color: #000;
 }
 
 .border-thick {
@@ -902,6 +904,7 @@ blockquote {
 
 .page-title {
   padding: 250px 0 150px;
+  background-color: #000;
 }
 
 .page-title .container {
