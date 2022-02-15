@@ -10,7 +10,7 @@
         <img src="{{if .Params.thumbnail}}{{.Params.thumbnail | relURL}}{{ else }}{{.Params.Image | relURL}}{{ end }}"
           class="img-fluid w-100" alt="{{ .Title }}" />
       </div>
-      <div class="col-lg-7 mb-5 mb-lg-0 d-flex justify-content-end align-items-center">
+      <div class="col-lg-7 mb-5 mb-lg-0">
         <div class="row mx-0">
           <div class="col-sm-6 mb-5">
             <div class="project-meta">
@@ -45,7 +45,7 @@
           </div>
           {{ end }}
           {{ if .Params.material_link}}
-          <div class="col-sm-6 mb-5" data-bs-toggle="tooltip" data-bs-placement="bottom"
+          <div class="col-sm-12 mb-5" data-bs-toggle="tooltip" data-bs-placement="top"
             title="for school attendees only">
             <div class="project-meta">
               <i class="ti-link"></i>
