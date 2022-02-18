@@ -198,7 +198,7 @@ img {
   max-height: 120px;
   /* width: 100%; */
   /* height: 100%; */
-  width: 120px;
+  width: 120px !important;
   height: 120px;
   background: #e6e7ed;
   border-radius: 60px;
@@ -240,7 +240,9 @@ select:focus {
 a.text-dark:hover {
   color: var(--primary-color) !important;
 }
-
+a.text-light:hover {
+  color: var(--primary-color) !important;
+}
 a:hover {
   color: var(--primary-color);
 }
