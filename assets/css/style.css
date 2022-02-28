@@ -136,9 +136,9 @@ h6,
   opacity: 0.8;
 }
 
-.btn-primary:active, 
+.btn-primary:active,
 .btn-primary:hover {
-  background: var(--primary-color) !important
+  background: var(--primary-color) !important;
   color: #fff !important;
 }
 
@@ -250,7 +250,7 @@ a.text-light:hover {
   color: var(--primary-color) !important;
 }
 a:hover {
-  color: var(--primary-color) !important;
+  color: var(--primary-color);
 }
 
 .faculty-logo-slider .col-4 {
