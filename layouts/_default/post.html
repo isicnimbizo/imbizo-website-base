@@ -1,15 +1,18 @@
 <div class="col-lg-4 col-sm-6 mb-4">
   <article class="card shadow">
-    <img class="rounded card-img-top"
+    <a href={{if .Params.link}}"{{.Params.link | relURL}}" target="_blank" {{ else }}"{{.Permalink}}"{{ end }}
+       >
+       <img class="rounded card-img-top"
       src="{{if .Params.thumbnail}}{{.Params.thumbnail | relURL}}{{ else }}{{.Params.Image | relURL}}{{ end }}"
       alt="{{.Title }}">
+      </a>
     <div class="card-body">
-      <h4 class="card-title"><a class="text-dark" href="{{.Permalink}}">{{.Title }}</a>
+      <h4 class="card-title"><a class="" href="{{.Permalink}}">{{.Title }}</a>
       </h4>
       {{ if .Params.published_in}}
       <h5 class="text-muted">{{.Params.published_in}}</h5>
       {{ end }}
-      <p class="cars-text">{{.Summary}}</p>
+      <p class="card-text">{{.Summary}}</p>
       <a href={{if .Params.link}}"{{.Params.link | relURL}}" target="_blank" {{ else }}"{{.Permalink}}"{{ end }}
         class="btn btn-sm btn-primary">Read More</a>
     </div>

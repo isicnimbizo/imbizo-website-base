@@ -1,0 +1,71 @@
+{{ define "main" }}
+
+{{ partial "page-title.html" . }}
+
+<section class="section">
+  <div class="container">
+    <div class="row">
+      {{ range .Data.Pages }}
+      {{ .Render "post" }}
+      {{ end }}
+      {{/*  CONTACT CARD  */}}
+      {{ with .Site.GetPage "/contact" }}
+      <div class="col-lg-4 col-sm-6 mb-4">
+          <article class="card shadow bg-dark text-white">
+            <img class="rounded card-img-top "
+            src="{{if .Params.thumbnail}}{{.Params.thumbnail | relURL}}{{ else }}{{.Params.Image | relURL}}{{ end }}"
+            alt="{{.Title }}">
+            <div class="card-img-overlay d-flex flex-column justify-content-center align-items-center">
+            <h2 class="card-title text-center"><a class="text-white btn btn-primary " href={{if .Params.link}}"{{.Params.link | relURL}}" target="_blank" {{ else }}
+              "{{.Permalink}}"{{ end }}>{{.Title }}</a></h2>
+            {{ if .Params.published_in}}
+            <h5 class="text-muted">{{.Params.published_in}}</h5>
+            {{ end }}
+            <p class="card-text  text-white">{{.Summary}}</p>
+          </div>
+        </article>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+{{ if site.Params.map.enable }}
+<section class="section pb-0">
+  <div class="container">
+    <div class="row">
+      <div class=" col-lg-6 col-12 text-center">
+        <h2 class="section-title">{{site.Params.address}}</h2>
+      </div>
+      <div class=" col-lg-6 col-12">
+        {{ with site.Params.map }}
+        {{"<!-- Google Map -->" | safeHTML}}
+        {{.map_embed_html | safeHTML}}
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}
+
+<section class="section">
+  <div class="container">
+    <div class="row">
+      <div class=" col-lg-6 col-12 text-center">
+        <h2 class="section-title">Follow us</h2>
+      </div>
+      <div class=" col-lg-6 col-12">
+        <ul class="list-inline social-icons text-center">
+          {{ range site.Params.social }}
+          {{ if gt (len .URL) 5 }}
+            <li class="list-inline-item"><a href="{{.URL}}" target="_blank"><i class="{{.icon}}"></i></a></li>
+          {{ end }}
+          {{ end }}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{{ end }}

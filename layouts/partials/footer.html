@@ -60,12 +60,10 @@
   });
 </script>
 
-{{ "<!-- Main Script -->" | safeHTML }} {{ $script := resources.Get
-"js/script.js" | minify}}
+{{ "<!-- Main Script -->" | safeHTML }} {{ $script := resources.Get "js/script.js" | minify}}
 <script src="{{ $script.Permalink }}"></script>
 
-{{ if and site.Params.contact.enable site.Params.contact.floating }} {{ "<!-- Formspree floating button -->"
-| safeHTML }}
+{{ if and site.Params.contact.enable site.Params.contact.floating }} {{ "<!-- Formspree floating button -->" | safeHTML }}
 <script src="https://formspree.io/js/formbutton-v1.min.js" defer></script>
 <script>
   /* paste this line in verbatim */
