@@ -29,8 +29,20 @@
         {{ end }}
       </ul>
       <!-- /social icon -->
+
+      {{ with site.Data.homepage.school }}
+        {{ if .dates.school_start_date}}
+          <div class="col-lg-6 mx-auto" style="position:relative;">
+            <h4 class="text-white font-tertiary text-center">
+              <i class="ti-calendar"></i> {{ dateFormat "Jan 02, 2006" .dates.school_start_date }} -
+              {{ dateFormat "Jan 02, 2006" .dates.school_end_date }}
+            </h4>
+          </div>
+        {{ end }}
+      {{ end }}
+
     </div>
-  </div>
+      
   {{ if site.Params.decor }}
   <div class="layer" id="l2">
     <img src="{{`images/illustrations/dots-cyan.svg` | relURL}}" alt="bg-shape" />
