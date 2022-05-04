@@ -17,7 +17,11 @@
               <i class="ti-calendar"></i>
               <div class="ms-3">
                 <h4>Date</h4>
-                <p>{{ .PublishDate.Format "Jan 02, 2006" }}</p>
+                <p>{{ .PublishDate.Format "Jan 02, 2006" }}
+                {{if .Params.end_date}}
+                - {{ .Params.end_date.Format "Jan 02, 2006" }}
+                {{ end }}
+                </p>
               </div>
             </div>
           </div>
@@ -39,7 +43,29 @@
               <i class="ti-folder"></i>
               <div class="ms-3">
                 <h4>Categories</h4>
-                <p>{{ delimit . ", " | humanize }}</p>
+                <p>{{ delimit . ", " }}</p>
+              </div>
+            </div>
+          </div>
+          {{ end }}
+          {{ if .Params.playlist}}
+          <div class="col-sm-6 mb-5">
+            <div class="project-meta">
+              <i class="ti-youtube"></i>
+              <div class="ms-3">
+                <h4><a href="{{.Params.playlist}}" target="_blank"
+                  title="link for {{.Params.Title}}">Playlist</a></h4>
+              </div>
+            </div>
+          </div>
+          {{ end }}
+          {{ if .Params.report}}
+          <div class="col-sm-6 mb-5">
+            <div class="project-meta">
+              <i class="ti-agenda"></i>
+              <div class="ms-3">
+                <h4><a href="{{.Params.report}}" target="_blank"
+                  title="link for {{.Params.Title}}">Report</a></h4>
               </div>
             </div>
           </div>
@@ -50,9 +76,9 @@
             <div class="project-meta">
               <i class="ti-link"></i>
               <div class="ms-3">
-                <h4>Material</h4>
+                <h4>
                 <a href="{{.Params.material_link}}" target="_blank"
-                  title="school material for {{.Params.Title}}">{{.Params.material_link}}</a>
+                  title="school material for {{.Params.Title}}">Material</a></h4>
               </div>
             </div>
           </div>

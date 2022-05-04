@@ -10,39 +10,59 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12 mx-auto">
-        <h1 class="text-white font-tertiary">
+        <h1 class="text-white font-tertiary text-center">
           {{ site.Data.homepage.banner.title | safeHTML }}
         </h1>
       </div>
-      <!-- social icon -->
-      <ul class="list-unstyled mt-3 position-relative zindex-1 d-flex align-items-center justify-content-end">
-        {{ range site.Params.social }}
-        {{ if gt (len .URL) 5}}
-        <li class="m-3">
-          {{ if .embed}}
-          {{ .embed | safeHTML}}
-          {{ else }}
-          <a class="text-white" href="{{.URL | safeURL }}"><i class="{{.icon}}"></i></a>
-          {{ end }}
-        </li>
-        {{ end }}
-        {{ end }}
-      </ul>
-      <!-- /social icon -->
 
       {{ with site.Data.homepage.school }}
-        {{ if .dates.school_start_date}}
-          <div class="col-lg-6 mx-auto" style="position:relative;">
+        {{ if .dates}}
+          <div class="col-lg-6 mx-auto position-relative">
             <h4 class="text-white font-tertiary text-center">
-              <i class="ti-calendar"></i> {{ dateFormat "Jan 02, 2006" .dates.school_start_date }} -
-              {{ dateFormat "Jan 02, 2006" .dates.school_end_date }}
+              <i class="ti-calendar"></i> 
+              {{ if .dates.school_start_date}}
+                {{ dateFormat "Jan 02, 2006" .dates.school_start_date }} -
+                {{ dateFormat "Jan 02, 2006" .dates.school_end_date }}
+              {{ else if .dates.estimated_date}}
+                {{ .dates.estimated_date }}
+              {{ end }}
             </h4>
           </div>
         {{ end }}
       {{ end }}
-
     </div>
-      
+    <div class="row mt-5">
+      <div class="col-lg-12 mx-auto">
+      {{ with site.Data.homepage.banner.cta }}
+      {{ if .enable}}
+        <ul class="list-unstyled mt-3 position-relative zindex-1 d-flex align-items-center justify-content-center">
+          {{ range .item }}
+          {{ if gt (len .URL) 5}}
+          <li class="m-3 btn btn-primary">
+            <a class="text-white" href="{{.URL | safeURL }}">{{.title}}</a>
+          </li>
+          {{ end }}
+          {{ end }}
+        </ul>
+      {{ end }}
+    {{ end }}
+    </div>
+    </div>
+    <!-- social icon -->
+    <ul class="list-unstyled mt-5 position-relative zindex-1 d-flex align-items-center justify-content-center">
+      {{ range site.Params.social }}
+      {{ if gt (len .URL) 5}}
+      <li class="m-3">
+        {{ if .embed}}
+        {{ .embed | safeHTML}}
+        {{ else }}
+        <h3><a class="" href="{{.URL | safeURL }}"><i class="{{.icon}}"></i></a></h3>
+        {{ end }}
+      </li>
+      {{ end }}
+      {{ end }}
+    </ul>
+    <!-- /social icon -->  
   {{ if site.Params.decor }}
   <div class="layer" id="l2">
     <img src="{{`images/illustrations/dots-cyan.svg` | relURL}}" alt="bg-shape" />
@@ -82,8 +102,8 @@
       <div class="col-10 mx-auto text-center">
         <p class="font-secondary lead text-dark">{{site.Data.homepage.about.content | markdownify}}</p>
       </div>
+      {{ if site.Data.homepage.about.show_application_info }}
       <div class="col-12 my-5 text-center">
-        {{ if site.Data.homepage.about.show_application_info }}
         <!-- application info -->
         {{ $t := (time .dates.applications_close_date) }}
         {{ if site.Data.application_info.applications_open }}
@@ -105,12 +125,12 @@
         </p>
         {{ end }}
         <!-- application info -->
-        {{ end }}
       </div>
       <div class="col-12 text-center">
         <a href="/apply" class="btn btn-sm btn-outline-secondary"><i class="ti-info-alt"></i>
           &nbsp;{{.info_link_label}}</a>
       </div>
+      {{ end }}
     </div>
     {{end}}
   </div>
@@ -129,16 +149,20 @@
         <h2 class="section-title text-center mb-5">{{ .title | markdownify }}</h2>
 
         <div class="row">
-          {{ if .dates.school_start_date}}
+          {{ if .dates}}
           <div class="col-4 mb-5">
             <div class="project-meta">
               <i class="ti-calendar"></i>
               <div class="ms-3">
+                {{ if .dates.school_start_date}}
                 <h4>Duration</h4>
                 <p>
                   {{ dateFormat "Jan 02, 2006" .dates.school_start_date }} -
                   {{ dateFormat "Jan 02, 2006" .dates.school_end_date }}
                 </p>
+                {{ else }}
+                <h4>{{ .dates.estimated_date }}</h4>
+                {{ end }}
               </div>
             </div>
           </div>
@@ -186,32 +210,8 @@
 <!-- /school -->
 {{ end }}
 
-{{ if site.Data.homepage.experience.enable }}
-{{ with site.Data.homepage.experience }}
-<!-- experience -->
-<hr class="mb-0" />
-<section class="section">
-  <div class="container">
-    <div class="row justify-content-around">
-      <div class="col-lg-12 text-center">
-        <h2 class="section-title">{{ .title | markdownify }}</h2>
-      </div>
-      {{ range .item }}
-      <div class="col-lg-3 col-md-4 text-center">
-        <img src="{{.logo | relURL }}" alt="icon" />
-        <p class="mb-0">{{.duration}}</p>
-        <h4>{{.title }}</h4>
-        <h6 class="text-light">{{.company }}</h6>
-      </div>
-      {{ end }}
-    </div>
-  </div>
-</section>
 
-{{ end }}
-{{ end }}
-<!-- /experience -->
-
+<!-- sponsors -->
 <section class="section bg-secondary position-relative slideshow-bg-shapes">
   <div class="container">
     <div class="row">
@@ -228,16 +228,18 @@
   <img src="{{`images/illustrations/leaf-cyan.svg` | relURL }}" alt="bg-shape" class="img-fluid bg-shape-5" />
   {{end}}
 </section>
+<!-- /sponsors -->
 
 <!-- faculty slider -->
+
 {{ if site.Data.homepage.faculty.enable }}
-<hr class="mt-0" />
+{{/*  <hr class="mt-0" />  */}}
 <section class="section">
   <div class="container" id="faculty">
     <div class="row mb-2">
       <div class="col-12 text-center mb-5">
         <h2 class="section-title mb-0">{{site.Data.faculty.title}}</h2>
-        <a href="people/#faculty">past {{site.Data.faculty.title | lower}} <i class="ti-arrow-top-right"></i></a>
+        <a href="people/#faculty">{{site.Data.homepage.faculty.link_text}}<i class="ti-arrow-top-right"></i></a>
       </div>
     </div>
     {{ partial "people-slider.html" site.Data.faculty }}
@@ -245,14 +247,13 @@
   </div>
 </section>
 
-
+{{ if site.Data.tutors }}
 <section class="section">
   <div class="container text-center" id="teaching-assistants">
     <div class="row mb-2">
       <div class="col-12 text-center mb-5">
         <h2 class="section-title mb-0">{{site.Data.tutors.title}}</h2>
-        <a href="people/#teaching-assistants">past {{site.Data.tutors.title | lower}} <i
-            class="ti-arrow-top-right"></i></a>
+        <a href="people/#teaching-assistants">{{site.Data.faculty.link_text}} <i class="ti-arrow-top-right"></i></a>
       </div>
     </div>
 
@@ -260,18 +261,20 @@
 
   </div>
 </section>
+{{end}}
 <!-- /faculty logo slider -->
 {{end}}
 
 <!-- blog -->
 {{ if site.Data.homepage.news.enable }}
+{{ with .Site.GetPage "/news" }}
 <hr class="mb-0" />
-<section class="section">
+<section class="section bg-primary">
   <div class="container">
     <div class="row">
       <div class="col-12 text-center mb-5">
         <h2 class="section-title mb-0">
-          {{site.Data.homepage.news.title | markdownify }}
+          {{.Title | markdownify }}
         </h2>
         <a href="news">read more<i class="ti-arrow-top-right"></i></a>
       </div>
@@ -284,6 +287,43 @@
 </section>
 <!-- /blog -->
 {{ end }}
+{{ end }}
+
+{{ if site.Data.homepage.experience.enable }}
+{{ with site.Data.homepage.experience }}
+<!-- experience -->
+<hr class="my-0" />
+<section class="section bg-light position-relative slideshow-bg-shapes">
+  <div class="container">
+    <div class="row justify-content-around">
+      <div class="col-lg-12 text-center">
+        <h2 class="section-title">{{ .title | markdownify }}</h2>
+      </div>
+      {{ range .item }}
+      <div class="col-lg-3 col-md-4 text-center">
+        <img src="{{.logo | relURL }}" alt="icon" width="300px"/>
+        <p class="mb-0">{{.duration}}</p>
+        <h4>{{.title }}</h4>
+        <h6 class="text-light">{{.company }}</h6>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+  {{ if site.Params.decor }}
+  <!-- bg shapes -->
+  <img src="{{`images/backgrounds/map.png` | relURL }}" alt="map" class="img-fluid bg-map" />
+  <img src="{{`images/illustrations/dots-group-v.svg` | relURL }}" alt="bg-shape" class="img-fluid bg-shape-5" />
+  <img src="{{`images/illustrations/leaf-orange.svg` | relURL }}" alt="bg-shape" class="img-fluid bg-shape-3" />
+  <img src="{{`images/illustrations/dots-group-sm.svg` | relURL }}" alt="bg-shape" class="img-fluid bg-shape-1" />
+  <img src="{{`images/illustrations/leaf-pink-round.svg` | relURL }}" alt="bg-shape" class="img-fluid bg-shape-2" />
+  <img src="{{`images/illustrations/leaf-cyan.svg` | relURL }}" alt="bg-shape" class="img-fluid bg-shape-4" />
+  {{end}}
+</section>
+
+{{ end }}
+{{ end }}
+<!-- /experience -->
+
 
 {{ if site.Params.contact.homepage }} {{ partial "contact.html" . }} {{ end }}
 

@@ -13,9 +13,13 @@
             {{ end }}
           </div>
         </div>
+        {{ range site.Params.social }}
+        {{ if in .URL "twitter" }}
         <div class="col-sm-12 col-md-3">
-          <a class="twitter-timeline" href="https://twitter.com/isiCNI?ref_src=twsrc%5Etfw">Tweets by isiCNI</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+          <a class="twitter-timeline" href="{{.embed_url}}">Tweets</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         </div>
+        {{ end }}
+        {{ end }}
       </div>
     </div>
   </section>
