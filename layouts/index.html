@@ -14,11 +14,11 @@
           {{ site.Data.homepage.banner.title | safeHTML }}
         </h1>
       </div>
-
+      {{ if site.Data.homepage.banner.show_date }}
       {{ with site.Data.homepage.school }}
         {{ if .dates}}
-          <div class="col-lg-6 mx-auto position-relative">
-            <h4 class="text-white font-tertiary text-center">
+          <div class="col-lg-12 mx-auto position-relative">
+            <h4 class="text-white font-tertiary text-center text-light">
               <i class="ti-calendar"></i> 
               {{ if .dates.school_start_date}}
                 {{ dateFormat "Jan 02, 2006" .dates.school_start_date }} -
@@ -30,6 +30,17 @@
           </div>
         {{ end }}
       {{ end }}
+      {{ end }}
+      {{ if site.Data.homepage.banner.show_address }}
+          <div class="col-lg-12 mx-auto position-relative">
+            <h4 class="text-white font-tertiary text-center">
+              <a href="about" class="text-light">
+                <i class="ti-location-pin"></i> 
+                {{ site.Params.address }}
+              </a>
+            </h4>
+          </div>
+      {{ end }}
     </div>
     <div class="row mt-5">
       <div class="col-lg-12 mx-auto">
@@ -38,7 +49,7 @@
         <ul class="list-unstyled mt-3 position-relative zindex-1 d-flex align-items-center justify-content-center">
           {{ range .item }}
           {{ if gt (len .URL) 5}}
-          <li class="m-3 btn btn-primary">
+          <li class="m-3 btn btn-primary" style="background-color:{{.color}} !important">
             <a class="text-white" href="{{.URL | safeURL }}">{{.title}}</a>
           </li>
           {{ end }}
@@ -269,11 +280,11 @@
 {{ if site.Data.homepage.news.enable }}
 {{ with .Site.GetPage "/news" }}
 <hr class="mb-0" />
-<section class="section bg-primary">
+<section class="section bg-dark">
   <div class="container">
-    <div class="row">
+    <div class="row justify-content-center">
       <div class="col-12 text-center mb-5">
-        <h2 class="section-title mb-0">
+        <h2 class="section-title mb-0 text-white">
           {{.Title | markdownify }}
         </h2>
         <a href="news">read more<i class="ti-arrow-top-right"></i></a>
@@ -301,10 +312,13 @@
       </div>
       {{ range .item }}
       <div class="col-lg-3 col-md-4 text-center">
-        <img src="{{.logo | relURL }}" alt="icon" width="300px"/>
-        <p class="mb-0">{{.duration}}</p>
-        <h4>{{.title }}</h4>
-        <h6 class="text-light">{{.company }}</h6>
+        <a href="{{.URL}}" target="_blank">
+          <img class="img-fluid d-inline-block rounded" src="{{.logo | relURL }}" alt="icon"/>
+        </a>
+          <p class="mb-0">{{.duration | markdownify}}</p>
+          <h4><a href="{{.URL}}" target="_blank">{{.title | markdownify}}</a></h4>
+          <h6 class="text-light">{{.company | markdownify}}</h6>
+        </a>
       </div>
       {{ end }}
     </div>
