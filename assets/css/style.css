@@ -409,7 +409,7 @@ a:hover {
 }
 
 .bg-dark .card-img-top {
-  filter: brightness(0.5);
+  /* filter: brightness(0.9); */
 }
 
 .bg-gradient {
