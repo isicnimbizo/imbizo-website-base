@@ -200,8 +200,8 @@
         {{ $num_items := len .item }}
         {{ $col_size := math.Round (div 12 $num_items) }}
         {{ range .item }}
-        <div class="col-lg-{{$col_size}} col-sm-6 mb-4">
-          <div class="card shadow">
+        <div class="col-xl-{{$col_size}} col-lg-4 col-sm-6 mb-4">
+          <div class="card shadow h-100" data-color="{{.color}}">
             <div class="position-relative rounded-top progress-wrapper" data-color="{{.color}}">
               <h4 class="position-absolute card-title text-center px-3 pt-3" style="z-index: 11; width: 100%;">
                 {{.title }}

@@ -19,13 +19,15 @@
       {{ $col_size = 3}}
       {{ end }}
       {{ range $filtered }}
-        <a class="col-{{$col_size}}" href="{{.link}}" target="_blank">
+        <a class="col-xl-{{$col_size}} col-6" href="{{.link}}" target="_blank">
           {{ if .image }}
           <img class="img-fluid mb-4 d-inline-block p-2"
             style="max-width: {{$size}}%; {{if .background_color}}background-color: {{.background_color}};{{end}}"
-            src="{{.image | absURL }}" alt="{{.name}}" />
+            src="{{.image | absURL }}" alt="{{.name}}" title="{{.name}}" />
           {{ end }}
+          {{ if site.Data.sponsors.show_names }}
           <h4 class="text-white">{{ .name }}</h4>
+          {{ end }}
           <h6 class="text-light mb-4">{{ .designation }}</h6>
         </a>
       {{ end }}
