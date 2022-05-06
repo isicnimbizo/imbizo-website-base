@@ -1,0 +1,28 @@
+<section class="section pt-5" id="faq">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h2 class="section-title">
+          {{ with .title}} {{ . | markdownify }} {{ else }} Frequently asked
+          questions {{ end }}
+        </h2>
+      </div>
+      {{$gapsize := (cond (eq .gapsize "") .gapsize 0)}}
+      {{ range .item}}
+      <div class="col-12">
+        <div class="project-meta mt-{{$gapsize}}">
+          <i class="{{if .icon}}{{.icon}}{{else}}ti-help{{end}}"></i>
+          <div class="mx-3">
+            <div class="font-weight-bold">
+              <h4>{{ .question | markdownify }}</h4>
+            </div>
+            <p class="text-muted font-weight-light">
+              {{ .answer | markdownify}}
+            </p>
+          </div>
+        </div>
+      </div>
+      {{end}}
+    </div>
+  </div>
+</section>

@@ -102,7 +102,7 @@ h6,
   padding: 16px 44px;
   border-radius: 5px;
   font-weight: 600;
-  border: 0;
+  /* border: 0; */
   position: relative;
   z-index: 1;
   transition: 0.2s ease;
@@ -127,29 +127,42 @@ h6,
   font-size: 15px;
 }
 
-.btn-primary {
+.btn-primary, 
+.btn-primary.focus,
+.btn-primary.active, 
+.btn-primary:active,
+.btn-primary:hover {
   background: var(--primary-color) !important;
   color: #fff;
+}
+
+.btn-primary, 
+.btn-primary.focus,
+.btn-primary.active, 
+.btn-primary:active,
+.btn-primary:hover,
+.btn-outline-primary, 
+.btn-outline-primary.focus,
+.btn-outline-primary.active, 
+.btn-outline-primary:active,
+.btn-outline-primary:hover {
+  border-color: var(--primary-color);
+}
+
+.btn-outline-primary{
+  color: var(--primary-color)
+}
+
+.btn-outline-primary:hover{
+  background: var(--primary-color);
 }
 
 .btn-primary.active {
   opacity: 0.8;
 }
 
-.btn-primary:active,
-.btn-primary:hover {
-  background: var(--primary-color) !important;
-  color: #fff !important;
-}
-
 .btn:hover {
   filter: brightness(0.9);
-}
-
-.btn-primary.focus,
-.btn-primary.active {
-  background: var(--primary-color) !important;
-  box-shadow: none !important;
 }
 
 .btn-transparent {
@@ -841,7 +854,7 @@ blockquote {
 }
 
 .content * {
-  margin-bottom: 20px;
+  margin-bottom: 0.5em;
 }
 
 .content img {

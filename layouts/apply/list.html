@@ -95,35 +95,9 @@
 <!-- ./Target applications-->
 
 {{ if site.Data.application_info.faq.enable }}
-{{ with site.Data.application_info.faq }}
-<section class="section pt-5" id="faq">
-  <div class="container">
-    <div class="row">
-      <div class="col-12 text-center">
-        <h2 class="section-title">{{ .title | markdownify }}</h2>
-      </div>
-      {{ range .item}}
-      <div class="col-12">
-        <div class="project-meta">
-          <i class="ti-help"></i>
-          <div class="ms-3">
-            <div class="font-weight-bold mt-5">
-              <h3>{{ .question | markdownify }}</h3>
-            </div>
-            <p class="text-muted font-weight-light">
-              {{ .answer | markdownify}}
-            </p>
-          </div>
-        </div>
-      </div>
-      {{end}}
 
+{{ partial "faq.html" site.Data.application_info.faq}}
 
-    </div>
-  </div>
-</section>
-<!-- /about -->
-{{ end }}
 {{ end }}
 
 <!-- team -->

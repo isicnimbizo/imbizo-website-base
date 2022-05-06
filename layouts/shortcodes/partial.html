@@ -1,0 +1,5 @@
+{{ if .IsNamedParams }}
+    {{ partial (.Get "name") (index .Page.Params (.Get "arg") ) }}
+{{ else }}
+    {{ partial (.Get 0) (index .Page.Params (.Get 1) ) }}
+{{ end }}
