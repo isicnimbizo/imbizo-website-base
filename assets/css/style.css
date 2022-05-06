@@ -149,8 +149,10 @@ h6,
   border-color: var(--primary-color);
 }
 
-.btn-check:focus+.btn-primary, .btn-primary:focus{
+.btn-group>.btn-check:checked+.btn{
   z-index: 99;
+}
+.btn-check:focus+.btn-primary, .btn-primary:focus{
   box-shadow: 0 0 10px 0.25rem var(--primary-color);
 }
 
