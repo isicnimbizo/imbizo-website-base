@@ -23,7 +23,7 @@
             <a class="nav-link" href="{{ site.BaseURL }}">{{ with site.Params.Home }} {{ . }} {{ end }}</a>
           </li>
           {{ $current := . }}
-          {{ $id := strings.TrimRight "/" (strings.TrimLeft "/" .URL) }}
+          {{ $id := strings.TrimRight "/" (strings.TrimLeft "/" .RelPermalink) }}
           {{ range site.Menus.main }}
             {{ $active := or ($current.IsMenuCurrent "main" .) ($current.HasMenuCurrent "main" .) }}
             {{ $active = or $active (eq .Name $current.Title) }}
