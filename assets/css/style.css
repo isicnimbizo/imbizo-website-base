@@ -149,6 +149,12 @@ h6,
   border-color: var(--primary-color);
 }
 
+.btn-check:focus+.btn-primary, .btn-primary:focus{
+  z-index: 99;
+  box-shadow: 0 0 10px 0.25rem var(--primary-color);
+}
+
+
 .btn-outline-primary{
   color: var(--primary-color)
 }
