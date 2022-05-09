@@ -271,7 +271,7 @@ a.text-light:hover {
   color: var(--primary-color) !important;
 }
 a:hover {
-  color: var(--primary-color);
+  color: var(--primary-color) !important;
 }
 
 .faculty-logo-slider .col-4 {

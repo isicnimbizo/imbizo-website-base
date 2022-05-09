@@ -19,15 +19,17 @@
 
       <div class="collapse navbar-collapse text-center justify-content-end" id="navigation">
         <ul class="navbar-nav ms-auto align-items-center">
+          {{ $current := . }}
+          {{ $id := strings.TrimRight "/" (strings.TrimLeft "/" .RelPermalink) }}
+          
           <li class="nav-item">
             <a class="nav-link" href="{{ site.BaseURL }}">{{ with site.Params.Home }} {{ . }} {{ end }}</a>
           </li>
-          {{ $current := . }}
-          {{ $id := strings.TrimRight "/" (strings.TrimLeft "/" .RelPermalink) }}
+          
           {{ range site.Menus.main }}
             {{ $active := or ($current.IsMenuCurrent "main" .) ($current.HasMenuCurrent "main" .) }}
             {{ $active = or $active (eq .Name $current.Title) }}
-            {{ $active = or $active (eq $id .Identifier) }}
+            {{ $active = or $active (and (gt (len .Identifier) 1) (eq $id .Identifier)) }}
               {{ if .HasChildren }}
               <li
                 class="nav-item dropdown btn-group justify-content-center align-items-center {{ if $active }}active{{ end }}">
