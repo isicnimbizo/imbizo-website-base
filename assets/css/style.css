@@ -270,6 +270,9 @@ a.text-dark:hover {
 a.text-light:hover {
   color: var(--primary-color) !important;
 }
+a.text-white:hover {
+  color: var(--primary-color) !important;
+}
 a:hover {
   color: var(--primary-color);
 }
@@ -571,6 +574,10 @@ textarea.form-control {
   background: rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   transition: background-color 0.3s ease;
+}
+.nav-item:active {
+  /* color: #52f8f4; */
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .hero-area {
