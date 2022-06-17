@@ -30,6 +30,7 @@ p {
 
 a {
   color: var(--secondary-color);
+  transition: color 0.3s ease-out;
 }
 
 h1,
@@ -83,6 +84,7 @@ h3,
 h4,
 .h4 {
   font-size: 22px;
+  transition: color 0.3s ease-out;
 }
 
 h5,
@@ -241,7 +243,7 @@ img {
   transition: box-shadow 0.3s ease-out;
 }
 
-.circletag:hover {
+a:hover .circletag, .circletag:hover {
   box-shadow: #000 0px 0px 3px;
 }
 
@@ -273,7 +275,7 @@ a.text-light:hover {
 a.text-white:hover {
   color: var(--primary-color) !important;
 }
-a:hover {
+a:hover, a:hover *:not(i) {
   color: var(--primary-color);
 }
 
