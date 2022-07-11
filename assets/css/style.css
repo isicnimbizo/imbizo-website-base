@@ -988,7 +988,7 @@ blockquote {
   position: absolute;
   left: 90px;
   bottom: -50px;
-  transform: rotate(180deg);
+  /* transform: rotate(180deg); */
 }
 
 .page-title .bg-shape-6 {
