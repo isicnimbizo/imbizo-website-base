@@ -67,7 +67,7 @@
         {{ if .embed}}
         {{ .embed | safeHTML}}
         {{ else }}
-        <h3><a class="" href="{{.URL | safeURL }}"><i class="{{.icon}}"></i></a></h3>
+        <h3><a class="" href="{{.URL | safeURL }}" {{if .text}} title={{.text}} {{end}}><i class="{{.icon}}"></i></a></h3>
         {{ end }}
       </li>
       {{ end }}
