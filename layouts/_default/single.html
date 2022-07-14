@@ -9,15 +9,22 @@
         {{if .Params.thumbnail}}
         <img src="{{.Params.thumbnail | relURL}}" alt="{{.Title}}" class="img-fluid rounded mb-4">
         {{ end }}
-        <p class="font-secondary">Published 
-          {{if .Params.published_in}}in <strong>{{.Params.published_in}}</strong> {{ end }}
-          on {{ .PublishDate.Format "Jan 02, 2006" }} 
-          <span class="text-primary">
+        <p class="font-secondary text-muted">Published 
+          {{if .Params.published_in}}in <strong>{{.Params.published_in | markdownify}}</strong> {{ end }}
+          on <span class="text-secondary">{{ .PublishDate.Format "02 January 2006" }}</span>
             {{ if .Params.Author }}
-            by {{ .Params.Author }}
+            by <span class="text-primary">{{ .Params.Author | markdownify}}</span>
             {{ end }}
-          </span>
+          {{ if .Params.update}}
+            | updated 
+            on <span class="text-secondary">{{ .Params.update.Format "02 January 2006" }}</span>
+              {{ if .Params.update_author }}
+              by <span class="text-primary">{{ .Params.update_author | markdownify}}</span>
+              {{ end }}
+            
+          {{ end}}
         </p>
+        
       </div>
       <div class="col-lg-9 col-12">
         <div class="content">
