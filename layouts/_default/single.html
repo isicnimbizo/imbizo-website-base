@@ -24,7 +24,10 @@
           {{.Content}}
         </div>
         {{if .Params.link}}
-        <a href="{{.Params.link | relURL}}" target="_blank" class="btn btn-sm btn-primary">Read more</a>
+        <a href="{{.Params.link | relURL}}" target="_blank" class="btn btn-sm btn-primary"
+          title="{{if .Params.link_text}}{{.Params.link_text}}{{ else }}Read More{{ end }}">
+          {{if .Params.link_text}}{{.Params.link_text}}{{ else }}Read More{{ end }}
+        </a>
         {{ end }}
       </div>
     </div>

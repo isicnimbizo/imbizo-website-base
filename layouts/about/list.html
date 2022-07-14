@@ -65,7 +65,7 @@
         <ul class="list-inline social-icons text-center">
           {{ range site.Params.social }}
           {{ if gt (len .URL) 5 }}
-            <li class="list-inline-item"><a href="{{.URL}}" target="_blank"><i class="{{.icon}}"></i></a></li>
+            <li class="list-inline-item"><a href="{{.URL}}" {{if .text}} title="{{.text}}" {{end}} target="_blank" ><i class="{{.icon}}"></i></a></li>
           {{ end }}
           {{ end }}
         </ul>
