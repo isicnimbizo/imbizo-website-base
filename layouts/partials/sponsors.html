@@ -27,6 +27,7 @@
     <div class="row mt-4 position-relative shuffle-wrapper">
       {{ range .sponsors}} 
         {{ $tier := .tier }}
+        {{ $size := .size }}
         {{ $filtered := where .item "current" (not false)}}
         {{ if $filtered}}
         <div class="col-lg-3 col-sm-12 col-6 mb-4 shuffle-item" 
@@ -46,15 +47,16 @@
                 href="{{.link}}"
                 class="pl-0 ms-0 center text-center"
                 target="_blank"
-                class="d-flex"
               >
                 <div class="position-relative">
-                  {{if .image}}
+                  {{if (or .image .image_alt)}}
                   <img
-                    src="{{ .image | absURL }}"
+                    src="{{if .image_alt}}{{ .image_alt | absURL }}{{else}}{{ .image | absURL }}{{end}}"
                     alt="{{.name}}"
-                    class="img-fluid w-100 d-block p-2"
-                    style="{{if .background_color}}background-color: {{.background_color}};{{end}}"
+                    title="{{.name}}"
+                    class="img-fluid w-100 d-block p-2 m-auto"
+                    style="{{if .background_color}}background-color: {{.background_color}};{{end}}
+                           {{if $size}}width: {{$size}}% !important;{{end}}"
                   />
                   {{else}}
                   <h4 class="text-white font-weight-light">{{ .name }}</h4>

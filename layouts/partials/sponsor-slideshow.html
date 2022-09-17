@@ -1,8 +1,5 @@
 <!-- sponsor slideshow -->
 {{ with site.Data.sponsors }}
-<div class="col-12 text-center">
-  <h2 class="section-title text-white mb-5">{{ .title | markdownify }}</h2>
-</div>
 <div class="col-lg-10 mx-auto slideshow-slider d-flex align-items-center">
   {{ range .sponsors }}
   <!-- slider-item -->
@@ -21,14 +18,14 @@
       {{ range $filtered }}
         <a class="col-xl-{{$col_size}} col-6" href="{{.link}}" target="_blank">
           {{ if .image }}
-          <img class="img-fluid mb-4 d-inline-block p-2"
+          <img class="img-fluid d-inline-block p-2"
             style="max-width: {{$size}}%; {{if .background_color}}background-color: {{.background_color}};{{end}}"
             src="{{.image | absURL }}" alt="{{.name}}" title="{{.name}}" />
           {{ end }}
           {{ if site.Data.sponsors.show_names }}
           <h4 class="text-white">{{ .name }}</h4>
           {{ end }}
-          <h6 class="text-light mb-4">{{ .designation }}</h6>
+          <h6 class="text-light">{{ .designation }}</h6>
         </a>
       {{ end }}
     </div>
