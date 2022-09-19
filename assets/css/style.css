@@ -20,7 +20,7 @@ body {
   color: #4c4c4c;
 }
 
-p {
+p, li {
   font-weight: 400;
   color: #4c4c4c;
   font-size: 16px;
@@ -1032,8 +1032,12 @@ blockquote {
   display: flex;
   align-items: center;
 }
+.faq-item {
+  display: flex;
+  align-items: baseline;
+}
 
-.project-meta i {
+.project-meta i{
   height: 100px;
   min-width: 100px;
   line-height: 100px;
@@ -1045,12 +1049,24 @@ blockquote {
   box-shadow: 0 18px 39.1px 6.9px rgba(224, 241, 255, 0.34);
   font-size: 30px;
 }
+.faq-item i {
+  height: 100px;
+  min-width: 100px;
+  line-height: 100px;
+  background-color: var(--primary-color);
+  color: #fff;
+  border-radius: 50%;
+  text-align: center;
+  display: block;
+  box-shadow: 0 18px 39.1px 6.9px rgba(224, 241, 255, 0.34);
+  font-size: 30px;
+}
 
-.project-meta h4 {
+.project-meta h4, .faq-itemh4 {
   font-weight: bold;
   font-size: 24px;
 }
 
-.project-meta p {
+.project-meta p, .faq-item p {
   margin-bottom: 0;
 }

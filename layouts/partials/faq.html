@@ -10,7 +10,7 @@
       {{$gapsize := (cond (eq .gapsize "") .gapsize 0)}}
       {{ range .item}}
       <div class="col-12">
-        <div class="project-meta mt-{{$gapsize}}">
+        <div class="faq-item mt-{{$gapsize}}">
           <i class="{{if .icon}}{{.icon}}{{else}}ti-help{{end}}"></i>
           <div class="mx-3">
             <div class="font-weight-bold">
