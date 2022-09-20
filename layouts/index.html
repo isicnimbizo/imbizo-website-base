@@ -49,8 +49,10 @@
         <ul class="list-unstyled mt-3 position-relative zindex-1 d-flex align-items-center justify-content-center">
           {{ range .item }}
           {{ if gt (len .URL) 5}}
-          <li class="m-3 btn btn-primary" style="background-color:{{.color}} !important">
-            <a class="text-white" href="{{.URL | safeURL }}">{{.title}}</a>
+          <li class="m-3" >
+            <a class="btn btn-primary text-white shadow" 
+               style="background-color:{{.color}} !important"
+                href="{{.URL | safeURL }}">{{.title}}</a>
           </li>
           {{ end }}
           {{ end }}

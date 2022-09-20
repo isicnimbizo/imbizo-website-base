@@ -275,6 +275,9 @@ a.text-light:hover {
 a.text-white:hover {
   color: var(--primary-color) !important;
 }
+a.text-white.btn-primary:hover {
+  color: #fff !important;
+}
 a:hover, a:hover *:not(i) {
   color: var(--primary-color);
 }
