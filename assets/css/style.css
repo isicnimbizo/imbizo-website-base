@@ -1071,7 +1071,7 @@ blockquote > p{
 
 .project-meta i{
   height: 100px;
-  min-width: 100px;
+  width: 100px;
   line-height: 100px;
   background-color: #fff;
   color: var(--primary-color);
@@ -1083,7 +1083,7 @@ blockquote > p{
 }
 .faq-item i {
   height: 100px;
-  min-width: 100px;
+  width: 100px;
   line-height: 100px;
   background-color: var(--primary-color);
   color: #fff;
@@ -1094,7 +1094,7 @@ blockquote > p{
   font-size: 30px;
 }
 
-.project-meta h4, .faq-itemh4 {
+.project-meta h4, .faq-item h4 {
   font-weight: bold;
   font-size: 24px;
 }
