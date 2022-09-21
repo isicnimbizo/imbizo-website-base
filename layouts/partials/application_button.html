@@ -7,16 +7,15 @@
 <div class="row my-3 text-center">
   <!-- application info -->
   {{ $t := (time .close_date) }}
-  {{ $t_open := (time .open_date) }}
+  {{/*  this next line fails on github build  */}}
+  {{/*  {{ $t_open := (time .open_date) }}  */}}
   {{/*  check type of $t_open  */}}
-  {{ if eq (printf "%T" $t_open) "time.Time" }}
+  {{/*  {{ if eq (printf "%T" $t_open) "time.Time" }}  */}}
   {{/*  is a time object */}}
   {{/*  {{ $t_open = $t_open.Format "2006-01-02" }}  */}}
-  
-  {{else}}
+  {{/*  {{else}}  */}}
   {{/*  variable could not be parse to time/date  */}}
-  
-  {{ end }}
+  {{/*  {{ end }}  */}}
   {{ if .heading }}
     <h4 class="section-title mb-2">{{ .heading | markdownify }}</h4>
   {{ end }}
