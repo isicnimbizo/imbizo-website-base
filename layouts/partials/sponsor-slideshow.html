@@ -12,7 +12,7 @@
       {{ $size := .size }}
       {{$num_items := len $filtered}}
       {{$col_size := math.Round (div 12 $num_items) }}
-      {{if lt $col_size 2}}
+      {{if lt $col_size 3}}
       {{ $col_size = 3}}
       {{ end }}
       {{ range $filtered }}

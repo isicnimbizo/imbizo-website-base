@@ -2,6 +2,21 @@
 
 {{ partial "page-title.html" . }}
 
+
+{{ if (gt (len .Data.Pages) 0) }}
+<section class="section bg-secondary">
+  <div class="container-fluid">
+    <div class="row align-items-start">
+      {{ range .Data.Pages }}
+        {{ .Render "post" }}
+      {{ end }}
+    </div>
+  </div>
+</section>
+<hr class="m-0">
+{{ end }}
+
+{{ if (gt (len .Content) 0) }}
 <section class="section pt-5 bg-light">
   <div class="container">
     <div class="row">
@@ -10,58 +25,23 @@
   </div>
 </section>
 <hr class="m-0">
+{{ end }}
 
-<!-- about -->
-<section class="section pt-5">
-  <div class="container">
-    {{with site.Data.application_info}}
-    <div class="row my-5">
-      <div class="col-12 text-center">
-        <!-- application info -->
-        {{ $t := (time .dates.applications_close_date) }}
-        {{ if .applications_open }}
-        <a href="{{ .URL | absURL }}" class="btn btn-success btn-lg btn-block">{{.label}}</a>
-        <p>Closing {{dateFormat "Monday 02 Jan 2006 at 15:04:05 MST" site.Data.application_info.dates.applications_close_date }}</p>
-        {{else if $t.Before now }}
-        <a href="{{ .URL | absURL }}" class="btn disabled btn-danger btn-lg">{{.closed_message}}</a>
-        <p class="text-muted">
-          Acceptances expected {{site.Data.application_info.dates.acceptance_date}}
-        </p>
 
-        {{else}}
-        <a href="{{ .URL | absURL }}" class="btn disabled btn-info btn-lg">{{.closed_message}}</a>
-        <p class="text-muted">
-          Opening {{site.Data.application_info.dates.applications_open_date}}
-        </p>
-        {{ end }}
-        <!-- application info -->
-      </div>
-    </div>
-    <div class="row">
-      <div class="project-meta justify-content-center">
-        <i class="ti-calendar"></i>
-        <div class="ms-3">
-          <h4>Application period</h4>
-          <p>
-            {{ .dates.applications_open_date }} -
-            {{ dateFormat "02 Jan 2006 15:04:05 MST" .dates.applications_close_date }}
-            <br><small>notified {{ .dates.acceptance_date }}</small>
-          </p>
-        </div>
-      </div>
-    </div>
-    {{end}}
-  </div>
+<!-- application -->
+<section class="section pt-5" id="apply">
+  <div class="container-fluid">
+    {{partial "applications"}}
   </div>
 </section>
-<!-- /about -->
+<!-- /application -->
 
 <!-- Target applications -->
 {{ if site.Data.application_info.target_applicants.enable }}
 {{ with site.Data.application_info.target_applicants }}
 <hr class="mb-0 mt-0">
 <section class="section bg-light">
-  <div class="container">
+  <div class="container-fluid">
     <div class="row justify-content-around">
       <div class="col-lg-12 text-center">
         <h2 class="section-title">{{ .title | markdownify }}</h2>

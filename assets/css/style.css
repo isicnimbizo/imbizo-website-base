@@ -27,6 +27,9 @@ p, li {
   line-height: 1.8;
   /* font-family: roboto, sans-serif; */
 }
+small, .text-compressed {
+  line-height: inherit;
+}
 
 a {
   color: var(--secondary-color);
@@ -98,11 +101,11 @@ h6,
 }
 
 .btn {
-  font-size: 22px;
+  /* font-size: 22px; */
   font-family: playfair display, serif;
   /* text-transform: capitalize; */
-  padding: 16px 44px;
-  border-radius: 5px;
+  /* padding: 0.5em 1em; */
+  /* border-radius: 5px; */
   font-weight: 600;
   /* border: 0; */
   position: relative;
@@ -121,12 +124,12 @@ h6,
 
 .btn-sm {
   font-size: 15px;
-  padding: 10px 30px;
+  padding: 0.4em 0.8em;
 }
 
 .btn-xs {
-  padding: 5px 10px;
   font-size: 15px;
+  padding: 0.2em 0.4em;
 }
 
 .btn-primary, 
@@ -157,7 +160,14 @@ h6,
 .btn-check:focus+.btn-primary, .btn-primary:focus{
   box-shadow: 0 0 10px 0.25rem var(--primary-color);
 }
-
+.btn-group>.btn-group:not(:last-child)>.btn, .btn-group>.btn:not(:last-child):not(.dropdown-toggle){
+  /* extends existing condition to include 0 radius for bottom left */
+  border-bottom-left-radius: 0;
+}
+.btn-group>.btn-group:last-child>.btn, .btn-group>.btn:last-child:not(.dropdown-toggle){
+  /* extends existing condition to include 0 radius for top right */
+  border-top-right-radius: 0;
+}
 
 .btn-outline-primary{
   color: var(--primary-color)
@@ -276,6 +286,15 @@ a.text-white:hover {
   color: var(--primary-color) !important;
 }
 a.text-white.btn-primary:hover {
+  color: #fff !important;
+}
+.text-white.btn > a {
+  /* allows parent of link to specify style 
+  especially useful in .md files
+  e.g. 
+  ### [<anchor text>](<link>){.btn <other classes>}
+  (note the # in front that allows classes to be specified in curly braces)
+  */
   color: #fff !important;
 }
 a:hover, a:hover *:not(i) {
@@ -429,8 +448,11 @@ a:hover, a:hover *:not(i) {
   font-family: bwnistaint-xbd !important;
 }
 
-.shadow {
-  box-shadow: 0 18px 39.1px 6.9px rgba(224, 241, 255, 0.34) !important;
+.shadow-light, .bg-dark .shadow {
+  box-shadow: 0 .5rem 1rem rgba(224, 241, 255, 0.34) !important; 
+}
+.shadow-dark, .bg-white .shadow {
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;
 }
 
 .bg-dark {
@@ -605,7 +627,7 @@ textarea.form-control {
 
 .layer {
   position: absolute;
-  z-index: 1;
+  z-index: 0;
 }
 
 #l1 {
@@ -864,13 +886,20 @@ textarea.form-control {
   }
 }
 
+table {
+  margin-bottom: 1rem;
+}
+
 blockquote {
   display: inline-block;
   padding: 10px 20px;
   background: #eaeaea;
-  border-left: 2px solid var(--primary-color);
-  font-style: italic;
+  border-left: 0.5em solid var(--primary-color);
+  /* font-style: italic; */
   font-size: 22px;
+}
+blockquote > p{
+  margin: 0;
 }
 
 .content * {

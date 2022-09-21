@@ -8,15 +8,15 @@
       {{ .Content }}
     </div>
     <hr>
-    <div class="row">
+    <div class="row align-items-start">
       {{ range .Data.Pages }}
       {{ .Render "post" }}
       {{ end }}
       {{/*  CONTACT CARD  */}}
       {{ with .Site.GetPage "/contact" }}
       <div class="col-lg-4 col-sm-6 mb-4">
-          <article class="card shadow bg-dark text-white">
-            <img class="rounded card-img-top "
+          <article class="card rounded shadow bg-dark text-white">
+            <img class="card-img-top "
             src="{{if .Params.thumbnail}}{{.Params.thumbnail | relURL}}{{ else }}{{.Params.Image | relURL}}{{ end }}"
             alt="{{.Title }}">
             <div class="card-img-overlay d-flex flex-column justify-content-center align-items-center">

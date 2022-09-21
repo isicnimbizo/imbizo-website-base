@@ -1,0 +1,4 @@
+<!-- include the content of another file -->
+<!--  see https://github.com/gohugoio/hugo/issues/247  -->
+{{$file := .Get 0}}
+{{ with .Site.GetPage $file }}{{ .Content }}{{ end }}

@@ -110,42 +110,30 @@
 <!-- about -->
 <section class="section">
   <div class="container">
-    <div class="row">
-      {{with site.Data.application_info}}
+    <div class="row align-items-center justify-content-around">
       <div class="col-10 mx-auto text-center">
         <p class="font-secondary lead text-dark">{{site.Data.homepage.about.content | markdownify}}</p>
       </div>
-      {{ if site.Data.homepage.about.show_application_info }}
-      <div class="col-12 my-5 text-center">
-        <!-- application info -->
-        {{ $t := (time .dates.applications_close_date) }}
-        {{ if site.Data.application_info.applications_open }}
-        <a href="{{ .URL | absURL }}" class="btn btn-success btn-lg btn-block">{{.label}}</a>
-        <p>Closing
-          {{dateFormat "Monday 02 Jan 2006 at 15:04:05 MST" site.Data.application_info.dates.applications_close_date }}
-        </p>
-        {{else if $t.Before now }}
-        <a href="{{ .URL | absURL }}" class="btn disabled btn-danger btn-lg"
-          aria-disabled="true">{{.closed_message}}</a>
-        <p class="text-muted">
-          Acceptances expected {{site.Data.application_info.dates.acceptance_date}}
-        </p>
-
-        {{else}}
-        <a href="{{ .URL | absURL }}" class="btn disabled btn-info btn-lg" aria-disabled="true">{{.closed_message}}</a>
-        <p class="text-muted">
-          Opening {{site.Data.application_info.dates.applications_open_date}}
-        </p>
-        {{ end }}
-        <!-- application info -->
+      <hr>
+      <!--  registration info button  -->
+      <div class="row">
+        <div class="col-12 text-center">
+          {{ $link := default "/apply" site.Data.application_info.link}}
+          <a href="{{$link}}" class="btn btn-outline-secondary"><i class="ti-info-alt"></i>
+            &nbsp;{{site.Data.application_info.info_link_label}}</a>
+        </div>
       </div>
-      <div class="col-12 text-center">
-        <a href="/apply" class="btn btn-sm btn-outline-secondary"><i class="ti-info-alt"></i>
-          &nbsp;{{.info_link_label}}</a>
-      </div>
-      {{ end }}
+      <!--  /registration info button  -->
+      {{partial "applications"}}
     </div>
-    {{end}}
+
+    <!-- application period -->
+    {{ if site.Data.application_info.show_period }}
+      <div class="row mt-3">
+        {{partial "application_period"}}
+      </div>  
+    {{ end }}
+    <!-- /application period -->
   </div>
 </section>
 <!-- /about -->

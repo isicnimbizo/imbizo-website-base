@@ -1,0 +1,62 @@
+{{/*  allow params to be passed and the context normally in "." will be "context"  */}}
+{{$context := default . .context}} 
+{{/*  allowed params  */}}
+{{ $with_info := default true .with_info }}
+{{/*  template  */}}
+{{ with $context}}
+<div class="row my-3 text-center">
+  <!-- application info -->
+  {{ $t := (time .close_date) }}
+  {{ $t_open := (time .open_date) }}
+  {{/*  check type of $t_open  */}}
+  {{ if eq (printf "%T" $t_open) "time.Time" }}
+  {{/*  is a time object */}}
+  {{/*  {{ $t_open = $t_open.Format "2006-01-02" }}  */}}
+  
+  {{else}}
+  {{/*  variable could not be parse to time/date  */}}
+  
+  {{ end }}
+  {{ if .heading }}
+    <h4 class="section-title mb-2">{{ .heading | markdownify }}</h4>
+  {{ end }}
+  {{ if .open }}
+    <a href="{{ .URL | absURL }}" 
+       class="btn btn-success btn-lg btn-block"
+       style="background-color:{{.color}} !important; border-color:{{.color}} !important;"
+       >
+       {{.label | safeHTML}}
+      </a>
+    <p class="text-compressed my-2">
+      <strong>Deadline: {{dateFormat "Mon 02 Jan 2006 at 15:04:05 (MST UTC)" .close_date }}</strong>
+    </p>
+    <p class="text-compressed my-1">
+      <small class="text-muted">
+        Acceptance: {{.acceptance_date}}
+      </small>
+    </p>
+    
+  {{else if $t.Before now }}
+    <a href="{{ .URL | absURL }}" class="btn disabled btn-danger btn-lg"
+       style="background-color:{{.color}} !important; border-color:{{.color}} !important;"
+    >{{.closed_message}}</a>
+    <p class="text-muted text-compressed my-2">
+      Acceptance: {{.acceptance_date}}
+    </p>
+  {{else}}
+    <a href="{{ .URL | absURL }}" class="btn disabled btn-info btn-lg"
+    >{{.closed_message}}</a>
+    <p class="text-compressed my-2">
+      Opening {{.open_date}}
+    </p>
+    <p class="text-compressed my-1">
+      <small class="text-muted">
+        Open until: {{dateFormat "Monday 02 Jan 2006 at 15:04:05 MST" .close_date }}
+      </small>
+    </p>
+  {{ end }}
+  
+  
+  <!-- application info -->
+</div>
+{{ end }}
