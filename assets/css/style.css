@@ -1063,14 +1063,17 @@ blockquote > p{
 .project-meta {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 }
 .faq-item {
   display: flex;
   align-items: baseline;
+  flex-wrap: wrap;
 }
 
 .project-meta i{
   height: 100px;
+  min-width: 100px;
   width: 100px;
   line-height: 100px;
   background-color: #fff;
@@ -1083,6 +1086,7 @@ blockquote > p{
 }
 .faq-item i {
   height: 100px;
+  min-width: 100px;
   width: 100px;
   line-height: 100px;
   background-color: var(--primary-color);
