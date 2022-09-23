@@ -2,14 +2,24 @@
 
   {{ partial "page-title.html" . }}
 
-  <!-- news -->
+  {{ if (gt (len .Content) 0) }}
+    <section class="section pt-5 bg-light">
+      <div class="container">
+        <div class="row">
+          {{.Content}}
+        </div>
+      </div>
+    </section>
+    <hr class="m-0">
+  {{ end }}
+
   <section class="section">
     <div class="container">
       <div class="row">
         <div class="col-sm-12 col-md-9">
           <div class="row">
             {{ range .Data.Pages }}
-            {{ .Render "post" }}
+              {{ .Render "post" }}
             {{ end }}
           </div>
         </div>
@@ -19,6 +29,5 @@
       </div>
     </div>
   </section>
-  <!-- /news -->
 
 {{ end }}

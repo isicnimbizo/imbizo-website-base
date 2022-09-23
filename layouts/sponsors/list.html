@@ -1,2 +1,18 @@
-{{ define "main" }} {{ partial "page-title.html" . }} {{ partial
-"sponsors.html"}} {{ end }}
+{{ define "main" }} 
+
+    {{ partial "page-title.html" . }} 
+
+    {{ if (gt (len .Content) 0) }}
+    <section class="section bg-diagonal ">
+    <div class="container">
+        <div class="row">
+        {{.Content}}
+        </div>
+    </div>
+    </section>
+    <hr class="m-0">
+    {{ end }}
+
+    {{ partial "sponsors.html"}} 
+
+{{ end }}

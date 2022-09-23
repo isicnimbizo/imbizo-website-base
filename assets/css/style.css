@@ -463,12 +463,12 @@ a:hover, a:hover *:not(i) {
   /* filter: brightness(0.9); */
 }
 
-.bg-gradient {
-  /* background: linear-gradient(
-    to bottom,
-    rgba(245, 246, 252, 0.1),
-    var(--primary-color)
-  ); */
+.bg-diagonal {
+  background: linear-gradient(
+    130deg,
+    rgba(245, 246, 252, 0.1) 80%,
+    var(--primary-color) 80%
+  ) !important;
   /* z-index: 1; */
 }
 
