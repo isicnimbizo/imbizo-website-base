@@ -238,11 +238,35 @@
   <img src="{{`images/illustrations/leaf-orange.svg` | relURL }}" alt="bg-shape" class="img-fluid bg-shape-2" />
   <img src="{{`images/illustrations/dots-group-sm.svg` | relURL }}" alt="bg-shape" class="img-fluid bg-shape-3" />
   <img src="{{`images/illustrations/leaf-pink-round.svg` | relURL }}" alt="bg-shape" class="img-fluid bg-shape-4" />
-  <img src="{{`images/illustrations/leaf-cyan.svg` | relURL }}" alt="bg-shape" class="img-fluid bg-shape-5" />
+  <img src="{{`images/illustrations/leaf-yellow.svg` | relURL }}" alt="bg-shape" class="img-fluid bg-shape-5" />
   {{end}}
 </section>
 <!-- /sponsors -->
 {{ end }}
+
+
+<!-- schedule -->
+{{with site.Data.homepage.schedule}}
+{{ if .enable }}
+  <section id="schedule" class="section bg-light">
+    <div class="container">
+      <div class="row mb-2">
+        <div class="col-12 text-center mb-5">
+          <h2 class="section-title mb-0">{{site.Data.schedule.title}}</h2>
+          {{if site.Data.homepage.schedule.link}}
+            <a href="{{site.Data.homepage.schedule.link}}">{{site.Data.homepage.schedule.link_text}}
+              {{$link_icon := default "arrow-top-right" site.Data.homepage.schedule.link_icon}}
+              <i class="ti-{{$link_icon}}"></i></a>
+          {{end}}
+      </div>
+      
+      {{ partial "schedule.html"}}
+    </div>
+  </section>
+{{ end }}
+{{ end }}
+<!-- /schedule -->
+
 
 <!-- faculty slider -->
 

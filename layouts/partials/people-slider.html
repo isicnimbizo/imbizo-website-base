@@ -1,41 +1,66 @@
-<div class="faculty-logo-slider d-flex align-items-center justify-content-center">
+{{/*  allow params to be passed and the context normally in "." will be "context"  */}}
+{{$context := default . .context}} 
+{{/*  allowed params  */}}
+
+{{ $show_all := default false site.Data.homepage.faculty.show_all}}
+{{ $show_all = default $show_all .show_all }}
+{{ $slider := default true site.Data.homepage.faculty.slider}}
+{{ $slider = default $slider .show_all }}
+
+{{/*  template  */}}
+{{ with $context}}
   {{/* Find latest year */}}
   {{ $max_year := 0 }}
+  {{ $all_cats := slice}}
   {{ range .item }}
     {{ range .years }}
+      {{$all_cats = $all_cats | append .}}
       {{ if gt . $max_year}}
         {{ $max_year = . }}
       {{ end }}
     {{ end }}
   {{ end }}
   {{ $select_years := (slice $max_year) }}
+  {{/*  select only unique cats  */}}
+  {{ $all_cats = $all_cats | uniq }}
 
-  {{ range .item }}
-    {{ $is_current := intersect $select_years .years }}
-    {{ if $is_current}}
-      {{ $path := printf "%s" .image}}
-        {{if not .image}}
-        {{ $last_name := lower (index (split .name " ") 1) }}
-        {{ $path = printf "images/people/%s.jpg" $last_name}}
-      {{end}}
-      <div class="col-lg-3 col-sm-12 col-4 mb-4 shuffle-item"
-        data-groups="[{{range $index, $element:= .years }}{{if ne $index 0}},{{end}}&quot;{{. | urlize}}&quot;{{ end }}]">
-        <a href="{{.link}}" class="pl-0 ms-0 center text-center" target="_blank" class="d-flex">
-          <div class="circletag">
-            {{if .image}}
-              <img src="{{ .image | absURL }}" alt="{{.name}}" class="img-fluid w-100 d-block">
-            {{else}}
-              {{$last_name := lower (index (split .name " ") 1) }}
-              {{ $path := printf "images/people/%s.jpg" $last_name}}
-              <img src="{{ $path | absURL }}" alt="{{.name}}" class="img-fluid w-100 d-block">
-            {{end}}
-          </div>
-          <div>
-            <h4>{{ .name }}</h4>
-            <p class="mb-0 text-light">{{.affiliation}}</p>
-          </div>
-        </a>
-      </div>
-      {{ end }}
+  <!--  determine if to use a slider -->
+  {{ $faculty_slider_disable := "" }}
+  {{ if (or (not $slider) (lt (len .item) 12))}}
+    {{$faculty_slider_disable = "-disable flex-wrap"}}
+
   {{ end }}
-</div>
+  <!-- /end slider determination-->
+  <div class="faculty-logo-slider{{$faculty_slider_disable}} d-flex align-items-center justify-content-center">
+    
+    {{ range .item }}
+      {{ $is_current := (or $show_all (intersect $select_years .years) )}}
+      {{ if $is_current}}
+        {{ $path := printf "%s" .image}}
+        {{ $last_name := lower (index (split .name " ") 1) }}
+          {{if not .image}}
+          
+          {{ $path = printf "images/people/%s.jpg" $last_name}}
+        {{end}}
+        <div class="col-lg-3 col-sm-12 col-4 mb-4 shuffle-item" id="{{.name | urlize}}"
+          data-groups="[{{range $index, $element:= .years }}{{if ne $index 0}},{{end}}&quot;{{. | urlize}}&quot;{{ end }}]">
+          <a href="{{.link}}" class="pl-0 ms-0 center text-center" target="_blank" class="d-flex">
+            <div class="circletag">
+              {{if .image}}
+                <img src="{{ .image | absURL }}" alt="{{.name}}" class="img-fluid w-100 d-block">
+              {{else}}
+                {{ $path := printf "images/people/%s.jpg" $last_name}}
+                <img src="{{ $path | absURL }}" alt="{{.name}}" class="img-fluid w-100 d-block">
+              {{end}}
+            </div>
+            <div>
+              <h4>{{ .name }}</h4>
+              <p class="mb-0 text-light">{{.affiliation}}</p>
+            </div>
+          </a>
+        </div>
+        {{ end }}
+    {{ end }}
+  </div>
+
+{{ end }}

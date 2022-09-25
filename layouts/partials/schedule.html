@@ -1,0 +1,138 @@
+{{with site.Data.schedule}}
+<div class="schedule-tab accordion">
+  {{ range .days }} {{ $day_id := .title | urlize}}
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="{{$day_id}}-heading">
+      <button
+        class="accordion-button"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#{{$day_id}}-collapse"
+        aria-expanded="true"
+        aria-controls="{{$day_id}}-collapse"
+      >
+        <div class="col-md-9 col-xs-12">
+          <h4>{{.title}}</h4>
+        </div>
+        <div class="col-md-2 col-xs-12">
+          <h4>
+            <i class="ti-calendar"></i>&nbsp; {{/* date */}} {{.date |
+            dateFormat "Mon 02 Jan 2006"}}
+          </h4>
+        </div>
+      </button>
+    </h2>
+    <div
+      id="{{$day_id}}-collapse"
+      class="accordion-collapse collapse show"
+      aria-labelledby="{{$day_id}}-heading"
+    >
+      <div class="accordion-body">
+        {{ range .sessions }}
+        <div class="row schedule-listing justify-content-between">
+          <div class="schedule-slot-time col-md-2 col-xs-12">
+            <i class="ti-time"></i>&nbsp;{{.time}}
+          </div>
+          <!-- determine column size (10 = 12 - 2 for the time) end -->
+          {{$col_size := (div 12 (len .columns))}}
+
+          <!-- different tracks -->
+          <div
+            class="row col-md-10 col-xs-12 schedule-listing justify-content-evenly"
+          >
+            {{ range .columns }}
+            <div class="schedule-slot-info col-md-{{$col_size}} col-xs-12">
+              <!-- heading -->
+              <div class="schedule-slot-info-heading">
+                {{ if .track }}
+                <!-- find track color -->
+                {{ $track_color := "#000000" }}
+                <!-- capture current track to a var for comparison -->
+                {{ $track_name := .track }}
+                <!-- loop through tracks -->
+                {{ range site.Data.schedule.tracks }}
+                <!-- compare current track to track in loop -->
+                {{ if eq (.title | urlize) ($track_name | urlize) }}
+                <!-- assign -->
+                {{ $track_color = .color }}
+                <!-- /assign -->
+                {{ end }}
+                <!-- end if -->
+                {{ end }}
+                <!-- end range -->
+                <!-- /track color -->
+                <h6
+                  class="schedule-slot-title-track text-white font-tertiary text-uppercase p-2 mb-0 badge"
+                  data-color="{{$track_color}}"
+                >
+                  <span>
+                    {{.title}}
+                    <!-- get number of sessions -->
+                    {{ $num_sessions := 0}} {{ if .number }}
+                    <!-- assign from data -->
+                    {{ $num_sessions = .number }} {{ else if .sessions }}
+                    <!-- calculate from sessions -->
+                    {{ $num_sessions = (len .sessions) }} {{end }}
+                    <!-- /get number of sessions -->
+                    <!-- display number of sessions -->
+                    {{ if $num_sessions}} 
+                    <span
+                      class="font-primary position-absolute top-0 start-100 translate-middle badge border border-light rounded-pill bg-danger"
+                    >
+                      {{$num_sessions}}
+                      <span class="visually-hidden">number of sessions</span>
+                    </span>
+                    {{end}}
+                    <!-- /display number of sessions -->
+                  </span>
+                </h6>
+
+                {{ else }}
+                <h3 class="schedule-slot-title text-uppercase mb-0">
+                  {{.title}}
+                </h3>
+                {{ end }}
+                <!-- heading location -->
+                {{ if .location}}
+                <small class="text-muted pt-0 mt-0"
+                  ><i class="ti-pin"></i>{{.location}}</small
+                >
+                {{end}}
+                <!-- /heading location -->
+                <!-- heading desciption -->
+                {{ if .content }}
+                <p class="text-muted">{{.content}}</p>
+                {{ end }}
+                <!-- /heading desciption -->
+              </div>
+              <!-- /heading-->
+              {{range .sessions}}
+              <div
+                class="schedule-slot-info-content row justify-content-start align-items-baseline"
+              >
+                <div class="col-md-3 col-xs-12 gx-0">
+                  <h4 class="schedule-slot-speaker-name font-primary">
+                    {{.speaker_name}}
+                  </h4>
+                  {{ if .time}}
+                  <small class="text-muted"
+                    ><i class="ti-time"></i>&nbsp;{{.time}}</small
+                  >
+                  {{end}}
+                </div>
+                <p class="schedule-slot-desc col-md-9 col-xs-12">{{.title}}</p>
+              </div>
+              {{end}}
+            </div>
+            <!-- Slot info end -->
+            {{ end }}
+          </div>
+        </div>
+        <!-- Schedule listing end -->
+        {{ end }}
+      </div>
+    </div>
+  </div>
+  {{ end }}
+</div>
+{{ end }}
