@@ -1,10 +1,14 @@
+{{/*  allowed params passed as (dict collapsed true) */}}
+{{ $collapsed := default false .collapsed}}
+
+{{/*  template  */}}
 {{with site.Data.schedule}}
 <div class="schedule-tab accordion">
   {{ range .days }} {{ $day_id := .title | urlize}}
   <div class="accordion-item">
-    <h2 class="accordion-header" id="{{$day_id}}-heading">
+    <h2 class="accordion-header font-tertiary" id="{{$day_id}}-heading">
       <button
-        class="accordion-button"
+        class="accordion-button {{if $collapsed}}collapsed{{end}}"
         type="button"
         data-bs-toggle="collapse"
         data-bs-target="#{{$day_id}}-collapse"
@@ -12,19 +16,19 @@
         aria-controls="{{$day_id}}-collapse"
       >
         <div class="col-md-9 col-xs-12">
-          <h4>{{.title}}</h4>
+          <h4 class="font-primary">{{.title}}</h4>
         </div>
         <div class="col-md-2 col-xs-12">
-          <h4>
+          <h5 class="font-tertiary" >
             <i class="ti-calendar"></i>&nbsp; {{/* date */}} {{.date |
             dateFormat "Mon 02 Jan 2006"}}
-          </h4>
+          </h5>
         </div>
       </button>
     </h2>
     <div
       id="{{$day_id}}-collapse"
-      class="accordion-collapse collapse show"
+      class="accordion-collapse collapse {{if not $collapsed}}show{{end}}"
       aria-labelledby="{{$day_id}}-heading"
     >
       <div class="accordion-body">
@@ -66,7 +70,12 @@
                   data-color="{{$track_color}}"
                 >
                   <span>
-                    {{.title}}
+                    {{$title := default .track .title}}
+                    <!-- consider the case of track being empty -->
+                    {{ if eq $title "" }}
+                      {{ $title = .track }}
+                    {{ end }}
+                    {{$title}}
                     <!-- get number of sessions -->
                     {{ $num_sessions := 0}} {{ if .number }}
                     <!-- assign from data -->
@@ -75,12 +84,14 @@
                     {{ $num_sessions = (len .sessions) }} {{end }}
                     <!-- /get number of sessions -->
                     <!-- display number of sessions -->
-                    {{ if $num_sessions}} 
+                    {{ if not (or (eq $num_sessions "") (eq $num_sessions 0) (eq $num_sessions "0") (eq $num_sessions "false")) }}
                     <span
                       class="font-primary position-absolute top-0 start-100 translate-middle badge border border-light rounded-pill bg-danger"
+                      data-bs-toggle="tooltip" data-bs-placement="top"
+                      title="number of speakers"
                     >
                       {{$num_sessions}}
-                      <span class="visually-hidden">number of sessions</span>
+                      <span class="visually-hidden">number of speakers</span>
                     </span>
                     {{end}}
                     <!-- /display number of sessions -->

@@ -1,7 +1,7 @@
 {{ define "main" }}
 
   {{ partial "page-title.html" . }}
-
+  
   {{ if (gt (len .Content) 0) }}
     <section class="section pt-5 bg-light">
       <div class="container">
@@ -13,6 +13,7 @@
     <hr class="m-0">
   {{ end }}
 
+  {{ if .Data.Pages}}
   <section class="section">
     <div class="container">
       <div class="row">
@@ -29,5 +30,6 @@
       </div>
     </div>
   </section>
-
+  {{ end }}
+  
 {{ end }}

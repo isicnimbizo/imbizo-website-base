@@ -5,6 +5,7 @@
           target="_blank" {{ else }}"{{.Permalink}}"{{ end }}
           title="{{.Title }}">
         <img class="card-img-top"
+            {{/*  style="height: 15em; object-fit: cover;"  */}}
             src="{{if .Params.thumbnail}}{{.Params.thumbnail | relURL}}{{ else }}{{.Params.Image | relURL}}{{ end }}"
             alt="{{.Title }}"
             title="{{.Title }}">

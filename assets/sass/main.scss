@@ -248,3 +248,8 @@ p.schedule-slot-desc {
   -o-transform: rotate(-90deg);
   transform: rotate(-90deg);
 }
+
+// 
+#formbutton-container{
+  @extend .d-print-none !optional
+}

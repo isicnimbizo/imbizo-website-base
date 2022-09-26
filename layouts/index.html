@@ -50,8 +50,8 @@
           {{ range .item }}
           {{ if gt (len .URL) 5}}
           <li class="m-3" >
-            <a class="btn btn-primary text-white shadow" 
-               style="background-color:{{.color}} !important"
+            <a class="btn btn-primary text-white shadow"
+               style="background-color:{{.color}} !important; border-color:{{.color}} !important;"
                 href="{{.URL | safeURL }}">{{.title}}</a>
           </li>
           {{ end }}
@@ -260,7 +260,7 @@
           {{end}}
       </div>
       
-      {{ partial "schedule.html"}}
+      {{ partial "schedule.html" (dict "collapsed" true)}}
     </div>
   </section>
 {{ end }}
@@ -312,7 +312,7 @@
 <hr class="mb-0" />
 <section class="section bg-dark">
   <div class="container">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center align-items-start">
       <div class="col-12 text-center mb-5">
         <h2 class="section-title mb-0 text-white">
           {{.Title | markdownify }}
