@@ -21,8 +21,8 @@
           <ul class="list-unstyled d-flex">
             {{ range site.Params.social }} {{ if gt (len .URL) 5}}
             <li class="m-2">
-              <a class="text-light" href="{{.URL | safeURL }}"
-                ><i class="{{.icon}}"></i
+              <a class="text-light" href="{{.URL | safeURL }}" alt="{{.text}}" title="{{.text}}" data-bs-toggle="tooltip" data-bs-placement="left">
+                <i class="{{.icon}}"></i
               ></a>
             </li>
             {{ end }} {{ end }}
@@ -34,7 +34,9 @@
   </div>
   {{end}} {{end}}
   <div class="border-top text-center border-dark py-5">
-    <p class="mb-0 text-light">{{ site.Params.copyright | markdownify }}</p>
+    <p class="mb-0 text-light">
+      Copyright ©{{now | dateFormat "2006"}} {{ site.Params.copyright | markdownify }}
+    </p>
   </div>
 </footer>
 <!-- /footer -->
@@ -52,6 +54,7 @@
 {{ end }}
 
 <script>
+  // add bootstrap tooltip functionality
   var tooltipTriggerList = [].slice.call(
     document.querySelectorAll('[data-bs-toggle="tooltip"]')
   );
@@ -60,7 +63,8 @@
   });
 </script>
 
-{{ "<!-- Main Script -->" | safeHTML }} {{ $script := resources.Get "js/script.js" | minify}}
+{{ "<!-- Main Script -->" | safeHTML }} 
+{{ $script := resources.Get "js/script.js" | minify}}
 <script src="{{ $script.Permalink }}"></script>
 
 {{ if and site.Params.contact.enable site.Params.contact.floating }} 

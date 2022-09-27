@@ -568,6 +568,10 @@ textarea.form-control {
   padding: 15px 100px;
 }
 
+.navbar-nav {
+  flex-wrap: wrap;
+}
+
 @media (max-width: 991px) {
   .navigation.nav-bg {
     padding: 15px 20px;

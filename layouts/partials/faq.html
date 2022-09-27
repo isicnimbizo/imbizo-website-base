@@ -10,7 +10,7 @@
       {{$gapsize := (cond (eq .gapsize "") .gapsize 0)}}
       {{ range .item}}
       <div class="col-12">
-        <div class="faq-item mt-{{$gapsize}} row">
+        <div class="faq-item mt-{{$gapsize}} row" id="{{.question | urlize}}">
           <i class="col-1 {{if .icon}}{{.icon}}{{else}}ti-help{{end}}"></i>
           <div class="mx-3 col-md-10 col-12">
             <div class="font-weight-bold">
