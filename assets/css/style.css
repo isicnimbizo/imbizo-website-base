@@ -688,6 +688,11 @@ textarea.form-control {
   min-height: 100%;
 }
 
+.container-fluid {
+  padding-left: 1.75rem;
+  padding-right: 1.75rem;
+}
+
 .progress-wrapper {
   height: 120px;
   overflow: hidden;
