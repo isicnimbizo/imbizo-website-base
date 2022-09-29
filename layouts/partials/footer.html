@@ -34,8 +34,7 @@
   </div>
   {{end}} {{end}}
   <div class="border-top text-center border-dark py-5">
-    <p class="mb-0 text-light">
-      Copyright ©{{now | dateFormat "2006"}} {{ site.Params.copyright | markdownify }}
+    <p class="mb-0 text-light">{{ replace (site.Params.copyright | markdownify) "{{now}}" (now | dateFormat "2006") }}
     </p>
   </div>
 </footer>

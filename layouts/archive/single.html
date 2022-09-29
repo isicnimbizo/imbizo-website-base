@@ -71,14 +71,15 @@
           </div>
           {{ end }}
           {{ if .Params.material_link}}
-          <div class="col-sm-12 mb-5" data-bs-toggle="tooltip" data-bs-placement="top"
-            title="for school attendees only">
+          <div class="col-sm-12 mb-5">
             <div class="project-meta">
               <i class="ti-link"></i>
               <div class="ms-3">
                 <h4>
                 <a href="{{.Params.material_link}}" target="_blank"
+                data-bs-toggle="tooltip" data-bs-placement="top"
                   title="school material for {{.Params.Title}}">Material</a></h4>
+                  <small class="text-muted"><em>access restricted</em></small>
               </div>
             </div>
           </div>

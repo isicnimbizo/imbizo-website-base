@@ -2,6 +2,8 @@
 
 {{ partial "page-title.html" . }}
 
+{{ $tracks := default site.Data.tracks site.Data.faculty.tracks }}
+
 <!-- portfolio -->
 <section class="section">
   <div class="container">
@@ -25,11 +27,8 @@
           {{ $color := "" }}
           {{$year := .}}
           
-          {{ range site.Data.faculty.tracks }}
-          
-          {{ if eq $year .title }}
-          {{ $color = .color }}
-          {{ end }}
+          {{ range $tracks }}
+            {{ if eq $year .title }}{{ $color = .color }}{{ end }}
           {{ end }}
           <input type="radio" class="btn-check" name="shuffle-filter" id="{{.}}" value="{{ . | urlize }}" />
           <label class="btn btn-sm btn-primary" id="{{. | urlize}}" for="{{.}}"
@@ -50,57 +49,15 @@
       {{ end }}
     </div>
     <div class="row shuffle-wrapper">
-      {{ range site.Data.faculty.item | sort }}
-      <div class="col-lg-3 col-sm-6 col-md-4 mb-4 shuffle-item" id="{{.name | urlize}}"
-        data-groups="[{{range $index, $element:= .years }}{{if ne $index 0}},{{end}}&quot;{{. | urlize}}&quot;{{ end }}]">
-        <a href="{{.link}}" class="pl-0 ms-0 center text-center" , target="_blank" class="d-flex">
-          <div class="circletag">
-            {{if .image}}
-            <img src="{{ .image | absURL }}" alt="{{.name}}" class="img-fluid w-100 d-block">
-            {{else}}
-            {{$last_name := lower (index (split .name " ") 1) }}
-            {{ $path := printf "images/people/%s.jpg" $last_name}}
-            <img src="{{ $path | absURL }}" alt="{{.name}}" class="img-fluid w-100 d-block">
-            {{end}}
-          </div>
-          <div>
-            <h4>{{ .name }}</h4>
-            <p class="mb-0 text-light">{{.affiliation}}</p>
-            <small class="text-muted mb-1">{{ range .years | sort}} {{ . }} {{end}}</small>
+      {{partial "people" site.Data.faculty }}
 
-          </div>
-        </a>
-      </div>
-      {{ end }}
-
-      <div class="col-12 shuffle-item text-center" id="teaching-assistants"
-        data-groups="[{{range $index, $element:= $years }}{{if ne $index 0}},{{end}}&quot;{{. | urlize}}&quot;{{ end }}]">
-        <hr>
-        <h3 class="section-title mt-5">{{site.Data.tutors.title}}</h3>
-      </div>
-      {{ if site.Data.tutors.item }}
-      {{ range site.Data.tutors.item | sort }}
-      <div class="col-lg-3 col-sm-6 col-md-4 mb-4 shuffle-item"
-        data-groups="[{{range $index, $element:= .years }}{{if ne $index 0}},{{end}}&quot;{{. | urlize}}&quot;{{ end }}]">
-        <a href="{{.link}}" class="pl-0 ms-0 center text-center" , target="_blank" class="d-flex">
-          <div class="circletag">
-            {{if .image}}
-            <img src="{{ .image | absURL }}" alt="{{.name}}" class="img-fluid w-100 d-block">
-            {{else}}
-            {{$last_name := lower (index (split .name " ") 1) }}
-            {{ $path := printf "images/people/%s.jpg" $last_name}}
-            <img src="{{ $path | absURL }}" alt="{{.name}}" class="img-fluid w-100 d-block">
-            {{end}}
-          </div>
-          <div>
-            <h4>{{ .name }}</h4>
-            <p class="mb-0 text-light">{{.affiliation}}</p>
-            <small class="text-muted mb-1">{{ range .years | sort}} {{ . }} {{end}}</small>
-
-          </div>
-        </a>
-      </div>
-      {{ end }}
+      {{ if site.Data.tutors }}
+        <div class="col-12 shuffle-item text-center" id="teaching-assistants"
+          data-groups="[{{range $index, $element:= $years }}{{if ne $index 0}},{{end}}&quot;{{. | urlize}}&quot;{{ end }}]">
+          <hr>
+          <h3 class="section-title mt-5">{{site.Data.tutors.title}}</h3>
+        </div>
+        {{partial "people" site.Data.tutors}}
       {{ end }}
     </div>
   </div>

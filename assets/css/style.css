@@ -305,6 +305,10 @@ a:hover, a:hover *:not(i) {
   max-width: 100% !important;
 }
 
+.faculty-badges {
+  font-size: 80%;
+}
+
 .slick-slide {
   outline: 0;
 }
@@ -1114,4 +1118,9 @@ blockquote > p{
 
 .project-meta p, .faq-item p {
   margin-bottom: 0;
+}
+
+/* badges */
+.badge {
+  line-height: normal;
 }

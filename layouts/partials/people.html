@@ -1,0 +1,6 @@
+{{ $tracks := default site.Data.tracks .tracks }}
+{{ $badges := default false .badges }}
+
+{{ range .item | sort }}
+    {{partial "people-person" (dict "context" . "tracks" $tracks "badges" $badges)}}
+{{ end }}
