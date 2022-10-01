@@ -17,24 +17,28 @@
           <label class="btn btn-sm btn-primary" for="all">All</label>
           </label>
           {{ $years := slice }}
-          {{ range site.Data.faculty.item }}
-          {{ range .years }}
-          {{ $years = $years | append . }}
+          {{ range site.Data.faculty }}
+            {{ range .years }}
+              {{ $years = $years | append . }}
+            {{ end }}
           {{ end }}
+          {{/*  initial sort  */}}
+          {{ $years := (sort (uniq $years) "value" "asc" ) }}      
+          {{ if in $years "Keynote" }}
+            {{ $years = append $years (slice "Keynote") }}
           {{ end }}
-          {{ range ( $years | uniq | sort ) }}
+          {{ range $year := $years | uniq }}
           <!-- match the year to the tracks in the data file and get color value -->
-          {{ $color := "" }}
-          {{$year := .}}
-          
-          {{ range $tracks }}
-            {{ if eq $year .title }}{{ $color = .color }}{{ end }}
-          {{ end }}
-          <input type="radio" class="btn-check" name="shuffle-filter" id="{{.}}" value="{{ . | urlize }}" />
-          <label class="btn btn-sm btn-primary" id="{{. | urlize}}" for="{{.}}"
-                style="background-color: {{ $color }} !important; border-color: {{ $color }};">
-          {{ . }}
-          </label>
+            {{ $color := "" }}
+            
+            {{ range $title, $props := $tracks }}
+              {{ if eq $year $title }}{{ $color = $props.color }}{{ end }}
+            {{ end }}
+            <input type="radio" class="btn-check" name="shuffle-filter" id="{{.}}" value="{{ . | urlize }}" />
+            <label class="btn btn-sm btn-primary" id="{{. | urlize}}" for="{{.}}"
+                  style="background-color: {{ $color }} !important; border-color: {{ $color }};">
+            {{ . }}
+            </label>
 
           {{ end }}
         </div>

@@ -276,7 +276,7 @@
   <div class="container" id="faculty">
     <div class="row mb-2">
       <div class="col-12 text-center mb-5">
-        <h2 class="section-title mb-0">{{site.Data.faculty.title}}</h2>
+        <h2 class="section-title mb-0">{{site.Data.homepage.faculty.title}}</h2>
         {{/*  assign site.Data.homepage.faculty.link to $faculty_link with default value of /people#faculty  */}}
         {{ $faculty_link := default "/people/#faculty" site.Data.homepage.faculty.link }}
         <a href="{{$faculty_link}}">{{site.Data.homepage.faculty.link_text}}<i class="ti-arrow-top-right"></i></a>

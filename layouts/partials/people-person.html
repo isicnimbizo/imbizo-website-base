@@ -1,29 +1,36 @@
 {{/*  allow params to be passed and the context normally in "." will be "context"  */}}
-{{$context := default . .context}} 
+{{$context := default . .context}}
 {{/*  allowed params  */}}
+{{$name := default $context.name .name}}
+
 {{ $tracks := default site.Data.tracks .tracks}}
-{{ $badges := default false .badges }}
+
+{{ $badges := default false site.Params.faculty.badges }}
+{{ $badges = default $badges .badges }}
+
 {{ $show_track := default false site.Data.homepage.faculty.show_track}}
 {{ $show_track = default $show_track .show_track}}
+
 {{ $col := default "col-lg-3 col-sm-6 col-md-4" .col }}
 
 {{/*  template  */}}
+
 {{ with $context}}
 {{/*  get or create link  */}}
 {{ $link := default "" .link}}
 {{ $speaker_link := default "/people" site.Data.homepage.faculty.link}}
 {{ if eq $link ""}}
-{{$link = printf "%s/#%s" $speaker_link .name | urlize}}
+{{$link = printf "%s/#%s" $speaker_link $name | urlize}}
 {{ end }}
 
 {{ $path := printf "%s" .image}}
-{{ $last_name := lower (index (split .name " ") 1) }}
+{{ $last_name := lower (index (split $name " ") 1) }}
 {{if not .image}}
     {{ $path = printf "images/people/%s.jpg" $last_name}}
 {{end}}
 <div
-  class="{{$col}} mb-4 shuffle-item d-flex center text-center flex-column"
-  id="{{.name | urlize}}"
+  class="{{$col}} mx-2 mb-4 shuffle-item d-flex center text-center flex-column"
+  id="{{$name | urlize}}"
   data-groups='[{{range $index, $element:= .years }}{{if ne $index 0}},{{end}}"{{. | urlize}}"{{ end }}]'
 > 
   {{if not (eq $link "")}}
@@ -44,11 +51,11 @@
     <div class="circletag">
       <img
         src="{{ $path | absURL }}"
-        alt="{{.name}}"
+        alt="{{$name}}"
         class="img-fluid w-100 d-block"
       />
     </div>
-    <h4 class="m-0">{{ .name }}</h4>
+    <h4 class="m-0">{{ $name }}</h4>
   {{if not (eq $link "")}}
   </a>
   {{else}}
@@ -63,29 +70,27 @@
     {{ end }}
     {{ if $show_track}}
     <div class="faculty-badges mt-1 position-relative">
-        {{ range .years | sort}} 
-        {{ $color := "#000000" }} 
-        {{ $class := "rounded" }} 
-        {{ $year := . }}
-        {{ range $tracks }} 
-            {{ if eq $year .title }} {{ $color = .color }} {{ end }} 
-        {{ end }}
-        
-        {{ if $badges }} 
-            {{ $class = "p-2 rounded-circle" }} 
-        {{ end }}
-        <small
-            class="font-primary d-inline-block badge border border-light {{$class}}"
-            data-color="{{ $color }}"
-            {{ if $badges }}
-            data-bs-toggle="tooltip"
-            data-bs-placement="right"
-            title="{{ . }}"
-            {{ end }}
-        >
-            {{ if not $badges }}{{ . }}{{ end }}
-            <span class="visually-hidden">{{ . }}</span>
-        </small>
+        {{ range $year := .years | sort}} 
+          {{ $color := "#000000" }} 
+          {{ range $title, $props := $tracks }}
+            {{ if eq $year $title }}{{ $color = $props.color }}{{ end }}
+          {{ end }}      
+          {{ $class := "rounded" }} 
+          {{ if $badges }} 
+              {{ $class = "p-2 rounded-circle" }} 
+          {{ end }}
+          <small
+              class="font-primary d-inline-block badge border border-light {{$class}}"
+              data-color="{{ $color }}"
+              {{ if $badges }}
+              data-bs-toggle="tooltip"
+              data-bs-placement="right"
+              title="{{ . }}"
+              {{ end }}
+          >
+              {{ if not $badges }}{{ . }}{{ end }}
+              <span class="visually-hidden">{{ . }}</span>
+          </small>
         {{end}}
         </div>
     {{end}}
@@ -94,11 +99,11 @@
 
 {{with .modal}} 
 <!-- Modal -->
-<div class="modal fade" id="{{.name | urlize}}-modal" tabindex="-1" aria-labelledby="{{.name}}" aria-hidden="true">
+<div class="modal fade" id="{{$name | urlize}}-modal" tabindex="-1" aria-labelledby="{{$name}}" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header"> 
-        <h5 class="modal-title" id="exampleModalLabel">{{.name}}</h5>
+        <h5 class="modal-title" id="exampleModalLabel">{{$name}}</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
