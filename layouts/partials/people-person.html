@@ -29,7 +29,7 @@
     {{ $path = printf "images/people/%s.jpg" $last_name}}
 {{end}}
 <div
-  class="{{$col}} mx-2 mb-4 shuffle-item d-flex center text-center flex-column"
+  class="{{$col}} mb-4 shuffle-item d-flex center text-center flex-column"
   id="{{$name | urlize}}"
   data-groups='[{{range $index, $element:= .years }}{{if ne $index 0}},{{end}}"{{. | urlize}}"{{ end }}]'
 > 
@@ -55,7 +55,7 @@
         class="img-fluid w-100 d-block"
       />
     </div>
-    <h4 class="m-0">{{ $name }}</h4>
+    <h4 class="m-0 px-2">{{ $name }}</h4>
   {{if not (eq $link "")}}
   </a>
   {{else}}
