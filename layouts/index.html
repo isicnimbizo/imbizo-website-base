@@ -50,7 +50,7 @@
           {{ range .item }}
           {{ if gt (len .URL) 5}}
           <li class="m-3" >
-            <a class="btn btn-primary text-white shadow"
+            <a class="btn btn-primary btn-lg text-white shadow"
                style="background-color:{{.color}} !important; border-color:{{.color}} !important;"
                 href="{{.URL | safeURL }}">{{.title}}</a>
           </li>
