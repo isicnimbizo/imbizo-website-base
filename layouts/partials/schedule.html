@@ -56,7 +56,7 @@
                 <!-- loop through tracks -->
                 {{ range site.Data.schedule.tracks }}
                 <!-- compare current track to track in loop -->
-                {{ if eq (.title | urlize) ($track_name | urlize) }}
+                {{ if eq (.name | urlize) ($track_name | urlize) }}
                 <!-- assign -->
                 {{ $track_color = .color }}
                 <!-- /assign -->
