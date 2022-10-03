@@ -16,13 +16,12 @@
   {{/*  all catergories is used to find max_year overall  */}}
   {{ $all_cats := slice}}
   {{/*  merge . mapping such that it has a new property .name that is equal to the key  */}}
-  {{ $merged_people := dict }}
-  {{ range $name, $person_info := . }}
-    {{ $person_info = merge $person_info (dict "name" $name) }}
+  {{ $merged_people := slice }}
+  {{ range $person_info := .people }}
     {{/* Find latest year per person*/}}
     {{ $max_year := index (last 1 (sort $person_info.years)) 0 }}
     {{ $all_cats = $all_cats | append $person_info.years }}
-    {{ $merged_people = merge $merged_people (dict $name (merge $person_info (dict "max_year" $max_year))) }}
+    {{ $merged_people = append $merged_people (slice (merge $person_info (dict "max_year" $max_year))) }}
   {{ end }}
 
   {{/*  select only unique cats  */}}

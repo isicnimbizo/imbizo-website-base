@@ -1,16 +1,15 @@
-{{ $tracks := default site.Data.tracks .tracks }}
+{{ $tracks := default site.Data.tracks.tracks .tracks }}
 {{ $badges := default false .badges }}
 
 {{ $sortby := default "max_year" site.Params.faculty.sortby }}
 {{ $order := default "desc" site.Params.faculty.order }}
 
 {{/*  merge . mapping such that it has a new property .name that is equal to the key  */}}
-{{ $merged_people := dict }}
-{{ range $name, $person_info := . }}
-  {{ $person_info = merge $person_info (dict "name" $name) }}
+{{ $merged_people := slice }}
+{{ range $person_info := .people }}
   {{/* Find latest year per person*/}}
   {{ $max_year := index (last 1 (sort $person_info.years)) 0 }}
-  {{ $merged_people = merge $merged_people (dict $name (merge $person_info (dict "max_year" $max_year))) }}
+  {{ $merged_people = append $merged_people (slice (merge $person_info (dict "max_year" $max_year))) }}
 {{ end }}
 
 {{ range $info := (sort $merged_people $sortby $order)  }}

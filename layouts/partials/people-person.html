@@ -3,7 +3,7 @@
 {{/*  allowed params  */}}
 {{$name := default $context.name .name}}
 
-{{ $tracks := default site.Data.tracks .tracks}}
+{{ $tracks := default site.Data.tracks.tracks .tracks}}
 
 {{ $badges := default false site.Params.faculty.badges }}
 {{ $badges = default $badges .badges }}
@@ -72,8 +72,8 @@
     <div class="faculty-badges mt-1 position-relative">
         {{ range $year := .years | sort}} 
           {{ $color := "#000000" }} 
-          {{ range $title, $props := $tracks }}
-            {{ if eq $year $title }}{{ $color = $props.color }}{{ end }}
+          {{ range $track := $tracks }}
+            {{ if eq $year $track.name }}{{ $color = $track.color }}{{ end }}
           {{ end }}      
           {{ $class := "rounded" }} 
           {{ if $badges }} 

@@ -2,7 +2,7 @@
 
 {{ partial "page-title.html" . }}
 
-{{ $tracks := default site.Data.tracks site.Data.faculty.tracks }}
+{{ $tracks := default site.Data.tracks.tracks site.Data.faculty.tracks }}
 
 <!-- portfolio -->
 <section class="section">
@@ -17,7 +17,7 @@
           <label class="btn btn-sm btn-primary" for="all">All</label>
           </label>
           {{ $years := slice }}
-          {{ range site.Data.faculty }}
+          {{ range site.Data.faculty.people }}
             {{ range .years }}
               {{ $years = $years | append . }}
             {{ end }}
@@ -31,9 +31,9 @@
           <!-- match the year to the tracks in the data file and get color value -->
             {{ $color := "" }}
             
-            {{ range $title, $props := $tracks }}
-              {{ if eq $year $title }}{{ $color = $props.color }}{{ end }}
-            {{ end }}
+            {{ range $track := $tracks }}
+              {{ if eq $year $track.name }}{{ $color = $track.color }}{{ end }}
+            {{ end }} 
             <input type="radio" class="btn-check" name="shuffle-filter" id="{{.}}" value="{{ . | urlize }}" />
             <label class="btn btn-sm btn-primary" id="{{. | urlize}}" for="{{.}}"
                   style="background-color: {{ $color }} !important; border-color: {{ $color }};">
