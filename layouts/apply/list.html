@@ -3,12 +3,14 @@
 {{ partial "page-title.html" . }}
 
 
-{{ if (gt (len .Data.Pages) 0) }}
+{{ if (gt (len .Pages) 0) }}
 <section class="section bg-secondary">
   <div class="container-fluid">
     <div class="row align-items-start">
-      {{ range .Data.Pages }}
-        {{ .Render "post" }}
+      {{ range .Pages}}
+        {{if not (eq .Type "hidden")}}
+          {{ .Render "post" }}
+        {{ end }}
       {{ end }}
     </div>
   </div>
