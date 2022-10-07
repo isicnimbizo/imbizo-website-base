@@ -167,13 +167,7 @@
               </div>
             </div>
           </div>
-          {{/* Old version */}} {{/*
-          <p class="mb-5 text-muted">
-            {{ dateFormat "Jan 02, 2006"
-            site.Data.homepage.dates.school_start_date }} -
-            {{ dateFormat "Jan 02, 2006" site.Data.homepage.dates.school_end_date }}
-          </p>
-          */}} {{end}}
+          {{end}}
           <div class="col-md-8 col-sm-12 mb-5">
             <div class="project-meta">
               <i class="ti-info"></i>
@@ -194,12 +188,12 @@
           <div class="card shadow h-100" data-color="{{.color}}">
             <div class="position-relative rounded-top progress-wrapper" data-color="{{.color}}">
               <h4 class="position-absolute card-title text-center px-3 pt-3" style="z-index: 11; width: 100%;">
-                {{.title }}
+                {{.title | safeHTML}}
               </h4>
               <div class="wave" data-progress="{{.height}}"></div>
             </div>
             <div class="card-footer text-white text-left font-weight-light pb-3" data-color="{{.color}}">
-              {{.content}}
+              {{.content | safeHTML}}
             </div>
           </div>
         </div>

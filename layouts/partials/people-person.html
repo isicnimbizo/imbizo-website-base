@@ -33,15 +33,11 @@
   id="{{$name | urlize}}"
   data-groups='[{{range $index, $element:= .years }}{{if ne $index 0}},{{end}}"{{. | urlize}}"{{ end }}]'
 > 
-  {{if not (eq $link "")}}
+  
    <a href="{{$link}}"
-  {{else}}
-   <div
-    {{end}}
-
-    {{with .modal}}  
+    {{if .modal}}
       data-bs-toggle="modal"
-      data-bs-target="{{$link}}-modal"
+      data-bs-target="#{{$name | urlize}}-modal"
       title="click to open modal for more information"
     {{end}}
     class="pt-1 ms-0 center text-center"
@@ -58,11 +54,8 @@
     </div>
     {{ end }}
     <h4 class="m-0 px-2">{{ $name }}</h4>
-  {{if not (eq $link "")}}
   </a>
-  {{else}}
-  </div>
-  {{ end }}
+  
   <div class="faculty-extra">
     <p class="my-0 p-0 text-light text-compressed">{{.affiliation}}</p>
     {{ if .topic }}
@@ -99,21 +92,20 @@
   </div>
 </div>
 
-{{with .modal}} 
+{{with .modal}}
 <!-- Modal -->
 <div class="modal fade" id="{{$name | urlize}}-modal" tabindex="-1" aria-labelledby="{{$name}}" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header"> 
-        <h5 class="modal-title" id="exampleModalLabel">{{$name}}</h5>
+        <h5 class="modal-title">{{default $name .title}}</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
+        {{.content | markdownify }}
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
