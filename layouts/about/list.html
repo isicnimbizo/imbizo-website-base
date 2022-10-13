@@ -20,7 +20,7 @@
             src="{{if .Params.thumbnail}}{{.Params.thumbnail | relURL}}{{ else }}{{.Params.Image | relURL}}{{ end }}"
             alt="{{.Title }}">
             <div class="card-img-overlay d-flex flex-column justify-content-center align-items-center">
-            <h2 class="card-title text-center"><a class="btn btn-primary " href={{if .Params.link}}"{{.Params.link | relURL}}" target="_blank" {{ else }}
+            <h2 class="card-title text-center"><a class="btn btn-primary btn-lg py-3 px-5" href={{if .Params.link}}"{{.Params.link | relURL}}" target="_blank" {{ else }}
               "{{.Permalink}}"{{ end }}>{{.Title }}</a></h2>
             {{ if .Params.published_in}}
             <h5 class="text-muted">{{.Params.published_in}}</h5>

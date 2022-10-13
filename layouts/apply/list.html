@@ -3,7 +3,7 @@
 {{ partial "page-title.html" . }}
 
 
-{{ if (gt (len .Pages) 0) }}
+{{ if (gt (len (where .Pages "Type" "!=" "hidden") ) 0) }}
 <section class="section bg-secondary">
   <div class="container-fluid">
     <div class="row align-items-start">
@@ -50,8 +50,8 @@
       </div>
       <div class="col-12">
         <div class="project-meta">
-          <i class="ti-info"></i>
-          <div class="ms-3">
+          <i class="ti-info col-2"></i>
+          <div class="col-10">
             <p class="text-muted font-weight-light">
               {{ .content | markdownify}}
             </p>

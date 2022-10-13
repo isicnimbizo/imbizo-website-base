@@ -5,7 +5,7 @@
 {{ $show_all := default false site.Data.homepage.faculty.show_all}}
 {{ $show_all = default $show_all .show_all }}
 {{ $slider := default true site.Data.homepage.faculty.slider}}
-{{ $slider = default $slider .show_all }}
+{{ $slider = or $slider .show_all }}
 
 {{ $sortby := default "max_year" site.Params.faculty.sortby }}
 {{ $order := default "desc" site.Params.faculty.order }}
@@ -30,7 +30,7 @@
 
   <!--  determine if to use a slider -->
   {{ $faculty_slider_disable := "" }}
-  {{ if (or (not $slider) (lt (len .) 12))}}
+  {{ if (or (not $slider) (lt (len (where $merged_people "max_year" "in" $select_years)) 6))}}
     {{$faculty_slider_disable = "-disable flex-wrap"}}
   {{ end }}
   <!-- /end slider determination-->

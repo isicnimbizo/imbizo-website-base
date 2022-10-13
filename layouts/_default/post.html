@@ -22,19 +22,31 @@
               </a>
             </h4>
       </div>
+      
       {{/*  <h4 class="card-title">{{.Params.title }}</h4>  */}}
-      {{ if .Params.designation}}
-      <p class="text-light font-secondary">{{.Params.designation }}</p>
+      {{ if or .Params.author .Params.published_in}}
+      <div class="d-flex flex-column justify-content-start align-items-start">
+        {{ if .Params.author}}
+        <p class="card-text text-light m-0 font-secondary small d-flex justify-content-between align-items-baseline"><i class="ti-id-badge"></i>&nbsp;<small> {{.Params.author }}</small></p>
+        {{ end }}
+        {{ if .Params.published_in}}
+        <p class="card-text text-light m-0 font-secondary small d-flex justify-content-around align-items-baseline"><i class="ti-book"></i>&nbsp;<small>{{.Params.published_in }}</small></p>
+        {{ end }}
+      </div>
       {{ end }}
       {{ if .Summary}}
         <p class="card-text">{{.Summary}}</p>
       {{ end }}
-      <p class="card-text" style="text-align: end;">
+    </div>
+    <div class="card-footer">
+      <p class="card-text d-flex flex-row flex-wrap justify-content-between align-items-center">
+          <i class="d-inline-block ti-calendar small"> <small class="text-muted font-primary">{{.Date.Format "2006-01-02"}}</small></i> 
         <a href={{if .Params.link}}"{{.Params.link | relURL}}" target="_blank" {{ else }}"{{.Permalink}}"{{ end }}
-            class="btn-sm btn-outline-secondary"
+            class="d-inline-block btn-sm btn-outline-success"
             title="go to '{{.Title }}' page">
-            {{if .Params.link_text}}{{.Params.link_text}}&nbsp;{{ else }}{{ end }}
-            <i class="ti-arrow-right"></i>
+            {{if .Params.link_text}}{{.Params.link_text}}&nbsp;{{ else }}read more {{ end }}
+            {{if .Params.link}}<i class="ti-new-window"></i>{{ else }}<i class="ti-arrow-right"></i>{{ end }}
+            
         </a>
       </p>
     </div>

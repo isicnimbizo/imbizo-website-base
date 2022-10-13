@@ -558,6 +558,10 @@ textarea.form-control {
   border: 0;
 }
 
+.card-text, .card-text * {
+  text-align: left !important;
+}
+
 .card-footer {
   border: 0;
 }
