@@ -18,7 +18,7 @@
           {{ end }} 
         {{ end }} 
         {{ range ( $tiers | uniq ) }}
-          <input type="radio" class="btn-check" name="shuffle-filter" id="{{.}}" value="{{ . | urlize }}" />
+          <input type="radio" class="btn-check" name="shuffle-filter" id="{{.}}" value="{{ . | anchorize }}" />
           <label class="btn btn-sm btn-primary" for="{{.}}">{{ . }}</label>
         {{ end }}
       </div>
@@ -31,17 +31,17 @@
         {{ $filtered := where .item "current" (not false)}}
         {{ if $filtered}}
         <div class="col-lg-3 col-sm-12 col-6 mb-4 shuffle-item" 
-            data-groups="[&quot;{{$tier | urlize}}&quot;]">
+            data-groups="[&quot;{{$tier | anchorize}}&quot;]">
             {{/*  include a dummy div that sets the size of the blocks  */}}
         </div>
         <div class="col-12 shuffle-item"
-            data-groups="[&quot;{{$tier | urlize}}&quot;]">
+            data-groups="[&quot;{{$tier | anchorize}}&quot;]">
             <h2 class="text-dark">{{.tier | markdownify}}</h2>
         </div>
           {{range $filtered}}
             <div
               class="col-lg-3 col-sm-12 col-6 mb-4 shuffle-item"
-              data-groups="[&quot;{{$tier | urlize}}&quot;]" 
+              data-groups="[&quot;{{$tier | anchorize}}&quot;]" 
             >
               <a
                 href="{{.link}}"
@@ -69,7 +69,7 @@
             </div>
           {{ end }} {{/*  end range item  */}}
           <div class="col-12 shuffle-item text-center" id="teaching-assistants"
-            data-groups="[&quot;{{$tier | urlize}}&quot;]">
+            data-groups="[&quot;{{$tier | anchorize}}&quot;]">
             <hr>  
           </div>  
       

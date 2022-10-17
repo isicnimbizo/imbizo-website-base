@@ -32,7 +32,7 @@ small, .text-compressed {
 }
 
 a {
-  color: var(--secondary-color);
+  /* color: var(--secondary-color); */
   transition: color 0.3s ease-out;
 }
 
@@ -1102,17 +1102,16 @@ blockquote > p{
   font-size: 30px;
 }
 .faq-item i {
-  height: 100px;
-  min-width: 100px;
-  width: 100px;
-  line-height: 100px;
+  width: 3.25rem;
+  line-height: 3.25rem;
+  font-size: 1.5rem;
+  padding: 0;
   background-color: var(--primary-color);
   color: #fff;
   border-radius: 50%;
   text-align: center;
   display: block;
   box-shadow: 0 18px 39.1px 6.9px rgba(224, 241, 255, 0.34);
-  font-size: 30px;
 }
 
 .project-meta h4, .faq-item h4 {

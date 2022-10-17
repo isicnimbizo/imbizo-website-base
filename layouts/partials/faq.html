@@ -1,23 +1,28 @@
-<section class="section pt-5" id="faq">
+
+{{$title := default "Frequently asked questions" .title }}
+{{$title_id := default "faq" (.title | anchorize) }}
+
+<section class="section pt-5" id="{{$title_id}}">
   <div class="container-fluid">
     <div class="row">
       <div class="col-12 text-center">
         <h2 class="section-title">
-          {{ with .title}} {{ . | markdownify }} {{ else }} Frequently asked
-          questions {{ end }}
+          {{ $title | markdownify }}
         </h2>
       </div>
       {{$gapsize := (cond (eq .gapsize "") .gapsize 0)}}
       {{ range .item}}
       <div class="col-12">
-        <div class="faq-item mt-{{$gapsize}} row" id="{{.question | urlize}}">
+        <div class="faq-item mt-{{$gapsize}} row" id="{{.question | anchorize}}">
           <i class="col-1 {{if .icon}}{{.icon}}{{else}}ti-help{{end}}"></i>
-          <div class="mx-3 col-md-10 col-12">
+          <div class="col-10">
             <div class="font-weight-bold">
               <h4>{{ .question | markdownify }}</h4>
             </div>
+            </div>
+            <div class="col-12">
             <p class="text-muted font-weight-light">
-              {{ .answer | markdownify}}
+              {{ (.answer | markdownify) | replaceRE "<p>" "<p class=\"text-muted font-weight-light\">" | safeHTML}}
             </p>
           </div>
         </div>

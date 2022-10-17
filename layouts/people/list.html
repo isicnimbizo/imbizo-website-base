@@ -34,8 +34,8 @@
             {{ range $track := $tracks }}
               {{ if eq $year $track.name }}{{ $color = $track.color }}{{ end }}
             {{ end }} 
-            <input type="radio" class="btn-check" name="shuffle-filter" id="{{.}}" value="{{ . | urlize }}" />
-            <label class="btn btn-sm btn-primary" id="{{. | urlize}}" for="{{.}}"
+            <input type="radio" class="btn-check" name="shuffle-filter" id="{{.}}" value="{{ . | anchorize }}" />
+            <label class="btn btn-sm btn-primary" id="{{. | anchorize}}" for="{{.}}"
                   style="background-color: {{ $color }} !important; border-color: {{ $color }};">
             {{ . }}
             </label>
@@ -57,7 +57,7 @@
 
       {{ if site.Data.tutors }}
         <div class="col-12 shuffle-item text-center" id="teaching-assistants"
-          data-groups="[{{range $index, $element:= $years }}{{if ne $index 0}},{{end}}&quot;{{. | urlize}}&quot;{{ end }}]">
+          data-groups="[{{range $index, $element:= $years }}{{if ne $index 0}},{{end}}&quot;{{. | anchorize}}&quot;{{ end }}]">
           <hr>
           <h3 class="section-title mt-5">{{site.Data.tutors.title}}</h3>
         </div>

@@ -20,7 +20,7 @@
 {{ $link := default "" .link}}
 {{ $speaker_link := default "/people" site.Data.homepage.faculty.link}}
 {{ if eq $link ""}}
-{{$link = printf "%s/#%s" $speaker_link $name | urlize}}
+{{$link = printf "%s/#%s" $speaker_link $name | anchorize}}
 {{ end }}
 
 {{ $path := printf "%s" .image}}
@@ -30,14 +30,14 @@
 {{end}}
 <div
   class="{{$col}} mb-4 shuffle-item d-flex center text-center flex-column"
-  id="{{$name | urlize}}"
-  data-groups='[{{range $index, $element:= .years }}{{if ne $index 0}},{{end}}"{{. | urlize}}"{{ end }}]'
+  id="{{$name | anchorize}}"
+  data-groups='[{{range $index, $element:= .years }}{{if ne $index 0}},{{end}}"{{. | anchorize}}"{{ end }}]'
 > 
   
    <a href="{{$link}}"
     {{if .modal}}
       data-bs-toggle="modal"
-      data-bs-target="#{{$name | urlize}}-modal"
+      data-bs-target="#{{$name | anchorize}}-modal"
       title="click to open modal for more information"
     {{end}}
     class="pt-1 ms-0 center text-center"
@@ -94,7 +94,7 @@
 
 {{with .modal}}
 <!-- Modal -->
-<div class="modal fade" id="{{$name | urlize}}-modal" tabindex="-1" aria-labelledby="{{$name}}" aria-hidden="true">
+<div class="modal fade" id="{{$name | anchorize}}-modal" tabindex="-1" aria-labelledby="{{$name}}" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header"> 

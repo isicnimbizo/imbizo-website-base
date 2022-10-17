@@ -6,22 +6,22 @@
 <section class="section">
   <div class="container">
     <div class="row">
-      <div class="col-lg-3 offset-lg-1 mb-5 align-items-center">
+      <div class="col-lg-3 mb-5 align-items-center">
         <img src="{{if .Params.thumbnail}}{{.Params.thumbnail | relURL}}{{ else }}{{.Params.Image | relURL}}{{ end }}"
           class="img-fluid w-100" alt="{{ .Title }}" />
       </div>
-      <div class="col-lg-7 mb-5 mb-lg-0">
+      <div class="offset-lg-1 col-lg-8 mb-5 mb-lg-0">
         <div class="row mx-0">
           <div class="col-sm-6 mb-5">
             <div class="project-meta">
               <i class="ti-calendar"></i>
               <div class="ms-3">
-                <h4>Date</h4>
+                <h4>Dates</h4>
                 <p>{{ .PublishDate.Format "Jan 02, 2006" }}
-                {{if .Params.end_date}}
-                - {{ .Params.end_date.Format "Jan 02, 2006" }}
-                {{ end }}
                 </p>
+                {{if .Params.end_date}}
+                  <p>- {{ .Params.end_date.Format "Jan 02, 2006" }}</p>
+                  {{ end }}
               </div>
             </div>
           </div>
@@ -43,7 +43,13 @@
               <i class="ti-folder"></i>
               <div class="ms-3">
                 <h4>Categories</h4>
-                <p>{{ delimit . ", " }}</p>
+                <p class="d-flex flex-wrap">
+                  {{ range . }}
+                  <p>
+                  <a href="/categories/{{ . | urlize }}" class="badge bg-secondary text-white m-0">{{ . }}</a>
+                  </p>
+                  {{ end }}
+                </p>
               </div>
             </div>
           </div>
@@ -71,17 +77,37 @@
           </div>
           {{ end }}
           {{ if .Params.material_link}}
-          <div class="col-sm-12 mb-5">
-            <div class="project-meta">
-              <i class="ti-link"></i>
-              <div class="ms-3">
-                <h4>
-                <a href="{{.Params.material_link}}" target="_blank"
-                data-bs-toggle="tooltip" data-bs-placement="top"
-                  title="school material for {{.Params.Title}}">Material</a></h4>
-                  <small class="text-muted"><em>access restricted</em></small>
+          <div class="col-sm-6 mb-5">
+            <a href="{{.Params.material_link}}" target="_blank"
+                data-bs-toggle="tooltip" data-bs-placement="bottom"
+                  title="click to access material for {{.Params.Title}}">
+              <div class="project-meta">
+                <i class="ti-link"></i>
+                <div class="ms-3">
+                  <h4 class="">Material</h4>
+                  {{$material_link_end := index ((split .Params.material_link "/") | last 1) 0}}
+                  <p><small class="text-muted"><em>{{.Params.material_link | first 5}}...{{$material_link_end | last 10}}</em></small></p>
+                  <small class="text-muted"><em>restricted</em></small>
+                </div>
               </div>
-            </div>
+            </a>
+          </div>
+          {{ end }}
+          {{ if .Params.schedule_link}}
+          <div class="col-sm-6 mb-5">
+            <a href="{{.Params.schedule_link}}" target="_blank"
+                data-bs-toggle="tooltip" data-bs-placement="bottom"
+                  title="click to access schedule for {{.Params.Title}}">
+              <div class="project-meta">
+                <i class="ti-menu-alt"></i>
+                <div class="ms-3">
+                  <h4 class="">Schedule</h4>
+                  {{$schedule_link_end := index ((split .Params.schedule_link "/") | last 1) 0}}
+                  <p><small class="text-muted"><em>{{.Params.schedule_link | first 5}}...{{$schedule_link_end | last 10}}</em></small></p>
+                  <small class="text-muted"><em>public</em></small>
+                </div>
+              </div>
+            </a>
           </div>
           {{ end }}
         </div>

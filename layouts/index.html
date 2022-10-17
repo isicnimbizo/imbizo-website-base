@@ -249,8 +249,8 @@
           <h2 class="section-title mb-0">{{site.Data.schedule.title}}</h2>
           {{if site.Data.homepage.schedule.link}}
             <a href="{{site.Data.homepage.schedule.link}}">{{site.Data.homepage.schedule.link_text}}
-              {{$link_icon := default "arrow-top-right" site.Data.homepage.schedule.link_icon}}
-              <i class="ti-{{$link_icon}}"></i></a>
+              {{$link_icon := default "ti-arrow-top-right" site.Data.homepage.schedule.link_icon}}
+              <i class="{{$link_icon}}"></i></a>
           {{end}}
       </div>
       
@@ -340,7 +340,11 @@
           <img class="img-fluid d-inline-block rounded" src="{{.image | relURL }}" title="{{.name | markdownify}}" alt="photo of {{.name | markdownify}}"/>
         </a>
           <p class="mb-0">{{.position | markdownify}}</p>
-          <h4><a href="{{.link}}" target="_blank">{{.name | markdownify}}</a></h4>
+          {{if .link}}<a href="{{.link}}" target="_blank">{{end}}
+            <h4>
+              {{.name | markdownify}}
+            </h4>
+          {{if .link}}</a>{{end}}
           <h6 class="text-light">{{.affiliation | markdownify}}</h6>
         </a>
       </div>

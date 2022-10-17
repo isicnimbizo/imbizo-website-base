@@ -30,7 +30,7 @@
 
   <!--  determine if to use a slider -->
   {{ $faculty_slider_disable := "" }}
-  {{ if (or (not $slider) (lt (len (where $merged_people "max_year" "in" $select_years)) 6))}}
+  {{ if (or (not $slider) (lt (len (where $merged_people "max_year" "in" $select_years)) 12))}}
     {{$faculty_slider_disable = "-disable flex-wrap"}}
   {{ end }}
   <!-- /end slider determination-->

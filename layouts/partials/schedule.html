@@ -1,7 +1,7 @@
 {{/* allowed params passed as (dict collapsed true) */}} {{ $collapsed :=
 default false .collapsed}} {{/* template */}} {{with site.Data.schedule}}
 <div class="schedule-tab accordion">
-  {{ range .days }} {{ $day_id := .title | urlize}}
+  {{ range .days }} {{ $day_id := .title | anchorize}}
   <div class="accordion-item">
     <h2 class="accordion-header font-tertiary" id="{{$day_id}}-heading">
       <button
@@ -53,7 +53,7 @@ default false .collapsed}} {{/* template */}} {{with site.Data.schedule}}
                 <!-- loop through tracks -->
                 {{ range site.Data.schedule.tracks }}
                 <!-- compare current track to track in loop -->
-                {{ if eq (.name | urlize) ($track_name | urlize) }}
+                {{ if eq (.name | anchorize) ($track_name | anchorize) }}
                 <!-- assign -->
                 {{ $track_color = .color }}
                 <!-- /assign -->
@@ -127,9 +127,9 @@ default false .collapsed}} {{/* template */}} {{with site.Data.schedule}}
                 <div class="p-0 schedule-slot-desc col-lg-1 col-2 d-flex flex-column">
                   {{if .modal}}
                   <a
-                    href="#{{.name | urlize}}-modal"
+                    href="#{{.name | anchorize}}-modal"
                     data-bs-toggle="modal"
-                    data-bs-target="#{{.name | urlize}}-modal"
+                    data-bs-target="#{{.name | anchorize}}-modal"
                     title="click to open modal for more information"
                   >
                     <i class="ti-layout-media-left-alt"></i>
