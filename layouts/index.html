@@ -313,9 +313,11 @@
         </h2>
         <a href="news">read more<i class="ti-arrow-top-right"></i></a>
       </div>
+      <div class="row row-cols-1 row-cols-lg-2 row-cols-xxl-3 align-items-start">
       {{ range first 3 (where .Site.RegularPages "Section" "news")}}
       {{ .Render "post" }}
       {{ end }}
+      </div>
 
     </div>
   </div>
