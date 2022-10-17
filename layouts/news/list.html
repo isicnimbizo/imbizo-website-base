@@ -4,10 +4,10 @@
 
   <!-- news -->
   <section class="section">
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-12 col-md-9">
-          <div class="row align-items-start">
+        <div class="col-sm-12 col-md-8">
+          <div class="row row-cols-1 row-cols-lg-2 row-cols-xxl-3 align-items-start">
             {{ range .Data.Pages }}
             {{ .Render "post" }}
             {{ end }}
@@ -15,7 +15,7 @@
         </div>
         {{ range site.Params.social }}
         {{ if in .URL "twitter" }}
-        <div class="col-sm-12 col-md-3">
+        <div class="col-sm-12 col-md-4">
           <a class="twitter-timeline" href="{{.embed_url}}">Tweets</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         </div>
         {{ end }}

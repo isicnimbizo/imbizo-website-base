@@ -1,4 +1,4 @@
-<div class="col-lg-4 col-sm-6 mb-4 mb-4">
+<div class="col mb-4 mb-4">
   <article class="position-relative h-100 card shadow text-center rounded position-relative hover-wrapper">
       <a class="card-img-top d-flex position-relative"
           href={{if .Params.link}}"{{.Params.link | relURL}}" 
@@ -15,7 +15,7 @@
       <div style="margin-top: -2.5em;">
           <h4 style="top: inherit; transform: inherit;">
             {{/*  <p class="card-text text-white">{{.Summary}}</p>  */}}
-            <a class="btn btn-secondary btn shadow" 
+            <a class="btn btn-success btn shadow" 
               href={{if .Params.link}}"{{.Params.link | relURL}}" target="_blank" 
               {{ else }}  "{{.Permalink}}"{{ end }}>
                 {{.Title }}
