@@ -9,11 +9,11 @@
           <img class="img-fluid d-inline-block rounded" src="{{.image | relURL }}" title="{{.title | markdownify}}" alt="photo of {{.name | markdownify}}"/>
         {{if .link}}</a>{{end}}
           <p class="mb-0">{{.position | markdownify}}</p>
+          <h4>
           {{if .link}}<a href="{{.link}}" target="_blank">{{end}}
-            <h4>
-              {{.name | markdownify}}
-            </h4>
+          {{.name | markdownify}}
           {{if .link}}</a>{{end}}
+          </h4>
           <h6 class="text-light">{{.affiliation | markdownify}}</h6>
       </div>
       {{ end }}
