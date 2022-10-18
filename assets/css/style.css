@@ -297,6 +297,12 @@ a.text-white.btn-primary:hover {
   */
   color: #fff !important;
 }
+div[class^='btn-outline-'].btn > a, div[class*=' btn-outline-'].btn > a{
+  /* color: #000; */
+  color: unset;
+  transition: color 0.1s ease-in-out;
+}
+
 a:hover, a:hover *:not(i) {
   color: var(--primary-color);
 }
