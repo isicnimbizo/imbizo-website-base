@@ -6,7 +6,7 @@
 {{ if (gt (len (where .Pages "Type" "!=" "hidden") ) 0) }}
 <section class="section bg-secondary">
   <div class="container-fluid">
-    <div class="row align-items-start">
+    <div class="row align-items-stretch">
       {{ range .Pages}}
         {{if not (eq .Type "hidden")}}
           {{ .Render "post" }}
