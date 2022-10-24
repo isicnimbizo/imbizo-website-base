@@ -35,7 +35,7 @@
   {{ end }}
   <!-- /end slider determination-->
   
-  <div class="faculty-logo-slider{{$faculty_slider_disable}} d-flex align-items-center justify-content-center">
+  <div class="faculty-logo-slider{{$faculty_slider_disable}} d-flex align-items-center justify-content-center row gx-5 ">
     {{ range $info := sort $merged_people $sortby $order  }}
       {{ $is_current := (or $show_all (intersect $select_years $info.years) )}}
       {{ if $is_current}}

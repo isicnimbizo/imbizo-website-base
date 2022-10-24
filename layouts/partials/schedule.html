@@ -1,5 +1,6 @@
-{{/* allowed params passed as (dict collapsed true) */}} {{ $collapsed :=
-default false .collapsed}} {{/* template */}} {{with site.Data.schedule}}
+{{/* allowed params passed as (dict collapsed true) */}} 
+{{ $collapsed := default false .collapsed}} {{/* template */}} 
+{{with site.Data.schedule}}
 <div class="schedule-tab accordion">
   {{ range .days }} {{ $day_id := .title | anchorize}}
   <div class="accordion-item">
@@ -17,8 +18,8 @@ default false .collapsed}} {{/* template */}} {{with site.Data.schedule}}
         </div>
         <div class="col-md-2 col-xs-12">
           <h5 class="font-tertiary">
-            <i class="ti-calendar"></i>&nbsp; {{/* date */}} {{.date |
-            dateFormat "Mon 02 Jan 2006"}}
+            <i class="ti-calendar"></i>&nbsp; {{/* date */}} 
+            {{.date | dateFormat "Mon 02 Jan 2006"}}
           </h5>
         </div>
       </button>
@@ -118,14 +119,48 @@ default false .collapsed}} {{/* template */}} {{with site.Data.schedule}}
               <div
                 class="schedule-slot-info-content row justify-content-start align-items-start"
               >
-                {{partial "people-person" (dict "context" . "show_track" false
-                "col" "col-lg-3 col-12 gx-0") }}
+
+                {{/*  merge values from faculty  */}}
+                {{/* find topic in faculty  */}}
+                {{/*  keep name in scope for comparison  */}}
+                {{$name := .name}}
+                {{$context := .}}
+                {{/*  loop faculty  */}}
+                {{ range site.Data.faculty.people }}
+                  {{/*  compare  */}}
+                  {{ if eq .name $name }}
+                    {{/*  assign  */}}
+                    {{ $context = merge $context . }}
+                    {{/*  /assign  */}}
+                  {{ end }}
+                {{end}}
+                {{/*  /loop faculty  */}}
+                {{/*  /find topic in faculty  */}}
+                {{/*  /merge values from faculty  */}}
+                {{partial "people-person" (dict "context" $context "show_extra" false 
+                                          "show_track" false "col" "col-lg-3 col-12 gx-0") }}
+
+                {{ $title := default "" .title }}
+                
+                {{if eq $title ""}}
+                  {{$title = $context.topic}}
+                {{end}}
 
                 <div class="pt-1 schedule-slot-desc col-lg-8 col-10">
-                  <h5 class="font-primary">{{.title}}</h5>
+                  <h5 class="font-primary">
+                    {{if eq $context.link "modal"}}
+                      <a
+                        data-bs-toggle="modal"
+                        data-bs-target="#{{$name | anchorize}}-modal"
+                        title="click to open modal for more information"
+                      > 
+                    {{end}}  
+                    {{$title}}
+                    {{if eq $context.link "modal"}}</a>{{end}}
+                  </h5>
                 </div>
                 <div class="p-0 schedule-slot-desc col-lg-1 col-2 d-flex flex-column">
-                  {{if .modal}}
+                  {{if $context.talk_description}}
                   <a
                     href="#{{.name | anchorize}}-modal"
                     data-bs-toggle="modal"

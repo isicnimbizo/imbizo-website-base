@@ -11,7 +11,9 @@
 {{ $show_track := default false site.Data.homepage.faculty.show_track}}
 {{ $show_track = default $show_track .show_track}}
 
-{{ $col := default "col-lg-3 col-sm-6 col-md-4" .col }}
+{{ $show_extra := default true .show_extra}}
+
+{{ $col := default "col-lg-3 col-sm-6 col-md-4 mb-4" .col }}
 
 {{/*  template  */}}
 
@@ -20,7 +22,7 @@
 {{ $link := default "" .link}}
 {{ $speaker_link := default "/people" site.Data.homepage.faculty.link}}
 {{ if eq $link ""}}
-{{$link = printf "%s/#%s" $speaker_link $name | anchorize}}
+{{$link = printf "%s/#%s" $speaker_link $name | urlize}}
 {{ end }}
 
 {{ $path := printf "%s" .image}}
@@ -29,23 +31,25 @@
     {{ $path = printf "images/people/%s.jpg" $last_name}}
 {{end}}
 <div
-  class="{{$col}} mb-4 shuffle-item d-flex center text-center flex-column"
+  class="{{$col}} shuffle-item d-flex center text-center flex-column"
   id="{{$name | anchorize}}"
   data-groups='[{{range $index, $element:= .years }}{{if ne $index 0}},{{end}}"{{. | anchorize}}"{{ end }}]'
 > 
   
-   <a href="{{$link}}"
-    {{if .modal}}
+   <a
+    {{if eq $link "modal"}}
       data-bs-toggle="modal"
       data-bs-target="#{{$name | anchorize}}-modal"
       title="click to open modal for more information"
+    {{else}}
+    href="{{$link}}"
     {{end}}
     class="pt-1 ms-0 center text-center"
     {{ if not (in $link "#") }}target="_blank"{{end}}
     class="d-flex"
   > 
     {{if gt (len (index (last 1 (split $path "/")) 0)) 5}}
-    <div class="circletag">
+    <div class="person-img rounded mw-120">
       <img
         src="{{ $path | absURL }}"
         alt="{{$name}}"
@@ -57,11 +61,13 @@
   </a>
   
   <div class="faculty-extra">
-    <p class="my-0 p-0 text-light text-compressed">{{.affiliation}}</p>
-    {{ if .topic }}
-    <p class="m-0 p-0 text-muted text-compressed">
-      <small>{{ .topic }}</small>
-    </p>
+    {{if $show_extra}}
+      <p class="my-0 p-0 text-light text-compressed">{{.affiliation}}</p>
+      {{ if .topic }}
+      <p class="m-0 p-0 text-muted text-compressed">
+        <small>{{ .topic }}</small>
+      </p>
+    {{ end }}
     {{ end }}
     {{ if $show_track}}
     <div class="faculty-badges mt-1 position-relative">
@@ -92,25 +98,47 @@
   </div>
 </div>
 
-{{with .modal}}
 <!-- Modal -->
 <div class="modal fade" id="{{$name | anchorize}}-modal" tabindex="-1" aria-labelledby="{{$name}}" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header"> 
-        <h5 class="modal-title">{{default $name .title}}</h5>
+        <h5 class="modal-title">{{$name}}{{if .topic}} - <strong>{{.topic}}</strong>{{end}}</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        {{.content | markdownify }}
+        {{if .talk_description}}
+        <h5 class="font-primary">Talk description</h5>
+        {{.talk_description | markdownify }}
+        {{end}}
+        {{if .bio}}
+        <hr>
+        <h5 class="font-primary">Speaker bio</h5>
+        {{.bio | markdownify }}
+        {{end}}
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        {{/*  add social media  */}}
+        {{ if .social_media }}
+          find {{ $name }} on
+          {{ range .social_media }}
+            {{$icon := default (add "ti-" (lower .title)) .icon}}
+            {{if eq $icon "ti-twitter"}}
+              {{$icon = "ti-twitter-alt"}}
+            {{else if eq $icon "ti-website"}}
+              {{$icon = "fa-solid fa-globe"}}
+            {{end}}
+            <a href="{{ .link }}" title="{{.title}}" target="_blank" class="btn btn-sm btn-outline-primary">
+              <i class="{{ $icon }}"></i>
+            </a>
+          {{ end }}
+        {{ end }}
+
+        <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
       </div>
     </div>
   </div>
 </div>
-{{ end }}
 {{/*  end context  */}}
 {{ end }}
 
