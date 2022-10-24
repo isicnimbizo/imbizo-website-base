@@ -121,7 +121,7 @@
         {{/*  add social media  */}}
         {{ if .social_media }}
           find {{ $name }} on
-          {{ range .social_media }}
+          {{ range sort .social_media "title" "asc"}}
             {{$icon := default (add "ti-" (lower .title)) .icon}}
             {{if eq $icon "ti-twitter"}}
               {{$icon = "ti-twitter-alt"}}
