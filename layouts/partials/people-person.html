@@ -100,9 +100,9 @@
 
 <!-- Modal -->
 <div class="modal fade" id="{{$name | anchorize}}-modal" tabindex="-1" aria-labelledby="{{$name}}" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
     <div class="modal-content">
-      <div class="modal-header"> 
+      <div class="modal-header bg-light"> 
         <h5 class="modal-title">{{$name}}{{if .topic}} - <strong>{{.topic}}</strong>{{end}}</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
@@ -117,7 +117,7 @@
         {{.bio | markdownify }}
         {{end}}
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer bg-light">
         {{/*  add social media  */}}
         {{ if .social_media }}
           find {{ $name }} on
