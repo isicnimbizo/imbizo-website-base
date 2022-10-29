@@ -55,9 +55,18 @@
         alt="{{$name}}"
         class="img-fluid w-100 d-block"
       />
+      {{if eq $link "modal"}}
+      <span class="position-absolute top-0 end-0 badge rounded-circle">
+        <i class="fas fa-info-circle shadow"></i>
+        <span class="visually-hidden">open modal</span>
+      </span>
+    {{end}}
     </div>
     {{ end }}
-    <h4 class="m-0 px-2">{{ $name }}</h4>
+    
+    <h4 class="m-0 px-2 position-relative d-block">{{ $name }}
+      
+    </h4>
   </a>
   
   <div class="faculty-extra">
@@ -99,6 +108,7 @@
 </div>
 
 <!-- Modal -->
+{{if eq $link "modal"}}
 <div class="modal fade" id="{{$name | anchorize}}-modal" tabindex="-1" aria-labelledby="{{$name}}" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
     <div class="modal-content">
@@ -139,6 +149,7 @@
     </div>
   </div>
 </div>
+{{ end }}
 {{/*  end context  */}}
 {{ end }}
 
