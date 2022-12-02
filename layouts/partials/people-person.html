@@ -14,6 +14,9 @@
 {{ $show_extra := default true .show_extra}}
 
 {{ $col := default "col-lg-3 col-sm-6 col-md-4 mb-4" .col }}
+{{ $width := default "w-10" .width}}
+{{ $disable_modal := default false .disable_modal}} 
+
 
 {{/*  template  */}}
 
@@ -21,7 +24,7 @@
 {{/*  get or create link  */}}
 {{ $link := default "" .link}}
 {{ $speaker_link := default "/people" site.Data.homepage.faculty.link}}
-{{ if eq $link ""}}
+{{ if or (eq $link "") (eq $disable_modal true)}}
 {{$link = printf "%s/#%s" $speaker_link $name | urlize}}
 {{ end }}
 
@@ -49,12 +52,12 @@
     class="d-flex"
   > 
     {{if gt (len (index (last 1 (split $path "/")) 0)) 5}}
-    <div class="person-img rounded mw-120">
-      <img
+    <div class="person-img rounded {{$width}}" data-background="{{ $path | absURL }}">
+      {{/*  <img
         src="{{ $path | absURL }}"
         alt="{{$name}}"
         class="img-fluid w-100 d-block"
-      />
+      />  */}}
       {{if eq $link "modal"}}
       <span class="position-absolute top-0 end-0 badge rounded-circle">
         <i class="fas fa-info-circle shadow"></i>
@@ -108,7 +111,7 @@
 </div>
 
 <!-- Modal -->
-{{if eq $link "modal"}}
+{{if and (eq $link "modal") (eq $disable_modal false)}}
 <div class="modal fade" id="{{$name | anchorize}}-modal" tabindex="-1" aria-labelledby="{{$name}}" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
     <div class="modal-content">

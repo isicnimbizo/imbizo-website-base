@@ -35,11 +35,11 @@
   {{ end }}
   <!-- /end slider determination-->
   
-  <div class="faculty-logo-slider{{$faculty_slider_disable}} d-flex align-items-center justify-content-center row gx-5 ">
+  <div class="faculty-logo-slider{{$faculty_slider_disable}} d-flex align-items-center justify-content-center">
     {{ range $info := sort $merged_people $sortby $order  }}
       {{ $is_current := (or $show_all (intersect $select_years $info.years) )}}
       {{ if $is_current}}
-          {{partial "people-person" (dict "context" $info)}}
+          {{partial "people-person" (dict "context" $info "disable_modal" true)}}
       {{ end }}
     {{ end }}
   </div>

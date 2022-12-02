@@ -13,5 +13,5 @@
 {{ end }}
 
 {{ range $info := (sort $merged_people $sortby $order)  }}
-    {{partial "people-person" (dict "context" $info "tracks" $tracks "badges" $badges)}}
+    {{partial "people-person" (dict "context" $info "tracks" $tracks "badges" $badges "width" "w-10")}}
 {{ end }}
