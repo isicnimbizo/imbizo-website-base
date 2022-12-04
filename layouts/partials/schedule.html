@@ -117,29 +117,42 @@
               <!-- /heading-->
               {{range .sessions}}
               <div
-                class="schedule-slot-info-content row justify-content-start align-items-start"
+                class="schedule-slot-info-content row justify-content-center align-items-start"
               >
-
-                {{/*  merge values from faculty  */}}
-                {{/* find topic in faculty  */}}
-                {{/*  keep name in scope for comparison  */}}
-                {{$name := .name}}
+                {{$panel := default (slice .) .panel}}
+                {{$isPanel := (gt (len $panel) 1)}}
+                {{$col := "col-lg-3 col-12 gx-0"}}
+                {{ if $isPanel }}
+                  {{$col = "col-2 gx-0"}}
+                {{ end }}
                 {{$context := .}}
-                {{/*  loop faculty  */}}
-                {{ range site.Data.faculty.people }}
-                  {{/*  compare  */}}
-                  {{ if eq .name $name }}
-                    {{/*  assign  */}}
-                    {{ $context = merge $context . }}
-                    {{/*  /assign  */}}
-                  {{ end }}
-                {{end}}
-                {{/*  /loop faculty  */}}
-                {{/*  /find topic in faculty  */}}
-                {{/*  /merge values from faculty  */}}
-                {{partial "people-person" (dict "context" $context "show_extra" false 
-                                          "show_track" false "col" "col-lg-3 col-12 gx-0"
-                                          "width" "w-5") }}
+
+                {{ range $panel }}
+                  {{$context = .}}
+                    {{/*  merge values from faculty  */}}
+                    {{/* find topic in faculty  */}}
+                    {{/*  keep name in scope for comparison  */}}
+                    {{$name := .name}}
+                    {{/*  loop faculty  */}}
+                    {{ range site.Data.faculty.people }}
+                      {{/*  compare  */}}
+                      {{ if eq .name $name }}
+                        {{/*  assign  */}}
+                        {{ $context = merge $context . }}
+                        {{/*  /assign  */}}
+                      {{ end }}
+                    {{end}}
+                  {{/*  /loop faculty  */}}
+                  {{/*  /find topic in faculty  */}}
+                  {{/*  /merge values from faculty  */}}
+                  {{if $isPanel}}
+                    {{/*  change link to emtpy  */}}
+                    {{ $context = merge $context (dict "link" "") }}
+                  {{end}}
+                  {{partial "people-person" (dict "context" $context "show_extra" false 
+                                            "show_track" false "col" $col
+                                            "width" "w-5") }}
+                {{ end }}
 
                 {{ $title := default "" .title }}
                 
@@ -147,12 +160,16 @@
                   {{$title = $context.topic}}
                 {{end}}
 
-                <div class="pt-1 schedule-slot-desc col-lg-8 col-10">
+                {{$talkCol := "col-lg-8 col-10"}}
+                {{ if $isPanel }}
+                  {{$talkCol = "col-12 text-center"}}
+                {{ end }}
+                <div class="pt-1 schedule-slot-desc {{$talkCol}}">
                   <h5 class="font-primary">
                     {{if eq $context.link "modal"}}
                       <a
                         data-bs-toggle="modal"
-                        data-bs-target="#{{$name | anchorize}}-modal"
+                        data-bs-target="#{{.name | anchorize}}-modal"
                         title="click to open modal for more information"
                       > 
                     {{end}}  
@@ -160,22 +177,24 @@
                     {{if eq $context.link "modal"}}</a>{{end}}
                   </h5>
                 </div>
-                <div class="p-0 schedule-slot-desc col-lg-1 col-2 d-flex flex-column">
-                  {{if $context.talk_description}}
-                  <a
-                    href="#{{.name | anchorize}}-modal"
-                    data-bs-toggle="modal"
-                    data-bs-target="#{{.name | anchorize}}-modal"
-                    title="click to open modal for more information"
-                  >
-                    <i class="ti-layout-media-left-alt"></i>
-                  </a>
-                  {{/*  add links and things here  */}}
+                {{if not $isPanel}}
+                  <div class="p-0 schedule-slot-desc col-lg-1 col-2 d-flex flex-column">
+                    {{if $context.talk_description}}
+                    <a
+                      href="#{{.name | anchorize}}-modal"
+                      data-bs-toggle="modal"
+                      data-bs-target="#{{.name | anchorize}}-modal"
+                      title="click to open modal for more information"
+                    >
+                      <i class="ti-layout-media-left-alt"></i>
+                    </a>
+                    {{/*  add links and things here  */}}
+                    {{end}}
+                  </div>
                   {{end}}
                 </div>
-              </div>
-
               {{end}}
+
             </div>
             <!-- Slot info end -->
             {{ end }}

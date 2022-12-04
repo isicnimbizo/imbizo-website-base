@@ -92,7 +92,7 @@ h4,
 
 h5,
 .h5 {
-  font-size: 18px;
+  font-size: 1.0rem;
 }
 
 h6,
@@ -604,7 +604,7 @@ textarea.form-control {
 
 .navigation.nav-bg {
   background-color: var(--primary-color);
-  padding: 15px 100px;
+  padding: 0px 100px;
 }
 
 .navbar-nav {
@@ -613,14 +613,7 @@ textarea.form-control {
 
 @media (max-width: 991px) {
   .navigation.nav-bg {
-    padding: 15px 20px;
-  }
-}
-
-@media (max-width: 991px) {
-  .navigation {
-    padding: 20px;
-    background: var(--primary-color);
+    padding: 0px 20px;
   }
 }
 

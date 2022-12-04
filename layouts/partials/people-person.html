@@ -32,13 +32,15 @@
 {{ $last_name := lower (index (split $name " ") 1) }}
 {{if not .image}}
     {{ $path = printf "images/people/%s.jpg" $last_name}}
+    {{ if not (fileExists (printf "/static/%s" $path))}}
+        {{ $path = printf "images/people/%s.png" $last_name}}
+    {{ end }}
 {{end}}
 <div
   class="{{$col}} shuffle-item d-flex center text-center flex-column"
   id="{{$name | anchorize}}"
   data-groups='[{{range $index, $element:= .years }}{{if ne $index 0}},{{end}}"{{. | anchorize}}"{{ end }}]'
 > 
-  
    <a
     {{if eq $link "modal"}}
       data-bs-toggle="modal"
@@ -51,8 +53,9 @@
     {{ if not (in $link "#") }}target="_blank"{{end}}
     class="d-flex"
   > 
-    {{if gt (len (index (last 1 (split $path "/")) 0)) 5}}
-    <div class="person-img rounded {{$width}}" data-background="{{ $path | absURL }}">
+    {{if fileExists (printf "/static/%s" $path)}}
+    <div class="person-img rounded {{$width}}" 
+          data-background="{{ $path | absURL }}">
       {{/*  <img
         src="{{ $path | absURL }}"
         alt="{{$name}}"
@@ -67,8 +70,16 @@
     </div>
     {{ end }}
     
-    <h4 class="m-0 px-2 position-relative d-block">{{ $name }}
-      
+    <h4 class="m-0 px-0 position-relative d-block">
+      {{ $name }}
+      {{ if $badges }}
+        {{ if .is_faculty }}
+          <span class="badge rounded-pill bg-primary text-white ms-1">faculty</span>
+        {{ end }}
+        {{ if .is_alumni }}
+          <span class="badge rounded-pill bg-secondary text-white ms-1">alumni</span>
+        {{ end }}
+      {{ end }}
     </h4>
   </a>
   
