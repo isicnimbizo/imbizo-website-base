@@ -3,6 +3,7 @@
 
 {{ $sortby := default "max_year" site.Params.faculty.sortby }}
 {{ $order := default "desc" site.Params.faculty.order }}
+{{ $show_track := default false site.Params.faculty.show_track }}
 
 {{/*  merge . mapping such that it has a new property .name that is equal to the key  */}}
 {{ $merged_people := slice }}
@@ -13,5 +14,5 @@
 {{ end }}
 
 {{ range $info := (sort $merged_people $sortby $order)  }}
-    {{partial "people-person" (dict "context" $info "tracks" $tracks "badges" $badges "width" "w-10")}}
+    {{partial "people-person" (dict "context" $info "tracks" $tracks "show_track" $show_track "badges" $badges "width" "w-10")}}
 {{ end }}

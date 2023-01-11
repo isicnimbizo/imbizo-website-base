@@ -24,7 +24,7 @@
 {{/*  get or create link  */}}
 {{ $link := default "" .link}}
 {{ $speaker_link := default "/people" site.Data.homepage.faculty.link}}
-{{ if or (eq $link "") (eq $disable_modal true)}}
+{{ if or (eq $link "") (and (eq $link "modal") (eq $disable_modal true))}}
 {{$link = printf "%s/#%s" $speaker_link $name | urlize}}
 {{ end }}
 
