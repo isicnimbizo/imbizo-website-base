@@ -35,7 +35,7 @@
               {{ if eq $year $track.name }}{{ $color = $track.color }}{{ end }}
             {{ end }} 
             <input type="radio" class="btn-check" name="shuffle-filter" id="{{.}}" value="{{ . | anchorize }}" />
-            <label class="btn btn-sm btn-primary" id="{{. | anchorize}}" for="{{.}}"
+            <label class="btn btn-sm btn-primary font-primary" id="{{. | anchorize}}" for="{{.}}"
                   style="background-color: {{ $color }} !important; border-color: {{ $color }};">
             {{ . }}
             </label>
