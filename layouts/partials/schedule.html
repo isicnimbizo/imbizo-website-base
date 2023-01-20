@@ -1,6 +1,13 @@
 {{/* allowed params passed as (dict collapsed true) */}} 
-{{ $collapsed := default false .collapsed}} {{/* template */}} 
-{{with site.Data.schedule}}
+{{ $collapsed := default false .collapsed }} {{/* template */}} 
+{{ $schedule_data := default site.Data.schedule .schedule }}
+
+{{ $type := (printf "%T" $schedule_data) }}
+{{ if eq $type "string" }}
+{{ $schedule_data = index site.Data $schedule_data }}
+{{ end }}
+
+{{with $schedule_data}}
 <div class="schedule-tab accordion">
   {{ range .days }} {{ $day_id := .title | anchorize}}
   <div class="accordion-item">
@@ -52,7 +59,7 @@
                 <!-- capture current track to a var for comparison -->
                 {{ $track_name := .track }}
                 <!-- loop through tracks -->
-                {{ range site.Data.schedule.tracks }}
+                {{ range $schedule_data.tracks }}
                 <!-- compare current track to track in loop -->
                 {{ if eq (.name | anchorize) ($track_name | anchorize) }}
                 <!-- assign -->

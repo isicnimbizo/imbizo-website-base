@@ -110,6 +110,17 @@
             </a>
           </div>
           {{ end }}
+          {{ if .Params.album}}
+          <div class="col-sm-6 mb-5">
+            <div class="project-meta">
+              <i class="ti-camera"></i>
+              <div class="ms-3">
+                <h4><a href="{{.Params.album}}" target="_blank"
+                  title="photo album for {{.Params.Title}}">photo album</a></h4>
+              </div>
+            </div>
+          </div>
+          {{ end }}
         </div>
       </div>
       <div class="col-lg-11">

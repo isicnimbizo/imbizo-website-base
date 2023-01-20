@@ -258,8 +258,10 @@ img {
   height: 5em;
 }
 .person-img.w-8{
-  width: 8em;
-  height: 8em;
+  min-height: 8em;
+  /* max-height: 8em; */
+  min-width: 3em;
+  max-width: 8em;
 }
 .person-img.w-10{
   width: 10em;
@@ -598,7 +600,7 @@ textarea.form-control {
 }
 
 .navigation {
-  padding: 40px 130px;
+  padding: 40px 0px;
   transition: 0.3s ease;
 }
 
@@ -614,6 +616,10 @@ textarea.form-control {
 @media (max-width: 991px) {
   .navigation.nav-bg {
     padding: 0px 20px;
+  }
+  .navigation:has(.navbar-collapse.show){
+    /* ensure bg-color even if not scrolled */
+    background-color: var(--primary-color);
   }
 }
 
@@ -945,6 +951,10 @@ blockquote > p{
 
 .content * {
   margin-bottom: 0.5em;
+}
+.accordion-item, .accordion-item *{
+  /* .content * interfers with accordion */
+  margin-bottom: 0;
 }
 
 .content img {
