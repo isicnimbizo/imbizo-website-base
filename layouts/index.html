@@ -21,8 +21,14 @@
             <h4 class="text-white font-tertiary text-center">
               <i class="ti-calendar"></i> 
               {{ if .dates.school_start_date}}
-                {{ dateFormat "Jan 02, 2006" .dates.school_start_date }} -
-                {{ dateFormat "Jan 02, 2006" .dates.school_end_date }}
+                {{/*  check if 2 dates have the same month  */}}
+                {{ if eq (dateFormat "01" .dates.school_start_date) (dateFormat "01" .dates.school_end_date) }}
+                  {{ dateFormat "02" .dates.school_start_date }} -
+                  {{ dateFormat "02 Jan, 2006" .dates.school_end_date }}
+                {{ else }}
+                  {{ dateFormat "02 Jan" .dates.school_start_date }} -
+                  {{ dateFormat "02 Jan, 2006" .dates.school_end_date }}
+                {{ end }}
               {{ else if .dates.estimated_date}}
                 {{ .dates.estimated_date }}
               {{ end }}

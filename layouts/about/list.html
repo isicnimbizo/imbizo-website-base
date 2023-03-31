@@ -10,7 +10,7 @@
     <hr>
     <div class="row align-items-start">
       {{ range .Data.Pages }}
-      {{ .Render "post" }}
+        {{ .Render "post" }}
       {{ end }}
       {{/*  CONTACT CARD  */}}
       {{ with .Site.GetPage "/contact" }}
@@ -44,7 +44,7 @@
         <p>{{. | safeHTML}}</p>
         {{end}}
       </div>
-      <div class=" col-lg-6 col-12">
+      <div class=" col-lg-6 col-12" style="overflow: hidden;">
         {{ with site.Params.map }}
         {{"<!-- Google Map -->" | safeHTML}}
         {{.map_embed_html | safeHTML}}

@@ -1,7 +1,7 @@
 <div class="project-meta justify-content-center">
   <i class="ti-calendar"></i>
   <div class="ms-3">
-    <h4>{{site.Data.application_info.period_text}}</h4>
+    <h4>{{site.Data.application_info.period_text | markdownify }}</h4>
     <p>
       {{ site.Data.application_info.applications_open_date }} -
       {{ dateFormat "02 Jan 2006 15:04:05 MST" site.Data.application_info.applications_close_date }}

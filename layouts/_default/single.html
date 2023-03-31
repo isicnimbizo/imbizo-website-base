@@ -15,13 +15,13 @@
             {{ if .Params.Author }}
             by <span class="text-primary">{{ .Params.Author | markdownify}}</span>
             {{ end }}
-          {{ if .Params.update}}
+          {{ if not (eq .Lastmod .PublishDate)}}
             | updated 
-            on <span class="text-secondary">{{ .Params.update.Format "02 January 2006" }}</span>
-              {{ if .Params.update_author }}
+            on <span class="text-secondary">{{ .Lastmod.Format "02 January 2006" }}</span>
+              {{ if (and .Params.update_author (not (eq .Params.update_author .Params.Author))) }}
               by <span class="text-primary">{{ .Params.update_author | markdownify}}</span>
               {{ end }}
-            
+
           {{ end}}
         </p>
         
