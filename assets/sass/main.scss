@@ -1,5 +1,19 @@
-// schedule
+// ************************
+/* POSTS */
+// ************************
+.content {
+  section{
+    padding-top: 1em;
+  }
+  h2 {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+}
 
+// ************************
+/* SCHEDULE */
+// ************************
 #schedule {
 }
 
@@ -259,5 +273,24 @@ p.schedule-slot-desc {
 
 // 
 #formbutton-container{
-  @extend .d-print-none !optional
+  @extend .d-print-none !optional;
+}
+
+// ************************
+/* SPONSORS */
+// ************************
+#sponsors {
+  
+}
+
+.content #sponsors 
+{ 
+  // border: 1px solid var(--primary-color);
+  box-shadow: 0 0 10px #000 inset;
+  // inner box shadow
+
+  * {
+  // for use in posts
+  margin-bottom: 0;
+}
 }

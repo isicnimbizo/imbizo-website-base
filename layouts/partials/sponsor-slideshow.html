@@ -1,5 +1,16 @@
 <!-- sponsor slideshow -->
-{{ with site.Data.sponsors }}
+
+{{/* allowed params passed as dict */}} 
+
+{{ $sponsors_data := default site.Data.sponsors .sponsors }}
+
+{{ $type := (printf "%T" $sponsors_data) }}
+{{ if eq $type "string" }}
+{{ $sponsors_data = index site.Data $sponsors_data }}
+{{ end }}
+
+
+{{ with $sponsors_data }}
 <div class="col-lg-10 mx-auto slideshow-slider d-flex align-items-center">
   {{ range .sponsors }}
   <!-- slider-item -->
@@ -22,7 +33,7 @@
             style="max-width: {{$size}}%; {{if .background_color}}background-color: {{.background_color}};{{end}}"
             src="{{.image | absURL }}" alt="{{.name}}" title="{{.name}}" />
           {{ end }}
-          {{ if site.Data.sponsors.show_names }}
+          {{ if $sponsors_data.show_names }}
           <h4 class="text-white">{{ .name }}</h4>
           {{ end }}
           <h6 class="text-light">{{ .designation }}</h6>

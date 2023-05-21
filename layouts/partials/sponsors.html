@@ -1,8 +1,16 @@
-<section class="section bg-secondary ">
+{{/* allowed params passed as dict */}} 
+{{ $sponsors_data := default site.Data.sponsors .sponsors }}
+
+{{ $type := (printf "%T" $sponsors_data) }}
+{{ if eq $type "string" }}
+{{ $sponsors_data = index site.Data $sponsors_data }}
+{{ end }}
+
+<section id="sponsors" class="section bg-secondary ">
   <div class="container ">
     <div class="row mb-5 sticky-top" style="top: 85px; z-index:1031;">
     <!-- sponsors -->
-    {{ with site.Data.sponsors }}
+    {{ with $sponsors_data }}
     <div class="col-12">
       <div class="btn-group btn-group-toggle justify-content-center d-flex flex-wrap" data-toggle="buttons"
               style="box-shadow: 0 0 5px rgba(0,0,0,0.5); border-radius: 5px;" role="group"

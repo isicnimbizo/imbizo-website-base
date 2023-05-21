@@ -1,17 +1,23 @@
 {{/* allowed params passed as (dict collapsed true) */}} 
 {{ $collapsed := default false .collapsed }} {{/* template */}} 
 {{ $schedule_data := default site.Data.schedule .schedule }}
+{{ $faculty_data := default site.Data.faculty .faculty}}
 
 {{ $type := (printf "%T" $schedule_data) }}
 {{ if eq $type "string" }}
 {{ $schedule_data = index site.Data $schedule_data }}
 {{ end }}
 
+{{ $type := (printf "%T" $faculty_data) }}
+{{ if eq $type "string" }}
+{{ $faculty_data = index site.Data $faculty_data }}
+{{ end }}
+
 {{with $schedule_data}}
 <div class="schedule-tab accordion">
   {{ range .days }} {{ $day_id := .title | anchorize}}
   <div class="accordion-item">
-    <h2 class="accordion-header font-tertiary" id="{{$day_id}}-heading">
+    <h3 class="accordion-header font-tertiary" id="{{$day_id}}-heading">
       <button
         class="accordion-button {{if $collapsed}}collapsed{{end}}"
         type="button"
@@ -30,7 +36,7 @@
           </h5>
         </div>
       </button>
-    </h2>
+    </h3>
     <div
       id="{{$day_id}}-collapse"
       class="accordion-collapse collapse {{if not $collapsed}}show{{end}}"
@@ -59,16 +65,16 @@
                 <!-- capture current track to a var for comparison -->
                 {{ $track_name := .track }}
                 <!-- loop through tracks -->
-                {{ range $schedule_data.tracks }}
-                <!-- compare current track to track in loop -->
-                {{ if eq (.name | anchorize) ($track_name | anchorize) }}
-                <!-- assign -->
-                {{ $track_color = .color }}
-                <!-- /assign -->
-                {{ end }}
-                <!-- end if -->
-                {{ end }}
-                <!-- end range -->
+                  {{ range $schedule_data.tracks }}
+                  <!-- compare current track to track in loop -->
+                    {{ if eq (.name | anchorize) ($track_name | anchorize) }}
+                    <!-- assign -->
+                    {{ $track_color = .color }}
+                    <!-- /assign -->
+                    {{ end }}
+                  <!-- end if -->
+                  {{ end }}
+                  <!-- end range -->
                 <!-- /track color -->
                 <h6
                   class="schedule-slot-title-track text-white font-tertiary text-uppercase p-2 mb-0 badge"
@@ -108,6 +114,8 @@
                   {{.title}}
                 </h3>
                 {{ end }}
+                <!-- end track -->
+
                 <!-- heading location -->
                 {{ if .location}}
                 <small class="text-muted pt-0 mt-0"
@@ -141,7 +149,7 @@
                     {{/*  keep name in scope for comparison  */}}
                     {{$name := .name}}
                     {{/*  loop faculty  */}}
-                    {{ range site.Data.faculty.people }}
+                    {{ range $faculty_data.people }}
                       {{/*  compare  */}}
                       {{ if eq .name $name }}
                         {{/*  assign  */}}
