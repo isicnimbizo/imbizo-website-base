@@ -31,6 +31,10 @@ small, .text-compressed {
   line-height: inherit;
 }
 
+small p, small li {
+  font-size: 100%;
+}
+
 a {
   color: var(--secondary-color);
   transition: color 0.3s ease-out;
@@ -602,6 +606,13 @@ textarea.form-control {
   text-align: left !important;
 }
 
+.right {
+  float: right;
+}
+.text-right {
+  text-align: right;
+}
+
 .card-footer {
   border: 0;
 }
@@ -678,9 +689,9 @@ textarea.form-control {
   }
 }
 
-.hero-area h1 {
+.hero-area h1, .hero-area img, .hero-area p {
   position: relative;
-  z-index: 2;
+  display: block;
 }
 
 .layer {
