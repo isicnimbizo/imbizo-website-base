@@ -21,7 +21,14 @@
           <ul class="list-unstyled d-flex">
             {{ range site.Params.social }} {{ if gt (len .URL) 5}}
             <li class="m-2">
-              <a class="text-light" href="{{.URL | safeURL }}" alt="{{.text}}" title="{{.text}}" data-bs-toggle="tooltip" data-bs-placement="left">
+              <a
+                class="text-light"
+                href="{{.URL | safeURL }}"
+                alt="{{.text}}"
+                title="{{.text}}"
+                data-bs-toggle="tooltip"
+                data-bs-placement="left"
+              >
                 <i class="{{.icon}}"></i
               ></a>
             </li>
@@ -34,7 +41,9 @@
   </div>
   {{end}} {{end}}
   <div class="border-top text-center border-dark py-5">
-    <p class="mb-0 text-light">{{ replace (site.Params.copyright | markdownify) "{{now}}" (now | dateFormat "2006") }}
+    <p class="mb-0 text-light">
+      {{ replace (site.Params.copyright | markdownify) "{{now}}" (now |
+      dateFormat "2006") }}
     </p>
   </div>
 </footer>
@@ -62,12 +71,12 @@
   });
 </script>
 
-{{ "<!-- Main Script -->" | safeHTML }} 
-{{ $script := resources.Get "js/script.js" | minify}}
+{{ "<!-- Main Script -->" | safeHTML }} {{ $script := resources.Get
+"js/script.js" | minify}}
 <script src="{{ $script.Permalink }}"></script>
 
-{{ if and site.Params.contact.enable site.Params.contact.floating }} 
-{{ "<!-- Formspree floating button -->" | safeHTML }}
+{{ if and site.Params.contact.enable site.Params.contact.floating }} {{ "<!-- Formspree floating button -->"
+| safeHTML }}
 <script src="https://formspree.io/js/formbutton-v1.min.js" defer></script>
 <script>
   /* paste this line in verbatim */
@@ -83,6 +92,13 @@
     title: "How can we help?",
     fields: [
       {
+        type: "text",
+        label: "Name:",
+        name: "name",
+        required: true,
+        placeholder: "Full name",
+      },
+      {
         type: "email",
         label: "Email:",
         name: "email",
@@ -94,6 +110,12 @@
         label: "Message:",
         name: "message",
         placeholder: "What's on your mind?",
+      },
+      {
+        type: "hidden",
+        label: "",
+        name: "subject",
+        value: 'New submission from {{ "{{email}}" }}',
       },
       { type: "submit" },
     ],
