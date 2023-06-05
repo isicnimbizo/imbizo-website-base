@@ -20,8 +20,8 @@
                 <p>{{ .PublishDate.Format "Jan 02, 2006" }}
                 </p>
                 {{if .Params.end_date}}
-                  <p>- {{ .Params.end_date.Format "Jan 02, 2006" }}</p>
-                  {{ end }}
+                  <p>- {{ .Params.end_date | dateFormat "Jan 02, 2006" }}</p>
+                {{ end }}
               </div>
             </div>
           </div>
