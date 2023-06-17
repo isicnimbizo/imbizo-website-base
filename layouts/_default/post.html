@@ -47,7 +47,7 @@
       <p class="card-text d-flex flex-row flex-wrap justify-content-between align-items-center
       {{ if .Params.categories}}p-0 m-0{{end}}">
         <i class="d-inline-block ti-calendar small"> 
-          <small class="text-muted font-primary">{{.Lastmod.Format "2006-01-02"}}</small></i> 
+          <small class="px-1 text-muted font-primary">{{.Lastmod.Format "2006-01-02"}}</small></i> 
         <a href={{if .Params.link}}"{{.Params.link | relURL}}" target="_blank" {{ else }}"{{.Permalink}}"{{ end }}
             class="d-inline-block btn-sm btn-outline-success"
             title="go to '{{.Title }}' page">
