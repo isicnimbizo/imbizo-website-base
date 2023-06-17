@@ -1,4 +1,7 @@
-<div class="col col-lg-4 col-sm-6 mb-4 mb-4">
+{{ $colWidth := default "4" .Params.colWidth}}
+{{ $colOffset := default "0" .Params.colOffset}}
+
+<div class="col col-lg-{{$colWidth}} offset-lg-{{$colOffset}} col-sm-6 mb-4">
   <article class="position-relative h-100 card shadow text-center rounded position-relative hover-wrapper">
       <a class="card-img-top d-flex position-relative"
           href={{if .Params.link}}"{{.Params.link | relURL}}" 
