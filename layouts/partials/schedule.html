@@ -119,13 +119,25 @@
                 <!-- heading location -->
                 {{ if .location}}
                 <small class="text-muted pt-0 mt-0"
-                  ><i class="ti-pin"></i>{{.location}}</small
+                  ><i class="ti-pin"></i>{{.location | markdownify}}</small
                 >
                 {{end}}
                 <!-- /heading location -->
+                
+                <!-- heading image -->
+                {{ if .image }}
+                <div class="schedule-slot-image">
+                  <img
+                    src="{{.image}}"
+                    alt="{{.title}}"
+                    class="img-fluid"
+                  />
+                </div>
+                {{ end }}
+
                 <!-- heading desciption -->
                 {{ if .content }}
-                <p class="text-muted">{{.content}}</p>
+                <p class="text-muted">{{.content | markdownify}}</p>
                 {{ end }}
                 <!-- /heading desciption -->
               </div>
