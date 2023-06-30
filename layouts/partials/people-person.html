@@ -2,6 +2,7 @@
 {{$context := default . .context}}
 {{/*  allowed params  */}}
 {{$name := default $context.name .name}}
+{{$years := default $context.years .years}}
 
 {{ $tracks := default site.Data.tracks.tracks .tracks}}
 
@@ -94,7 +95,7 @@
     {{ end }}
     {{ if $show_track}}
     <div class="faculty-badges mt-1 position-relative">
-        {{ range $year := .years | sort}} 
+        {{ range $year := $years | sort}} 
           {{ $color := "#000000" }} 
           {{ range $track := $tracks }}
             {{ if eq $year $track.name }}{{ $color = $track.color }}{{ end }}

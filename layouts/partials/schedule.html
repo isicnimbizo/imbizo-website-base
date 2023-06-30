@@ -8,6 +8,8 @@
 {{ $schedule_data = index site.Data $schedule_data }}
 {{ end }}
 
+{{ $tracks := default site.Data.tracks.tracks site.Data.faculty.tracks }}
+
 {{ $type := (printf "%T" $faculty_data) }}
 {{ if eq $type "string" }}
 {{ $faculty_data = index site.Data $faculty_data }}
@@ -59,13 +61,14 @@
             <div class="schedule-slot-info col-md-{{$col_size}} col-xs-12">
               <!-- heading -->
               <div class="schedule-slot-info-heading">
+                {{ $current_track := default "" .track }}
                 {{ if .track }}
                 <!-- find track color -->
                 {{ $track_color := "#000000" }}
                 <!-- capture current track to a var for comparison -->
                 {{ $track_name := .track }}
                 <!-- loop through tracks -->
-                  {{ range $schedule_data.tracks }}
+                  {{ range $tracks }}
                   <!-- compare current track to track in loop -->
                     {{ if eq (.name | anchorize) ($track_name | anchorize) }}
                     <!-- assign -->
@@ -144,7 +147,8 @@
               <!-- /heading-->
               {{range .sessions}}
               <div
-                class="schedule-slot-info-content row justify-content-center align-items-start"
+                class="schedule-slot-info-content row justify-content-center align-items-start 
+                       display-block position-relative"
               >
                 {{$panel := default (slice .) .panel}}
                 {{$isPanel := (gt (len $panel) 1)}}
@@ -153,7 +157,7 @@
                   {{$col = "col-2 gx-0"}}
                 {{ end }}
                 {{$context := .}}
-
+                
                 {{ range $panel }}
                   {{$context = .}}
                     {{/*  merge values from faculty  */}}
@@ -176,15 +180,25 @@
                     {{/*  change link to emtpy  */}}
                     {{ $context = merge $context (dict "link" "") }}
                   {{end}}
+                  <div class="{{$col}} shuffle-item d-flex center text-center flex-column">
                   {{partial "people-person" (dict "context" $context "show_extra" false 
-                                            "show_track" false "col" $col
-                                            "width" "w-8") }}
+                                            "show_track" false "col" "override" 
+                                            "width" "w-8" ) }}
+                    {{ if .time}}
+                      <span
+                        class="font-primary badge bg-light text-dark  border border-light rounded-pill 
+                        position-absolute top-0 start-0 translate-start" 
+                      >
+                      {{.time}}
+                      </span>
+                    {{end}}
+                  </div>
                 {{ end }}
 
                 {{ $title := default "" .title }}
                 
                 {{if eq $title ""}}
-                  {{$title = $context.topic}}
+                  {{ $title = $context.topic }}
                 {{end}}
 
                 {{$talkCol := "col-lg-8 col-10"}}
@@ -199,10 +213,36 @@
                         data-bs-target="#{{.name | anchorize}}-modal"
                         title="click to open modal for more information"
                       > 
-                    {{end}}  
+                    {{end}}
                     {{$title}}
                     {{if eq $context.link "modal"}}</a>{{end}}
                   </h5>
+                  {{if $context.years}}
+
+                    {{/* iterate through tags (years)   */}}
+                    {{range $year := $context.years}}
+                      
+                      {{ if not (eq $year $current_track) }}
+                        {{/*  only add tags for non-top-level tracks  */}}
+                          <!-- match the year to the tracks in the data file and get color value -->
+                        {{ $color := "" }}
+                        
+                        {{ range $track := $tracks }}
+                          {{ if eq $year $track.name }}{{ $color = $track.color }}{{ end }}
+                        {{ end }} 
+
+                        <span
+                        class="font-primary badge border border-light " 
+                        style="background-color: {{ $color }} !important; border-color: {{ $color }};"
+                      >
+                        {{.}}
+                        </span>
+                      {{end}}
+                      {{/*  end not same as heading topic  */}}
+                    {{end}}
+                    {{/* end range years   */}}
+                  {{end}}
+                  {{/*  end if years  */}}
                 </div>
                 {{if not $isPanel}}
                   <div class="p-0 schedule-slot-desc col-lg-1 col-2 d-flex flex-column">
