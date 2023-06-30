@@ -18,6 +18,12 @@
 {{ $width := default "w-10" .width}}
 {{ $disable_modal := default false .disable_modal}} 
 
+{{ $show_time := default true .show_time}}
+{{ $schedule_data := default site.Data.schedule .schedule }}
+{{ $type := (printf "%T" $schedule_data) }}
+{{ if eq $type "string" }}
+{{ $schedule_data = index site.Data $schedule_data }}
+{{ end }}
 
 {{/*  template  */}}
 
@@ -91,7 +97,30 @@
       <p class="m-0 p-0 text-muted text-compressed">
         <small>{{ .topic }}</small>
       </p>
-    {{ end }}
+      {{ end }}
+      {{ if $show_time }}
+      {{/*  find their talk in $schedule_data  */}}
+        {{ $time := "" }}
+
+        {{ range $day_title, $day_data := $schedule_data.days }}
+          {{ range $session, $session_data := $day_data.sessions }}
+            {{ range $index, $session_column := $session_data.columns }}
+              {{ range $s, $session_session := $session_column.sessions}}
+              {{/*  {{$session_session}}  */}}
+                {{ if eq $session_session.name $name }}
+                  {{ $time = default $session_data.time $session_session.time }}
+                  {{ $time = (printf "%s - %s" $day_data.title $time) }}
+                {{ end }}
+              {{end}}
+            {{ end }}
+          {{ end }}
+        {{ end }}
+        <p class="my-0 p-0 text-muted text-compressed">
+          <small class="text-light">
+            {{$time}}
+          </small>
+        </p>
+      {{ end }}
     {{ end }}
     {{ if $show_track}}
     <div class="faculty-badges mt-1 position-relative">
