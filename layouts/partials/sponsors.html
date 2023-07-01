@@ -58,6 +58,9 @@
               >
                 <div class="position-relative">
                   {{if (or .image .image_alt)}}
+                  {{if .size}}
+                    {{ $size = .size }}
+                  {{end}}
                   <img
                     src="{{if .image_alt}}{{ .image_alt | absURL }}{{else}}{{ .image | absURL }}{{end}}"
                     alt="{{.name}}"
