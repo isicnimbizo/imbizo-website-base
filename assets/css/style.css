@@ -51,6 +51,14 @@ h6 {
   line-height: 1.2;
 }
 
+.badge{
+  white-space: inherit;
+}
+
+/* .faculty-badges small{
+  white-space: inherit;
+} */
+
 h1,
 .h1 {
   font-size: 80px;
