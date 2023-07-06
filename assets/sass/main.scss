@@ -276,6 +276,11 @@ p.schedule-slot-desc {
   @extend .d-print-none !optional;
 }
 
+.schedule-slot-info > * > p > img {
+  max-width: 100%;
+  height: auto;
+}
+
 // ************************
 /* SPONSORS */
 // ************************
@@ -293,4 +298,18 @@ p.schedule-slot-desc {
   // for use in posts
   margin-bottom: 0;
 }
+}
+
+// ************************
+/* PEOPLE */
+// ************************
+
+#people{
+  @media (max-width: 768px) {
+    .btn-group > label {
+      font-size: 0.7rem;
+    }
+
+  }
+  
 }
