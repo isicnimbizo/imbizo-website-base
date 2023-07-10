@@ -176,10 +176,6 @@
                   {{/*  /loop faculty  */}}
                   {{/*  /find topic in faculty  */}}
                   {{/*  /merge values from faculty  */}}
-                  {{if $isPanel}}
-                    {{/*  change link to emtpy  */}}
-                    {{ $context = merge $context (dict "link" "") }}
-                  {{end}}
                   <div class="{{$col}} shuffle-item d-flex center text-center flex-column">
                   {{partial "people-person" (dict "context" $context "show_extra" false 
                                             "show_track" false "col" "override" 
