@@ -230,7 +230,11 @@
         <a href="{{site.Data.homepage.sponsors.link | absURL}}" class="text-white">view all<i class="ti-arrow-top-right"></i></a>
         {{ end }}
       </div>
-      {{ partial "sponsor-slideshow.html" (dict "context" . ) }}
+      {{ if site.Data.homepage.sponsors.show_all }}
+        {{ partial "sponsors.html" (dict "context" . ) }}
+      {{ else }}
+        {{ partial "sponsor-slideshow.html" (dict "context" . ) }}
+      {{ end }}
       {{ if site.Data.homepage.sponsors.link }}
       <div class="col-12 text-center mt-5">
         <a href="{{site.Data.homepage.sponsors.link | absURL}}" class="btn btn-outline-success">view all {{site.Data.sponsors.title | markdownify | lower}}<i class="ti-arrow-top-right"></i></a>
