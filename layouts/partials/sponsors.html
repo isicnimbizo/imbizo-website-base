@@ -5,47 +5,56 @@
 {{ if eq $type "string" }}
 {{ $sponsors_data = index site.Data $sponsors_data }}
 {{ end }}
+{{ $headings := default true .headings}}
 
 <section id="sponsors" class="section bg-secondary ">
   <div class="container ">
-    <div class="row mb-5 sticky-top" style="top: 134px; z-index:1029;">
     <!-- sponsors -->
     {{ with $sponsors_data }}
-    <div class="col-12">
-      <div class="btn-group btn-group-toggle justify-content-center d-flex flex-wrap" data-toggle="buttons"
-              style="box-shadow: 0 0 5px rgba(0,0,0,0.5); border-radius: 5px;" role="group"
-              aria-label="select faculty year">
-          <input type="radio" class="btn-check" name="shuffle-filter" id="all" value="all" autocomplete="off"
-                checked="checked"><label class="btn btn-sm btn-primary" for="all">All</label>
-          </label>
-        {{ $tiers := slice }} 
-        {{ range .sponsors }} 
-          {{ $filtered := where .item "current" (not false)}}
-            {{ if $filtered}}
-              {{ $tiers = $tiers | append .tier }} 
+    {{ if $headings }}
+    <div class="row mb-5 sticky-top" style="top: 134px; z-index:1029;">
+      <div class="col-12">
+        <div class="btn-group btn-group-toggle justify-content-center d-flex flex-wrap" data-toggle="buttons"
+                style="box-shadow: 0 0 5px rgba(0,0,0,0.5); border-radius: 5px;" role="group"
+                aria-label="select faculty year">
+            <input type="radio" class="btn-check" name="shuffle-filter" id="all" value="all" autocomplete="off"
+                  checked="checked"><label class="btn btn-sm btn-primary" for="all">All</label>
+            </label>
+          {{ $tiers := slice }} 
+          {{ range .sponsors }} 
+            {{ $filtered := where .item "current" (not false)}}
+              {{ if $filtered}}
+                {{ $tiers = $tiers | append .tier }} 
+            {{ end }} 
           {{ end }} 
-        {{ end }} 
-        {{ range ( $tiers | uniq ) }}
-          <input type="radio" class="btn-check" name="shuffle-filter" id="{{.}}" value="{{ . | anchorize }}" />
-          <label class="btn btn-sm btn-primary" for="{{.}}">{{ . }}</label>
-        {{ end }}
+          {{ range ( $tiers | uniq ) }}
+            <input type="radio" class="btn-check" name="shuffle-filter" id="{{.}}" value="{{ . | anchorize }}" />
+            <label class="btn btn-sm btn-primary" for="{{.}}">{{ . }}</label>
+          {{ end }}
+        </div>
       </div>
     </div>
-    </div>
+    {{ end }} {{/*  end if headings  */}}
     <div class="row mt-4 position-relative shuffle-wrapper">
       {{ range .sponsors}} 
         {{ $tier := .tier }}
         {{ $size := .size }}
         {{ $filtered := where .item "current" (not false)}}
         {{ if $filtered}}
-        <div class="col-lg-3 col-sm-12 col-6 mb-4 shuffle-item" 
-            data-groups="[&quot;{{$tier | anchorize}}&quot;]">
+          
+
+
+
+          {{ if $headings }}
             {{/*  include a dummy div that sets the size of the blocks  */}}
-        </div>
-        <div class="col-12 shuffle-item"
-            data-groups="[&quot;{{$tier | anchorize}}&quot;]">
-            <h2 class="text-dark">{{.tier | markdownify}}</h2>
-        </div>
+            <div class="col-lg-3 col-sm-12 col-6 mb-4 shuffle-item" 
+                data-groups="[&quot;{{$tier | anchorize}}&quot;]">
+            </div>
+            <div class="col-12 shuffle-item"
+                data-groups="[&quot;{{$tier | anchorize}}&quot;]">
+                <h2 class="text-dark">{{.tier | markdownify}}</h2>
+            </div>
+          {{ end }}
           {{range $filtered}}
             <div
               class="col-lg-3 col-sm-12 col-6 mb-4 shuffle-item"
@@ -67,26 +76,29 @@
                     title="{{.name}}"
                     class="img-fluid w-100 d-block p-2 m-auto"
                     style="{{if .background_color}}background-color: {{.background_color}};{{end}}
-                           {{if $size}}width: {{$size}}% !important;{{end}}"
+                            {{if $size}}width: {{$size}}% !important;{{end}}"
                   />
                   {{else}}
                   <h4 class="text-white font-weight-light">{{ .name }}</h4>
                   {{end}}
                 </div>
+                {{if (or .image .image_alt)}}
                 <div>
                   <p class="mb-0 text-white font-weight-light">{{ .name}}</p>
                 </div>
+                {{ end }}
               </a>
             </div>
           {{ end }} {{/*  end range item  */}}
-          <div class="col-12 shuffle-item text-center" id="teaching-assistants"
-            data-groups="[&quot;{{$tier | anchorize}}&quot;]">
-            <hr>  
-          </div>  
-      
-          {{ end }}  {{/*  end if filtered  */}}
-        {{ end }} {{/*  end range sponsors  */}}
-      {{ end }}{{/*  end with  */}}
+          {{ if $headings }}
+            <div class="col-12 shuffle-item text-center"
+              data-groups="[&quot;{{$tier | anchorize}}&quot;]">
+              <hr>  
+            </div>  
+          {{ end}} {{/*  end if headings  */}}
+        {{ end }}  {{/*  end if filtered  */}}
+      {{ end }} {{/*  end range sponsors  */}}
+    {{ end }}{{/*  end with  */}}
     </div>
     <!-- /sponsors -->
 </div>

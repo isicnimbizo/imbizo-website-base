@@ -231,7 +231,7 @@
         {{ end }}
       </div>
       {{ if site.Data.homepage.sponsors.show_all }}
-        {{ partial "sponsors.html" (dict "context" . ) }}
+        {{ partial "sponsors.html" (dict "context" . "headings" site.Data.homepage.sponsors.headings ) }}
       {{ else }}
         {{ partial "sponsor-slideshow.html" (dict "context" . ) }}
       {{ end }}
