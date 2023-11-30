@@ -1,4 +1,4 @@
-# Hugo theme for the [IBRO-Simons Computational Neuroscience Imbizo](https://imbizo.africa)
+# Hugo theme for the [Computational Neuroscience Imbizo](https://imbizo.africa)
 
 ## Licensing
 
