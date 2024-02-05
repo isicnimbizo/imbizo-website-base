@@ -74,9 +74,14 @@
                 <i class="ti-agenda"></i>
                 <div class="ms-3">
                   <h4 class="">Report</h4>
-                  {{$report_link_end := index ((split .Params.report "/") | last 1) 0}}
-                  <p><small class="text-muted"><strong>{{.Params.report | first 5}}...{{$report_link_end | last 20}}</strong></small></p>
-                  <small class="text-muted"><em>public</em></small>
+                  {{$report_link_end := index ((split .Params.report "?") | first 1) 0}}
+                  {{$report_link_start := index ((split .Params.report "//") | last 1) 0}}
+                  {{/*  until '/'  */}}                  
+                  {{$report_link_start = index ((split $report_link_start "/") | first 2) 0}}
+                  {{/*  remove www.  */}}
+                  {{$report_link_start = index ((split $report_link_start "www.") | last 1) 0}}
+                  <p><small class="text-muted"><strong>{{$report_link_start | first 11}}...{{$report_link_end | last 20}}</strong></small></p>
+                  <small class="text-muted"><em>restricted</em></small>
                 </div>
               </div>
             </a>
@@ -93,7 +98,7 @@
                   <h4 class="">Material</h4>
                   {{$material_link_end := index ((split .Params.material_link "/") | last 1) 0}}
                   {{$material_link_start := index ((split .Params.material_link "//") | first 2) 1}}
-                  <p><small class="text-muted"><strong>{{$material_link_start | first 5}}...{{$material_link_end | last 20}}</strong></small></p>
+                  <p><small class="text-muted"><strong>{{$material_link_start | first 11}}...{{$material_link_end | last 20}}</strong></small></p>
                   <small class="text-muted"><em>restricted</em></small>
                 </div>
               </div>
@@ -111,7 +116,7 @@
                   <h4 class="">Schedule</h4>
                   {{$schedule_link_end := index ((split .Params.schedule_link "/") | last 1) 0}}
                   {{$schedule_link_start := index ((split .Params.schedule_link "//") | first 2) 1}}
-                  <p><small class="text-muted"><strong>{{$schedule_link_start | first 5}}...{{$schedule_link_end | last 20}}</strong></small></p>
+                  <p><small class="text-muted"><strong>{{$schedule_link_start | first 11}}...{{$schedule_link_end | last 20}}</strong></small></p>
                   <small class="text-muted"><em>public</em></small>
                 </div>
               </div>
