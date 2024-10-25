@@ -298,7 +298,7 @@
   </div>
 </section>
 
-<-- tutors -->
+<!-- tutors -->
 {{ if site.Data.tutors }}
 <section class="section">
   <div class="container text-center" id="teaching-assistants">
@@ -355,7 +355,7 @@
       {{ range .item }}
       <div class="col-lg-2 text-center">
         <a href="{{.link}}" target="_blank">
-          <img class="img-fluid d-inline-block rounded" src="{{.image | relURL }}" title="{{.name | markdownify}}" alt="photo of {{.name | markdownify}}"/>
+          <img class="img-fluid d-inline-block rounded center" src="{{.image | relURL }}" title="{{.name | markdownify}}" alt="photo of {{.name | markdownify}}"/>
         </a>
         <p class="mb-0">{{.position | markdownify}}</p>
         <h4>
