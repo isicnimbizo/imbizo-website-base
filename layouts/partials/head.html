@@ -28,7 +28,7 @@
 
   {{ "<!-- Main SASS Stylesheet -->" | safeHTML }}
   {{ $options := (dict "targetPath" "css/main.css" "outputStyle" "compressed" "enableSourceMap" (not hugo.IsProduction) "includePaths" (slice "node_modules/myscss")) }}
-  {{ $style := resources.Get "sass/main.scss" | resources.ToCSS $options }}
+  {{ $style := resources.Get "sass/main.scss" | css.Sass $options }}
   <link rel="stylesheet" href="{{ $style.Permalink }}" media="screen">
   {{ "<!-- Main Stylesheet -->" | safeHTML }}
   {{ $styles := resources.Get "css/style.css" | minify }}
