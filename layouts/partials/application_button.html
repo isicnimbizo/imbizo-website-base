@@ -31,7 +31,7 @@
     </p>
     <p class="text-compressed my-1">
       <small class="text-muted">
-        Acceptance: {{.acceptance_date | markdownify}}
+        {{.acceptance_date | markdownify}}
       </small>
     </p>
     
@@ -40,7 +40,7 @@
        style="background-color:{{.color}} !important; border-color:{{.color}} !important;"
     >{{.closed_message}}</a>
     <p class="text-muted text-compressed my-2">
-      Acceptance: {{.acceptance_date | markdownify}}
+      {{.acceptance_date | markdownify}}
     </p>
   {{else}}
     <a href="{{ .URL | absURL }}" class="btn disabled btn-info btn-lg"
@@ -54,8 +54,6 @@
       </small>
     </p>
   {{ end }}
-  
-  
   <!-- application info -->
 </div>
 {{ end }}
