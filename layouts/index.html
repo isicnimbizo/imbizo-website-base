@@ -34,9 +34,9 @@
                   {{ dateFormat "02 Jan" .dates.school_start_date }} -
                   {{ dateFormat "02 Jan, 2006" .dates.school_end_date }}
                 {{ end }}
-              {{ else if .dates.estimated_date}}
-                {{ .dates.estimated_date }}
-              {{ end }}
+                {{ else if .dates.estimated_start_date }}
+                  {{ .dates.estimated_start_date }} - {{ .dates.estimated_end_date }}
+                {{ end }}
             </h4>
           </div>
         {{ end }}
@@ -175,7 +175,7 @@
                   {{ dateFormat "Jan 02, 2006" .dates.school_end_date }}
                 </p>
                 {{ else }}
-                <h4>{{ .dates.estimated_date }}</h4>
+                <h4>{{ .dates.estimated_start_date }} - {{ .dates.estimated_end_date }}</h4>
                 {{ end }}
               </div>
             </div>
