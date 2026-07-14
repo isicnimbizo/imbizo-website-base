@@ -2,7 +2,6 @@
 
 {{ partial "page-title.html" . }}
 
-<!-- archive item -->
 <section class="section">
   <div class="container">
     <div class="row">
@@ -65,46 +64,77 @@
             </div>
           </div>
           {{ end }}
+
           {{ if .Params.report}}
           <div class="col-sm-6 mb-5">
-            <a href="{{.Params.report}}" target="_blank"
-                data-bs-toggle="tooltip" data-bs-placement="bottom"
-                  title="click to access report for {{.Params.Title}}">
-              <div class="project-meta">
-                <i class="ti-agenda"></i>
-                <div class="ms-3">
-                  <h4 class="">Report</h4>
-                  {{$report_link_end := index ((split .Params.report "?") | first 1) 0}}
-                  {{$report_link_start := index ((split .Params.report "//") | last 1) 0}}
-                  {{/*  until '/'  */}}                  
-                  {{$report_link_start = index ((split $report_link_start "/") | first 2) 0}}
-                  {{/*  remove www.  */}}
-                  {{$report_link_start = index ((split $report_link_start "www.") | last 1) 0}}
-                  <p><small class="text-muted"><strong>{{$report_link_start | first 11}}...{{$report_link_end | last 20}}</strong></small></p>
-                  <small class="text-muted"><em>restricted</em></small>
-                </div>
+            <div class="project-meta">
+              <i class="ti-agenda"></i>
+              <div class="ms-3">
+                <h4 class="">Report</h4>
+                {{ if .Params.report_text }}
+                  <p><small class="text-muted"><strong>{{ .Params.report_text }}</strong></small></p>
+                {{ else }}
+                  {{ if (hasPrefix .Params.report "http") }}
+                    <a href="{{ .Params.report }}" target="_blank"
+                        data-bs-toggle="tooltip" data-bs-placement="bottom"
+                        title="click to access report for {{.Params.Title}}">
+                      {{ $report_link_end := index ((split .Params.report "?") | first 1) 0 }}
+                      {{ $report_link_start := index ((split .Params.report "//") | last 1) 0 }}
+                      {{ $report_link_start = index ((split $report_link_start "/") | first 2) 0 }}
+                      {{ $report_link_start = index ((split $report_link_start "www.") | last 1) 0 }}
+                      
+                      <p><small class="text-muted"><strong>
+                        {{ if and (gt (len $report_link_start) 0) (gt (len $report_link_end) 0) }}
+                          {{ $report_link_start | first 11 }}...{{ $report_link_end | last 20 }}
+                        {{ else }}
+                          {{ .Params.report }}
+                        {{ end }}
+                      </strong></small></p>
+                    </a>
+                  {{ else }}
+                    <p><small class="text-muted"><strong>{{ .Params.report }}</strong></small></p>
+                  {{ end }}
+                {{ end }}
+                <small class="text-muted"><em>restricted</em></small>
               </div>
-            </a>
+            </div>
           </div>
           {{ end }}
+
           {{ if .Params.material_link}}
           <div class="col-sm-6 mb-5">
-            <a href="{{.Params.material_link}}" target="_blank"
-                data-bs-toggle="tooltip" data-bs-placement="bottom"
-                  title="click to access material for {{.Params.Title}}">
-              <div class="project-meta">
-                <i class="ti-link"></i>
-                <div class="ms-3">
-                  <h4 class="">Material</h4>
-                  {{$material_link_end := index ((split .Params.material_link "/") | last 1) 0}}
-                  {{$material_link_start := index ((split .Params.material_link "//") | first 2) 1}}
-                  <p><small class="text-muted"><strong>{{$material_link_start | first 11}}...{{$material_link_end | last 20}}</strong></small></p>
-                  <small class="text-muted"><em>restricted</em></small>
-                </div>
+            <div class="project-meta">
+              <i class="ti-link"></i>
+              <div class="ms-3">
+                <h4 class="">Material</h4>
+                {{ if .Params.material_text }}
+                  <p><small class="text-muted"><strong>{{ .Params.material_text }}</strong></small></p>
+                {{ else }}
+                  {{ if (hasPrefix .Params.material_link "http") }}
+                    <a href="{{ .Params.material_link }}" target="_blank"
+                        data-bs-toggle="tooltip" data-bs-placement="bottom"
+                        title="click to access material for {{.Params.Title}}">
+                      {{ $material_link_end := index ((split .Params.material_link "/") | last 1) 0 }}
+                      {{ $material_link_start := index ((split .Params.material_link "//") | first 2) 1 }}
+                      
+                      <p><small class="text-muted"><strong>
+                        {{ if and (gt (len $material_link_start) 0) (gt (len $material_link_end) 0) }}
+                          {{ $material_link_start | first 11 }}...{{ $material_link_end | last 20 }}
+                        {{ else }}
+                          {{ .Params.material_link }}
+                        {{ end }}
+                      </strong></small></p>
+                    </a>
+                  {{ else }}
+                    <p><small class="text-muted"><strong>{{ .Params.material_link }}</strong></small></p>
+                  {{ end }}
+                {{ end }}
+                <small class="text-muted"><em>restricted</em></small>
               </div>
-            </a>
+            </div>
           </div>
           {{ end }}
+
           {{ if .Params.schedule_link}}
           <div class="col-sm-6 mb-5">
             <a href="{{.Params.schedule_link}}" target="_blank"
@@ -142,7 +172,4 @@
     </div>
   </div>
 </section>
-<!-- /archive item-->
-
-
 {{ end }}
