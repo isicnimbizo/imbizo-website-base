@@ -279,43 +279,6 @@
 <!-- /schedule -->
 
 
-<!-- faculty slider -->
-
-{{ if site.Data.homepage.faculty.enable }}
-{{/*  <hr class="mt-0" />  */}}
-<section class="section">
-  <div class="container" id="faculty">
-    <div class="row mb-2">
-      <div class="col-12 text-center mb-5">
-        <h2 class="section-title mb-0">{{site.Data.homepage.faculty.title}}</h2>
-        {{/*  assign site.Data.homepage.faculty.link to $faculty_link with default value of /people#faculty  */}}
-        {{ $faculty_link := default "/people/#faculty" site.Data.homepage.faculty.link }}
-        <a href="{{$faculty_link}}">{{site.Data.homepage.faculty.link_text}}<i class="ti-arrow-top-right"></i></a>
-      </div>
-    </div>
-    {{ partial "people-slider.html" site.Data.faculty }}
-
-  </div>
-</section>
-
-<!-- tutors -->
-{{ if site.Data.tutors }}
-<section class="section">
-  <div class="container text-center" id="teaching-assistants">
-    <div class="row mb-2">
-      <div class="col-12 text-center mb-5">
-        <h2 class="section-title mb-0">{{site.Data.tutors.title}}</h2>
-        {{ $ta_link := default "/people/#teaching-assistants" site.Data.homepage.faculty.link}}
-        <a href="{{$ta_link}}">{{site.Data.homepage.faculty.link_text}}<i class="ti-arrow-top-right"></i></a>
-      </div>
-    </div>
-    {{ partial "people-slider.html" site.Data.tutors }}
-  </div>
-</section>
-{{end}}
-<!-- /faculty logo slider -->
-{{end}}
-
 <!-- blog -->
 {{ if site.Data.homepage.news.enable }}
 {{ with .Site.GetPage "/news" }}
@@ -381,6 +344,42 @@
 {{ end }}
 {{ end }}
 <!-- experience -->
+
+<!-- faculty slider -->
+{{ if site.Data.homepage.faculty.enable }}
+<section class="section">
+  <div class="container" id="faculty">
+    <div class="row mb-2">
+      <div class="col-12 text-center mb-5">
+        <h2 class="section-title mb-0">{{site.Data.homepage.faculty.title}}</h2>
+        {{/*  assign site.Data.homepage.faculty.link to $faculty_link with default value of /people#faculty  */}}
+        {{ $faculty_link := default "/people/#faculty" site.Data.homepage.faculty.link }}
+        <a href="{{$faculty_link}}">{{site.Data.homepage.faculty.link_text}}<i class="ti-arrow-top-right"></i></a>
+      </div>
+    </div>
+    {{ partial "people-slider.html" site.Data.faculty }}
+
+  </div>
+</section>
+{{ end }}
+<!-- /faculty slider -->
+
+<!-- tutors -->
+{{ if and site.Data.homepage.tutors.enable site.Data.tutors }}
+<section class="section">
+  <div class="container text-center" id="teaching-assistants">
+    <div class="row mb-2">
+      <div class="col-12 text-center mb-5">
+        <h2 class="section-title mb-0">{{site.Data.tutors.title}}</h2>
+        {{ $ta_link := default "/people/#teaching-assistants" site.Data.homepage.tutors.link}}
+        <a href="{{$ta_link}}">{{site.Data.homepage.tutors.link_text}}<i class="ti-arrow-top-right"></i></a>
+      </div>
+    </div>
+    {{ partial "people-slider.html" site.Data.tutors }}
+  </div>
+</section>
+{{ end }}
+<!-- /tutors -->
 
 <!-- testimonials -->
 {{ if site.Data.homepage.testimonials.enable }}
