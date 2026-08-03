@@ -18,9 +18,18 @@
   {{/*  merge . mapping such that it has a new property .name that is equal to the key  */}}
   {{ $merged_people := slice }}
   {{ range $person_info := .people }}
-    {{/* Find latest year per person*/}}
-    {{ $max_year := index (last 1 (sort $person_info.years)) 0 }}
-    {{ $all_cats = $all_cats | append $person_info.years }}
+    {{/* .years mixes real years ("2026") with a track/theme label ("NeuroAI" etc), so filter to 4-digit years only before finding the latest one */}}
+    {{ $person_years := slice }}
+    {{ range $y := $person_info.years }}
+      {{ if findRE "^[0-9]{4}$" $y }}
+        {{ $person_years = $person_years | append $y }}
+      {{ end }}
+    {{ end }}
+    {{ $max_year := "" }}
+    {{ if $person_years }}
+      {{ $max_year = index (last 1 (sort $person_years)) 0 }}
+    {{ end }}
+    {{ $all_cats = $all_cats | append $person_years }}
     {{ $merged_people = append $merged_people (slice (merge $person_info (dict "max_year" $max_year))) }}
   {{ end }}
 
